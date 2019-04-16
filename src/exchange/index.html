@@ -1,0 +1,107 @@
+<html>
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="Content-Type" content="text/html; charset=GBK">
+      <meta name="author" content="www.lingtouniao.com">
+      <meta http-equiv="cleartype" content="on">
+      <meta name="apple-mobile-web-app-capable" content="yes">
+      <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+      <meta name="format-detection" content="telephone=no">
+      <meta http-equiv="Expires" content="-1">
+      <meta http-equiv="Cache-Control" content="no-cache">
+      <meta name="keywords" content="Qtools母婴节">
+      <meta name="description" content="Qtools母婴节">
+      <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5">
+      <title>兑换礼品</title>
+  </head>
+  <body>
+<div id='root' v-cloak>
+  <div class="content-wrap">
+    <div class="top-total">
+      当前Q兔徽章：{{user}}
+    </div>
+    <ul class="gift-list">
+      <li class="item" v-for="item in productList">
+        <div class="fl-l">
+          <img :src="item.picUrl" alt="">
+        </div>
+        <div class="fl-r">
+          <p class="title">{{item.name}}</p>
+          <p>¥{{item.price}}</p>
+          <div class="bottom-part">
+            <p class="badge-num">{{item.valueQty}}Q兔徽章</p>
+            <p v-bind:class="['ex-btn',(item.presentStatus==0||item.presentStatus==3)?'disabled':'']" v-if="item.presentStatus==0" >已兑完</p>
+            <p v-bind:class="['ex-btn',(item.presentStatus==0||item.presentStatus==3)?'disabled':'']" v-else-if="item.presentStatus==1" v-on:click="goExchangeDetail(item)">查看兑换详情</p>
+            <p v-bind:class="['ex-btn',(item.presentStatus==0||item.presentStatus==3)?'disabled':'']" v-else-if="item.presentStatus==2" v-on:click="goExchange('1',item)">兑换</p>
+            <p v-bind:class="['ex-btn',(item.presentStatus==0||item.presentStatus==3)?'disabled':'']" v-else-if="item.presentStatus==3">徽章不足</p>
+          </div>
+        </div>
+      </li>
+      <li class="item coupon-item" v-for="el in couponList">
+        <div class="fl-l">
+          <div class="coupon-value-info">
+            <p class="coupon-money">
+              <span class="unit">¥</span>
+              {{el.couponMoney}}
+            </p>
+            <p class="full-amount">满{{el.couponFullAmount}}减{{el.couponMoney}}</p>
+          </div>
+        </div>
+        <div class="fl-r">
+          <p class="title">「{{el.name}}」有效期至{{el.couponValidDate}}</p>
+          <p class="use-tips">-全场需满{{el.couponFullAmount}}可以使用</p>
+          <p class="use-tips">-{{el.couponExplain}}</p>
+          <div class="bottom-part">
+            <p class="badge-num">{{el.valueQty}}Q兔徽章</p>
+            <p v-bind:class="['ex-btn',(el.presentStatus==0||el.presentStatus==3)?'disabled':'']" v-if="el.presentStatus==0">已兑完</p>
+            <p v-bind:class="['ex-btn',(el.presentStatus==0||el.presentStatus==3)?'disabled':'']" v-else-if="el.presentStatus==1" v-on:click="goExchangeDetail(el)">查看兑换详情</p>
+            <p v-bind:class="['ex-btn',(el.presentStatus==0||el.presentStatus==3)?'disabled':'']" v-else-if="el.presentStatus==2" v-on:click="goExchange('2',el)">兑换</p>
+            <p v-bind:class="['ex-btn',(el.presentStatus==0||el.presentStatus==3)?'disabled':'']" v-else-if="el.presentStatus==3">徽章不足</p>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <div class="rule-part">
+      <h2 class="rule-title">兑换规则</h2>
+      <p class="rule-item">1. 每邀请一位新用户即可获得随机Q兔徽章；</p>
+      <p class="rule-item">2. 每种奖品只可兑换一次，请根据实际Q兔徽章数进行合理选择；</p>
+      <p class="rule-item">3. 优惠券兑换后即可下单时使用；不可与其他优惠券叠加使用、不可兑现、不找零；使用有效期2019.5.1-2019.5.21</p>
+      <p class="rule-item">4. 实物礼品将在3个工作日内寄出；</p>
+      <p class="rule-item">5. 奖品数量有限，先到先得；</p>
+      <p class="rule-item">6. 若发现人为作弊情况，Qtools将终止/取消兑奖资格,本活动解释权归Qtools所有；</p>
+    </div>
+  </div>
+  <div class="cover-mask" v-show="visibleCover"></div>
+  <div class="modal-error modal-common" v-show="visibleTwo">
+    <div class="modal-content">
+      哎呀，下手慢了，奖品已兑完换个奖品兑换吧
+    </div>
+    <div class="modal-footer" v-on:click="onCancel('visibleTwo')">
+      去看看其他奖品
+    </div>
+  </div>
+  <div class="modal-success modal-common" v-show="visibleThr">
+    <div class="modal-title">
+      兑换成功
+    </div>
+    <div class="modal-content">
+      <div class="exchange-info">
+        你已成功兑换“满{{currentItem.couponFullAmount}}减{{currentItem.couponMoney}}”优惠券赶快去使用吧
+      </div>
+      <div class="img-wrap">
+        <img src="./imgs/gift.png" alt="">
+      </div>
+    </div>
+    <button type="button" name="button" class="use-btn" v-on:click="goUseCoupon">去使用</button>
+  </div>
+  <div class="confirm-modal modal-common" v-show="visibleOne">
+    <p class="modal-title">兑换确认</p>
+    <p class="modal-content">你确定要使用{{currentItem.valueQty}}兔徽章兑换“满{{currentItem.couponFullAmount}}减{{currentItem.couponMoney}}”优惠券吗</p>
+    <div class="modal-footer">
+      <p class="item" v-on:click="onCancel('visibleOne')">我在看看</p>
+      <p class="item" v-on:click="confirmExchange">确定</p>
+    </div>
+  </div>
+</div>
+</body>
+</html>

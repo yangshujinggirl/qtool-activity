@@ -1,0 +1,100 @@
+<html>
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="Content-Type" content="text/html; charset=GBK">
+      <meta name="author" content="qtoolsApp">
+      <meta http-equiv="cleartype" content="on">
+      <meta name="apple-mobile-web-app-capable" content="yes">
+      <meta name="apple-mobile-web-app-status-bar-style" content="black">
+      <meta name="format-detection" content="telephone=no">
+      <meta http-equiv="Expires" content="-1">
+      <meta http-equiv="Cache-Control" content="no-cache">
+      <meta name="keywords" content="Qtools母婴节">
+      <meta name="description" content="Qtools母婴节">
+      <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5">
+      <title>Qtools母婴节」邀约闺蜜，双重奖励</title>
+  </head>
+  <body>
+    <div id='root' v-cloak>
+      <div class="banner">
+        <img src="./imgs/banner.jpg" alt="">
+      </div>
+      <div class="part-redbox" id="shareAction">
+        <div class="redbox-content">
+          <div class="redbox-title">邀请好友 >好友绑定手机号 >获得Q兔徽章 >兑换超赞好物</div>
+          <button type="button" name="button" class="share-btn" v-on:click="goShareApplte">立即邀请好友</button>
+          <div class="share-btn-list">
+            <p class="fl fl-l" v-on:click="goShareWx">分享到朋友圈</p>
+            <p class="fl fl-r" v-on:click="gosharePtP(true)">面对面邀请</p>
+          </div>
+        </div>
+      </div>
+      <div class="part-same">
+        <div class="part-head">
+          <span class="item">当前Q兔徽章</span>
+        </div>
+        <div class="part-content">
+          <div class="ac-left">
+            <div class="top-cover">
+              <span class="ite badge-ite">
+                <img src="./imgs/badge.png" alt="">
+              </span>
+              <span class="ite big-num" v-if="totalBadges!=0">{{totalBadges}}</span>
+              <span class="ite" v-else>还没徽章哦</span>
+            </div>
+          </div>
+          <div class="ac-right" v-on:click="goGiftPage">立即兑换好物 >></div>
+        </div>
+      </div>
+      <div class="part-same part-share">
+        <div class="part-head">
+          <span class="item">我的邀请</span>
+        </div>
+        <div class="no-share"  v-if="userList.length==0">
+          暂无邀请好友，赶快点击邀请赢取Q兔徽章哦
+          <p class="btn-wrap">
+            <a href="#shareAction">
+              <button type="button" name="button" class="go-share">立即邀请</button>
+            </a>
+          </p>
+        </div>
+        <ul class="share-data-list" v-else>
+          <li class="share-item" v-for="(item,index) in userList">
+            <div class="flex-l">
+              <img :src="item.weiXinPic" alt="">
+            </div>
+            <div class="flex-r">
+              <p>{{ item.createTime }} {{item.mobile}}</p>
+              <p class="row-two">获得<span class="highlight">{{ item.badgeQty }}</span>个Q兔徽章</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="rule-part">
+        <h2 class="rule-title">活动规则</h2>
+        <p class="rule-item">1、活动时间：2019.5.1 0:00-5.21 24:00</p>
+        <p class="rule-item">2、活动对象：Qtools新老用户</p>
+        <p class="rule-item">3、用户可通过邀请好友/分享到朋友圈/面对面邀请等任一方式邀请好友前来参加活动</p>
+        <p class="rule-item">4、新用户扫描小程序进入小程序并成功绑定手机号则视为邀请成功；</p>
+        <p class="rule-item">5、根据成功邀请的好友人数，随机获得Q兔徽章；</p>
+        <p class="rule-item">6、Q兔徽章可兑换超值优惠券和精美母婴好物</p>
+      </div>
+      <footer>
+        <div class="logo-wrap">
+          <img src="./imgs/logo.png" alt="qtools">
+        </div>
+      </footer>
+      <div class="cover-mask"  v-if="visible" v-on:click="gosharePtP(false)">
+        <div class="modal-share">
+          <div class="top-title">
+            <img :src="userInfo.userPic" alt="">
+          </div>
+          <div class="middle-content">
+            <img :src="userInfo.codePath" alt="">
+          </div>
+          <div class="bottom-tips">邀请好友扫描此二维码，<br/>授权绑定手机号即可获得积分哦</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
