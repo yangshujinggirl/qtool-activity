@@ -23,7 +23,7 @@
     <ul class="gift-list">
       <li class="item" v-for="item in productList">
         <div class="fl-l">
-          <img :src="item.picUrl" alt="">
+          <img :src="fileDomain+item.picUrl" alt="">
         </div>
         <div class="fl-r">
           <p class="title">{{item.name}}</p>

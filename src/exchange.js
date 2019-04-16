@@ -2,8 +2,8 @@
 import '../common/stylesheet/reset.scss';
 import './exchange/index.scss';
 import rem from '../common/javascript/rem.js';
-import { isAndroidOrIos, primaryHandler, getSearchParts } from '../common/javascript/utils';
-import Vue from 'vue'
+
+import Vue from 'vue';
 
 rem(100,1);
 
@@ -20,7 +20,8 @@ $(document).ready(function() {
         visibleCover:false,
         currentItem:{},
         user:'',
-        accesstoken:''
+        accesstoken:'',
+        fileDomain:''
       },
       created() {
         window['showAccessToken'] = (getAccessToken) => {
@@ -124,6 +125,7 @@ $(document).ready(function() {
         },
         getData: function () {
           var vm = this;
+          // vm.accesstoken = "231b0be50f69739ce58bef53d87909a2"
           $.ajax({
             url:'/invitation/exchange/search?accesstoken='+vm.accesstoken,
             type: 'GET',
@@ -133,6 +135,7 @@ $(document).ready(function() {
               vm.couponList = res.data.couponList;
               vm.productList = res.data.productList;
               vm.user = res.data.user;
+              vm.fileDomain = res.fileDomain;
             },
             err: function (err) {
               window.Qtools.goLogin(null)

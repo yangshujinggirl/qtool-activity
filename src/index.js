@@ -1,6 +1,5 @@
 import rem from '../common/javascript/rem.js';
 
-import { isAndroidOrIos, primaryHandler, getSearchParts } from '../common/javascript/utils';
 import Vue from 'vue'
 // 导入reset.scss
 import '../common/stylesheet/reset.scss';
@@ -98,6 +97,7 @@ $(document).ready(function() {
         },
         getUserInfo: function () {
             var vm = this;
+            // vm.accesstoken = "231b0be50f69739ce58bef53d87909a2"
             $.ajax({
               url: '/invitation/h5ShareCode?accesstoken='+vm.accesstoken,
               type: 'GET',
