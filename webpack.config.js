@@ -52,7 +52,7 @@ for(let key in Entry.entry) {
       template:`${pagePath}/${key}/index.html`,
       // template:`./src/index.html`,
       filename:`${env.htmlFilePath}${key}.html`,
-      chunks:['common',key],
+      chunks:['common','vendor',key],
       hash:true
     }))
   }
@@ -139,17 +139,28 @@ module.exports = {
       '$':'jquery'
     }),
   ].concat(htmlArray),
-  // optimization: {
-  //   splitChunks: {
-  //     name: "common",
-  //     chunks: "initial",
-  //     filename: env.jsFileName,
-  //     minChunks: 2
-  //   }
-  // },
-  // externals: {
-  //   'jquery': 'jQuery'
-  // },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        default: false,
+        vendors: false,
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          chunks: 'initial',
+          enforce: true,
+          priority: 10,
+          name: 'vendor'
+        },
+        common: {
+          chunks: "all",
+          minChunks: 2,
+          name: 'common',
+          enforce: true,
+          priority: 5
+        }
+      }
+    }
+  },
   devServer:{
     host: Ip.address(),
     port:3006,

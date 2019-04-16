@@ -57,7 +57,7 @@ $(document).ready(function() {
         },
         goShareApplte: function () {
           var index = Math.floor(Math.random()*4);
-          var imgUrl = "http://v5.apph5.testin.qtoolsbaby.net:81/imgs/activity_share.png";
+          var imgUrl = "https://qcampfile.oss-cn-shanghai.aliyuncs.com/activity_share.png";
           window.Qtools.goShareApplte(JSON.stringify({
           	// imageUrl: 'http://pic15.nipic.com/20110813/1993003_205156492136_2.jpg',
           	imageUrl: imgUrl,
@@ -97,7 +97,7 @@ $(document).ready(function() {
         },
         getUserInfo: function () {
             var vm = this;
-            // vm.accesstoken = "231b0be50f69739ce58bef53d87909a2"
+            // vm.accesstoken = "2ab63862d983694f9f6ed07fb0d55f50"
             $.ajax({
               url: '/invitation/h5ShareCode?accesstoken='+vm.accesstoken,
               type: 'GET',
