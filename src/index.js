@@ -80,6 +80,7 @@ $(document).ready(function() {
         },
         getData: function () {
             var vm = this;
+            // vm.accesstoken = "2ab63862d983694f9f6ed07fb0d55f50"
             $.ajax({
               url: '/invitation/user/search?accesstoken='+vm.accesstoken,
               type: 'GET',
