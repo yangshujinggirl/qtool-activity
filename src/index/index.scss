@@ -42,6 +42,9 @@ body {
   flex: 1;
   font-size: 20px;
   color: #9F4229;
+  .bot-line {
+    border-bottom: 1px solid #9f4229;
+  }
 }
 .part-redbox .share-btn-list .fl-l {
   text-align: right;
@@ -104,7 +107,7 @@ body {
 .part-same .part-content .ac-left {
   width: 396px;
   height: 100%;
-  background: #B13319;
+  background: #DC603F;
   box-shadow: -9px 2px 20px 0 rgba(0,0,0,0.09);
   border-radius: 24px;
   box-sizing: border-box;
@@ -194,6 +197,33 @@ body {
 .part-share .share-data-list .row-two {
   font-weight: bold;
   padding-top: 20px;
+}
+.part-share {
+  .handle-item {
+    text-align: right;
+    font-size: 24px;
+    padding: 18px 0;
+  }
+  .icon-handle {
+    display: inline-block;
+    color: #9b9b9b;
+    .handle-text,.icon-arrow {
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .icon-arrow {
+      width: 24px;
+      height: 24px;
+      &.up-arrow {
+        background: url('./imgs/icon_bot.png') no-repeat center;
+        background-size: cover;
+      }
+      &.bot-arrow {
+        background: url('./imgs/icon_top.png') no-repeat center;
+        background-size: cover;
+      }
+    }
+  }
 }
 /*////////////////////////////////////////*/
 .rule-part {

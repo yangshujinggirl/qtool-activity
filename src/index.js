@@ -20,14 +20,16 @@ $(document).ready(function() {
       el: '#root',
       data: {
         userList:[],
+        botHalfData:[],
         totalBadges:0,
         visible:null,
         accesstoken:'',
         testAccessToken:'',
-        userInfo:{}
+        userInfo:{},
+        isUp:false
       },
       created() {
-        this.getAccessToken();
+        // this.getAccessToken();
         window['showAccessToken'] = (getAccessToken) => {
           this.showAccessToken(getAccessToken)
         };
@@ -35,11 +37,15 @@ $(document).ready(function() {
       mounted() {
         let vm = this;
         setTimeout(function(){
-          vm.getData();
           vm.getUserInfo()
+          vm.getData();
         });
       },
       methods: {
+        toggleList:function() {
+          let isUp = this.isUp;
+          this.isUp = !isUp;
+        },
         goLogin:function() {
           window.Qtools.goLogin(null)
         },
@@ -59,7 +65,6 @@ $(document).ready(function() {
           var index = Math.floor(Math.random()*4);
           var imgUrl = "https://qcampfile.oss-cn-shanghai.aliyuncs.com/activity_share.png";
           window.Qtools.goShareApplte(JSON.stringify({
-          	// imageUrl: 'http://pic15.nipic.com/20110813/1993003_205156492136_2.jpg',
           	imageUrl: imgUrl,
             title: titleMap[index],
           	path: 'pages/welcome/welcome?scene=4_'+this.userInfo.spshopid+'_'+this.userInfo.userId,
@@ -86,7 +91,14 @@ $(document).ready(function() {
               type: 'GET',
               dataType:'json',
               success:function(res) {
+                if(res.code == '401') {
+                  window.Qtools.goLogin(null);
+                  return;
+                }
+                let topHalfData = res.data.userList.slice(0,5);
+                let botHalfData = res.data.userList.slice(4);
                 vm.userList = res.data.userList;
+                vm.botHalfData = botHalfData;
                 vm.totalBadges = res.data.totalBadges;
                 vm.userId = res.data.userId;
                 vm.loading = true;
@@ -104,11 +116,14 @@ $(document).ready(function() {
               type: 'GET',
               dataType:'json',
               success:function(res) {
+                if(res.code == '401') {
+                  window.Qtools.goLogin(null);
+                  return;
+                }
                 var fileDomain = res.fileDomain;
                 vm.userInfo = {...res.data,...{fileDomain}};
               },
               error: function (err) {
-                // alert(err.code)
                 window.Qtools.goLogin(null)
               }
             })
