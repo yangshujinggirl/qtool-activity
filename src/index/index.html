@@ -43,7 +43,8 @@
               <span class="ite" v-else>还没徽章哦</span>
             </div>
           </div>
-          <div class="ac-right" v-on:click="goGiftPage">立即兑换好物 >></div>
+          <div class="ac-right" v-on:click="goGiftPage" v-if="totalBadges!=0">立即兑换好物 >></div>
+          <div class="ac-right" v-on:click="goGiftPage">看看神秘礼物 >></div>
         </div>
       </div>
       <div class="part-same part-share">
@@ -99,7 +100,7 @@
           <img src="./imgs/logo.png" alt="qtools">
         </div>
       </footer>
-      <div class="cover-mask"  v-if="visible" v-on:click="gosharePtP(false)">
+      <div class="cover-mask"  v-show="visible" v-on:click="gosharePtP(false)">
         <div class="modal-share">
           <div class="top-title">
             <img :src="userInfo.userPic" alt="">
