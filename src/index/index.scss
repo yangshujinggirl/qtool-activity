@@ -159,9 +159,11 @@ body {
   box-sizing: border-box;
 }
 .part-share .btn-wrap {
-  text-align: right;
+  text-align: center;
+  display: inline-block;
   font-size: 20px;
   color: #DC603F;
+  border-bottom: 1px solid #9f4229;
 }
 .part-share .btn-wrap .go-share{
   color: #DC603F;
@@ -251,12 +253,6 @@ footer {
   width: auto;
 }
 
-.cover-mask {
-  // display: none;
-  // &.visible {
-  //   display: block;
-  // }
-}
 .modal-share {
   background: rgba(252,252,252,0.80);
   background: #FFFFFF;
