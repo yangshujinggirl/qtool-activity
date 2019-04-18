@@ -29,7 +29,7 @@ $(document).ready(function() {
         isUp:false
       },
       created() {
-        this.getAccessToken();
+        // this.getAccessToken();
         window['showAccessToken'] = (getAccessToken) => {
           this.showAccessToken(getAccessToken)
         };

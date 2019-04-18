@@ -84,12 +84,13 @@
   position: relative;
   font-size: 90px;
   line-height: 90px;
+  display: inline-block;
 }
 .gift-list .coupon-item .unit{
   font-size: 30px;
   line-height: 30px;
   position: absolute;
-  left: 8px;
+  left: -10px;
   top: 10px;
 }
 .gift-list .coupon-item  .bottom-part {
