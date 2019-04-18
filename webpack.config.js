@@ -75,6 +75,7 @@ module.exports = {
         'vue': 'vue/dist/vue.js'
     }
   },
+  mode:process.env.NODE_ENV,
   entry: Entry.entry,
   output: {
     path: path.resolve(__dirname, env.path),
