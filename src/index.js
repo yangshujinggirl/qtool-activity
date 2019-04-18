@@ -1,8 +1,6 @@
 import rem from '../common/javascript/rem.js';
-
-import Vue from 'vue'
-// 导入reset.scss
-import '../common/stylesheet/reset.scss';
+import Vue from 'vue';
+import '../common/stylesheet/reset.scss';// 导入reset.scss
 import './index/index.scss';
 
 rem(100,1);

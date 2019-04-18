@@ -1,0 +1,198 @@
+@charset "UTF-8";
+.content-wrap {
+  padding: 0 0.4rem; }
+
+.top-total {
+  font-size: 0.32rem;
+  color: #464646;
+  padding: 0.44rem 0 0.1rem;
+  border-bottom: 0.01rem solid #D9D9D9; }
+
+.gift-list {
+  margin-bottom: 0.2rem; }
+
+.gift-list img {
+  height: 100%; }
+
+.gift-list .item {
+  display: flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0.42rem 0;
+  border-bottom: 0.01rem solid #D9D9D9; }
+
+.gift-list .item .fl-l {
+  width: 1.86rem;
+  height: 1.86rem;
+  background: #FFFFFF;
+  border: 0.01rem solid #E2E2E2;
+  border-radius: 0.16rem;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  overflow: hidden; }
+
+.gift-list .item .fl-r {
+  padding-left: 0.2rem;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1; }
+
+.gift-list .fl-r .title {
+  -o-text-overflow: -o-ellipsis-lastline;
+     text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+     text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical; }
+
+.gift-list .bottom-part {
+  display: flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end; }
+
+.gift-list .badge-num {
+  font-size: 0.28rem;
+  color: #EB9850; }
+
+.gift-list .ex-btn {
+  width: 1.6rem;
+  height: 0.6rem;
+  line-height: 0.6rem;
+  background: #E88653;
+  border-radius: 0.3rem;
+  font-size: 0.22rem;
+  color: #FFFFFF;
+  text-align: center; }
+
+.gift-list .ex-btn.disabled {
+  background: #BABABB; }
+
+/*优惠券*/
+.gift-list .coupon-item .use-tips {
+  font-size: 0.2rem;
+  color: #C9C9C9; }
+
+.gift-list .coupon-item .coupon-value-info {
+  text-align: center;
+  color: #00C4B3;
+  padding-top: 0.3rem; }
+
+.gift-list .coupon-item .coupon-money {
+  position: relative;
+  font-size: 0.9rem;
+  line-height: 0.9rem;
+  display: inline-block; }
+
+.gift-list .coupon-item .unit {
+  font-size: 0.3rem;
+  line-height: 0.3rem;
+  position: absolute;
+  left: -0.1rem;
+  top: 0.1rem; }
+
+.gift-list .coupon-item .bottom-part {
+  padding-top: 0.2rem; }
+
+/*---------------------------------------------*/
+.rule-part {
+  font-size: 0.24rem;
+  color: #9B9B9B;
+  padding-bottom: 0.8rem; }
+
+.modal-error .modal-content {
+  padding: 0.64rem 0.2rem;
+  text-align: center;
+  font-size: 0.3rem;
+  color: #464646;
+  line-height: 0.4rem;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box; }
+
+.modal-error .modal-footer {
+  text-align: center;
+  font-size: 0.34rem;
+  padding: 0.3rem 0;
+  color: #9B9B9B;
+  border-top: 0.01rem solid rgba(77, 77, 77, .78); }
+
+.modal-success {
+  color: #4A4A4A;
+  padding: 0.4rem 0.2rem 0.6rem;
+  text-align: center; }
+
+.modal-success .modal-title {
+  font-size: 0.34rem;
+  font-weight: bold;
+  padding-top: 0.4rem; }
+
+.modal-success .modal-content {
+  font-size: 0.3rem;
+  padding: 0.16rem 0 0;
+  text-align: center; }
+
+.modal-success .modal-content .exchange-info {
+  margin-bottom: 0.4rem; }
+
+.modal-success .img-wrap {
+  width: 2.34rem;
+  margin: 0 auto 0.6rem; }
+
+.modal-success .use-btn {
+  width: 3.96rem;
+  height: 0.75rem;
+  background: #E88653;
+  border-radius: 0.36rem;
+  font-size: 0.3rem;
+  color: #FFFFFF;
+  line-height: 0.75rem; }
+
+/*确认弹框*/
+.confirm-modal {
+  text-align: center; }
+
+.confirm-modal .modal-title,
+.confirm-modal .modal-content {
+  padding: 0 0.3rem;
+  margin-bottom: 0.3rem; }
+
+.confirm-modal .modal-title {
+  font-size: 0.34rem;
+  color: #4A4A4A;
+  padding-top: 0.4rem; }
+
+.confirm-modal .modal-content {
+  font-size: 0.26rem;
+  color: #9B9B9B; }
+
+.confirm-modal .modal-footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 0.34rem;
+  color: #9B9B9B;
+  border-top: 0.01rem solid #9B9B9B; }
+
+.confirm-modal .modal-footer .item {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  padding: 0.3rem 0; }
+
+.confirm-modal .modal-footer .item:not(:first-child) {
+  border-left: 0.01rem solid #9B9B9B;
+  color: #464646; }

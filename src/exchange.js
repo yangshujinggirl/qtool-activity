@@ -1,11 +1,8 @@
-// 导入reset.scss
-import '../common/stylesheet/reset.scss';
+import moment from 'moment';
+import Vue from 'vue';
+import '../common/stylesheet/reset.scss';// 导入reset.scss
 import './exchange/index.scss';
 import rem from '../common/javascript/rem.js';
-import moment from 'moment';
-
-import Vue from 'vue';
-
 rem(100,1);
 
 $(document).ready(function() {
