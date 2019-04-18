@@ -2,7 +2,7 @@
 import '../common/stylesheet/reset.scss';
 import './exchange/index.scss';
 import rem from '../common/javascript/rem.js';
-// import moment from 'moment';
+import moment from 'moment';
 
 import Vue from 'vue';
 
@@ -136,9 +136,9 @@ $(document).ready(function() {
             dataType: 'json',
             success:function(res) {
               let couponList = res.data.couponList?res.data.couponList:[]
-              // couponList.length>0&&res.data.couponList.map((el,index) => (
-              //   el.couponValidDate = moment(el.couponValidDate).format('YYYY-MM-DD')
-              // ))
+              couponList.length>0&&res.data.couponList.map((el,index) => (
+                el.couponValidDate = moment(el.couponValidDate).format('YYYY-MM-DD')
+              ))
               vm.couponList = couponList;
               vm.productList = res.data.productList?res.data.productList:[];
               vm.user = res.data.user;
