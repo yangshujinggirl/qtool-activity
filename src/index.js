@@ -110,7 +110,7 @@ $(document).ready(function() {
         },
         getUserInfo: function () {
             var vm = this;
-            // vm.accesstoken = "2ab63862d983694f9f6ed07fb0d55f50"
+            vm.accesstoken = "bc5f5dc949c3a9c8c5bf43102aa36f07"
             $.ajax({
               url: '/invitation/h5ShareCode?accesstoken='+vm.accesstoken,
               type: 'GET',

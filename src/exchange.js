@@ -2,6 +2,7 @@
 import '../common/stylesheet/reset.scss';
 import './exchange/index.scss';
 import rem from '../common/javascript/rem.js';
+import moment from 'moment';
 
 import Vue from 'vue';
 
@@ -119,21 +120,27 @@ $(document).ready(function() {
         onCancel:function(key) {
           this[key] = false;
           this.visibleCover = false;
+          if(key == 'visibleTwo') {
+            window.location.reload();
+          }
         },
         goGiftPage: function () {
           window.location.href = './exchange.html';
         },
         getData: function () {
           var vm = this;
-          // vm.accesstoken = "2ab63862d983694f9f6ed07fb0d55f50"
+          vm.accesstoken = "bc5f5dc949c3a9c8c5bf43102aa36f07"
           $.ajax({
             url:'/invitation/exchange/search?accesstoken='+vm.accesstoken,
             type: 'GET',
             dataType: 'json',
             success:function(res) {
-              console.log(res);
-              vm.couponList = res.data.couponList;
-              vm.productList = res.data.productList;
+              let couponList = res.data.couponList?res.data.couponList:[]
+              couponList.length>0&&res.data.couponList.map((el,index) => (
+                el.couponValidDate = moment(el.couponValidDate).format('YYYY-MM-DD')
+              ))
+              vm.couponList = couponList;
+              vm.productList = res.data.productList?res.data.productList:[];
               vm.user = res.data.user;
               vm.fileDomain = res.fileDomain;
             },
