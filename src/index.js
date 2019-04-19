@@ -60,12 +60,13 @@ $(document).ready(function() {
           this.accesstoken = accesstoken;
         },
         goShareApplte: function () {
+          const vm = this;
           var index = Math.floor(Math.random()*4);
           var imgUrl = "https://qcampfile.oss-cn-shanghai.aliyuncs.com/activity_share.png";
           window.Qtools.goShareApplte(JSON.stringify({
           	imageUrl: imgUrl,
             title: titleMap[index],
-          	path: 'pages/welcome/welcome?scene=4_'+this.userInfo.spshopid+'_'+this.userInfo.userId,
+          	path: 'pages/welcome/welcome?scene=4_'+vm.userInfo.spShopId+'_'+vm.userId,
             webpageUrl:'https://qtoolsapp-hd.qtoolsbaby.cn/download/'
           }));
         },
@@ -108,7 +109,7 @@ $(document).ready(function() {
         },
         getUserInfo: function () {
             var vm = this;
-            // vm.accesstoken = "bc5f5dc949c3a9c8c5bf43102aa36f07"
+            // vm.accesstoken = "231b0be50f69739ce58bef53d87909a2"
             $.ajax({
               url: '/invitation/h5ShareCode?accesstoken='+vm.accesstoken,
               type: 'GET',
