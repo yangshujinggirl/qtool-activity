@@ -8,6 +8,36 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const Ip = require('ip');
 const pkg = require('./package.json');
 
+var loaderOptions = {
+  mozjpeg: {
+    quality: 65
+  },
+  pngquant:{
+    quality: "65-90",
+    speed: 4
+  },
+  svgo:{
+    plugins: [
+      {
+        removeViewBox: false
+      },
+      {
+        removeEmptyAttrs: false
+      }
+    ]
+  },
+  gifsicle: {
+    optimizationLevel: 7,
+    interlaced: false
+  },
+  optipng: {
+    optimizationLevel: 7,
+    interlaced: false
+  },
+  webp: {
+    quality: 75
+  }
+}
 const env = {
   path: './',// 输出主路径
   publicPath: '/',// 资源cdn路径
@@ -126,7 +156,7 @@ module.exports = {
       use:[{
         loader:'url-loader',
         options:{
-          limit:4000,
+          limit:10000,
           name: env.imgFileName,
           publicPath: env.publicPath
         }
@@ -167,7 +197,8 @@ module.exports = {
     port:3006,
     proxy: {
       '/invitation': {
-        target: 'http://192.168.2.15:8214/',
+        // target: 'http://192.168.2.15:8214/',
+        target: 'http://v2.apph5.testin.qtoolsbaby.net:81/',
         // target: 'http://192.168.2.164:8214',
         changeOrigin: true,
       },
