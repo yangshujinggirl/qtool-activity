@@ -52,7 +52,7 @@ for(let key in Entry.entry) {
       template:`${pagePath}/${key}/index.html`,
       // template:`./src/index.html`,
       filename:`${env.htmlFilePath}${key}.html`,
-      chunks:['common','vendor',key],
+      chunks:['common',key],
       hash:true
     }))
   }
@@ -126,7 +126,7 @@ module.exports = {
       use:[{
         loader:'url-loader',
         options:{
-          limit:4000,
+          limit:8192,
           name: env.imgFileName,
           publicPath: env.publicPath
         }
@@ -143,15 +143,15 @@ module.exports = {
   optimization: {
     splitChunks: {
       cacheGroups: {
-        default: false,
-        vendors: false,
-        vendor: {
-          test: /[\\/]node_modules[\\/]/,
-          chunks: 'initial',
-          enforce: true,
-          priority: 10,
-          name: 'vendor'
-        },
+        // default: false,
+        // vendors: false,
+        // vendor: {
+        //   test: /[\\/]node_modules[\\/]/,
+        //   chunks: 'initial',
+        //   enforce: true,
+        //   priority: 10,
+        //   name: 'vendor'
+        // },
         common: {
           chunks: "all",
           minChunks: 2,
