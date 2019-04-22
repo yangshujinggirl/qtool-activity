@@ -19,7 +19,8 @@ $(document).ready(function() {
         currentItem:{},
         user:'',
         accesstoken:'',
-        fileDomain:''
+        fileDomain:'',
+        isLoading:false
       },
       created() {
         window['showAccessToken'] = (getAccessToken) => {
@@ -48,7 +49,8 @@ $(document).ready(function() {
               presentId:value.pdSpuActiveId,
               mainPicUrl:value.picUrl,
               name:value.name,
-              valueQty:value.valueQty
+              valueQty:value.valueQty,
+              price:value.price
             }));
             return;
           }
@@ -103,7 +105,8 @@ $(document).ready(function() {
           let params = {
             num:9,
             type,
-            presentId
+            presentId,
+            price:value.price
           }
           window.Qtools.goWebPage(JSON.stringify(params));
         },
@@ -126,12 +129,17 @@ $(document).ready(function() {
         },
         getData: function () {
           var vm = this;
-          // vm.accesstoken = "537aff88d79d4ac0130fc0c68332ad7b"
+          vm.isLoading = true
+          // vm.accesstoken = "be110fd9ef7b9042acad4e4f375db5df"
           $.ajax({
             url:'/invitation/exchange/search?accesstoken='+vm.accesstoken,
             type: 'GET',
             dataType: 'json',
             success:function(res) {
+              if(res.code == '401') {
+                window.Qtools.goLogin(null);
+                return;
+              }
               let couponList = res.data.couponList?res.data.couponList:[]
               couponList.length>0&&res.data.couponList.map((el,index) => (
                 el.couponValidDate = moment(el.couponValidDate).format('YYYY-MM-DD')
@@ -140,8 +148,10 @@ $(document).ready(function() {
               vm.productList = res.data.productList?res.data.productList:[];
               vm.user = res.data.user;
               vm.fileDomain = res.fileDomain;
+              vm.isLoading = false
             },
-            err: function (err) {
+            error: function (err) {
+              vm.isLoading = false
               window.Qtools.goLogin(null)
             }
           })

@@ -24,7 +24,8 @@ $(document).ready(function() {
         accesstoken:'',
         testAccessToken:'',
         userInfo:{},
-        isUp:false
+        isUp:false,
+        isLoading:false
       },
       created() {
         this.getAccessToken();
@@ -100,16 +101,18 @@ $(document).ready(function() {
                 vm.botHalfData = botHalfData;
                 vm.totalBadges = res.data.totalBadges;
                 vm.userId = res.data.userId;
-                vm.loading = true;
+                vm.isLoading = false
               },
               error: function (err) {
+                vm.isLoading = false
                 window.Qtools.goLogin(null)
               }
             })
         },
         getUserInfo: function () {
             var vm = this;
-            // vm.accesstoken = "231b0be50f69739ce58bef53d87909a2"
+            vm.isLoading = true
+            // vm.accesstoken = "be110fd9ef7b9042acad4e4f375db5df"
             $.ajax({
               url: '/invitation/h5ShareCode?accesstoken='+vm.accesstoken,
               type: 'GET',
@@ -121,8 +124,10 @@ $(document).ready(function() {
                 }
                 var fileDomain = res.fileDomain;
                 vm.userInfo = {...res.data,...{fileDomain}};
+                vm.isLoading = false
               },
               error: function (err) {
+                vm.isLoading = false
                 window.Qtools.goLogin(null)
               }
             })
