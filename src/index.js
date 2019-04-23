@@ -2,6 +2,7 @@ import rem from '../common/javascript/rem.js';
 import Vue from 'vue';
 import '../common/stylesheet/reset.scss';// 导入reset.scss
 import './index/index.scss';
+import showToast from 'show-toast';
 
 rem(100,1);
 
@@ -41,6 +42,13 @@ $(document).ready(function() {
         });
       },
       methods: {
+        valdateStatus:function() {
+          if(this.userInfo.spShopId&&this.userInfo.userId) {
+            return true;
+          } else {
+            return false;
+          }
+        },
         toggleList:function() {
           let isUp = this.isUp;
           this.isUp = !isUp;
@@ -61,6 +69,14 @@ $(document).ready(function() {
           this.accesstoken = accesstoken;
         },
         goShareApplte: function () {
+          if(!this.valdateStatus()) {
+            showToast({
+              str: "网络开小差了，重新打开页面试试",
+              time: 2000,
+              position: 'middle'
+            })
+            return;
+          }
           const vm = this;
           var index = Math.floor(Math.random()*4);
           var imgUrl = "https://qcampfile.oss-cn-shanghai.aliyuncs.com/activity_share.png";
@@ -78,6 +94,14 @@ $(document).ready(function() {
           }));
         },
         gosharePtP:function(value) {
+          if(!this.valdateStatus()) {
+            showToast({
+              str: "网络开小差了，重新打开页面试试",
+              time: 2000,
+              position: 'middle'
+            })
+            return;
+          }
           this.visible = value;
         },
         goGiftPage: function () {
@@ -104,7 +128,7 @@ $(document).ready(function() {
                 vm.userId = res.data.userId;
               },
               error: function (err) {
-                vm.isLoading = false
+                vm.isLoading = false;
                 window.Qtools.goLogin(null)
               }
             })
@@ -127,7 +151,7 @@ $(document).ready(function() {
                 vm.userInfo = {...res.data,...{fileDomain}};
               },
               error: function (err) {
-                vm.isLoading = false
+                vm.isLoading = false;
                 window.Qtools.goLogin(null)
               }
             })

@@ -347,6 +347,10 @@ img {
 [v-cloak] {
   display: none;
 }
+//toast样式
+.show-toast {
+  font-size: 24px!important;
+}
 .ellipsis {
   white-space  : nowrap;
   text-overflow: ellipsis;
