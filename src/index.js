@@ -36,7 +36,7 @@ $(document).ready(function() {
       mounted() {
         let vm = this;
         setTimeout(function(){
-          vm.getUserInfo()
+          vm.getUserInfo();
           vm.getData();
         });
       },
@@ -67,7 +67,7 @@ $(document).ready(function() {
           window.Qtools.goShareApplte(JSON.stringify({
           	imageUrl: imgUrl,
             title: titleMap[index],
-          	path: 'pages/welcome/welcome?scene=4_'+vm.userInfo.spShopId+'_'+vm.userId,
+          	path: 'pages/welcome/welcome?scene=4_'+vm.userInfo.spShopId+'_'+vm.userInfo.userId,
             webpageUrl:'https://qtoolsapp-hd.qtoolsbaby.cn/download/'
           }));
         },
@@ -91,6 +91,7 @@ $(document).ready(function() {
               type: 'GET',
               dataType:'json',
               success:function(res) {
+                vm.isLoading = false
                 if(res.code == '401') {
                   window.Qtools.goLogin(null);
                   return;
@@ -101,7 +102,6 @@ $(document).ready(function() {
                 vm.botHalfData = botHalfData;
                 vm.totalBadges = res.data.totalBadges;
                 vm.userId = res.data.userId;
-                vm.isLoading = false
               },
               error: function (err) {
                 vm.isLoading = false
@@ -112,19 +112,19 @@ $(document).ready(function() {
         getUserInfo: function () {
             var vm = this;
             vm.isLoading = true
-            // vm.accesstoken = "be110fd9ef7b9042acad4e4f375db5df"
+            // vm.accesstoken = "bc5f5dc949c3a9c8c5bf43102aa36f07"
             $.ajax({
               url: '/invitation/h5ShareCode?accesstoken='+vm.accesstoken,
               type: 'GET',
               dataType:'json',
               success:function(res) {
                 if(res.code == '401') {
+                  vm.isLoading = false
                   window.Qtools.goLogin(null);
                   return;
                 }
                 var fileDomain = res.fileDomain;
                 vm.userInfo = {...res.data,...{fileDomain}};
-                vm.isLoading = false
               },
               error: function (err) {
                 vm.isLoading = false

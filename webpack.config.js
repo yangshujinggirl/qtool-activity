@@ -168,7 +168,7 @@ module.exports = {
     proxy: {
       '/invitation': {
         // target: 'http://192.168.2.15:8214/',
-        target: 'http://v2.apph5.testin.qtoolsbaby.net:81/',
+        target: 'http://v5.apph5.testin.qtoolsbaby.net:81/',
         // target: 'http://192.168.2.164:8214',
         changeOrigin: true,
       },
