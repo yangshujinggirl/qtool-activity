@@ -109,7 +109,7 @@ $(document).ready(function() {
         },
         getData: function () {
             var vm = this;
-            // vm.accesstoken = "2ab63862d983694f9f6ed07fb0d55f50"
+            vm.accesstoken = "2d61f518afc2aca2f6e18251315c1ccd"
             $.ajax({
               url: '/invitation/user/search?accesstoken='+vm.accesstoken,
               type: 'GET',
@@ -120,9 +120,9 @@ $(document).ready(function() {
                   window.Qtools.goLogin(null);
                   return;
                 }
-                let topHalfData = res.data.userList.slice(0,5);
+                let topHalfData = res.data.userList.slice(0,4);
                 let botHalfData = res.data.userList.slice(4);
-                vm.userList = res.data.userList;
+                vm.userList = topHalfData;
                 vm.botHalfData = botHalfData;
                 vm.totalBadges = res.data.totalBadges;
                 vm.userId = res.data.userId;
