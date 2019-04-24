@@ -109,7 +109,7 @@ $(document).ready(function() {
         },
         getData: function () {
             var vm = this;
-            vm.accesstoken = "2d61f518afc2aca2f6e18251315c1ccd"
+            // vm.accesstoken = "2d61f518afc2aca2f6e18251315c1ccd"
             $.ajax({
               url: '/invitation/user/search?accesstoken='+vm.accesstoken,
               type: 'GET',
