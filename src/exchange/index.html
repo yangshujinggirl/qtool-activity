@@ -27,7 +27,7 @@
           <img :src="fileDomain+item.picUrl" alt="" v-on:click="enlargeImg(item)">
         </div>
         <div class="fl-r">
-          <p class="title">{{item.name}}</p>
+          <p class="title" v-on:click="enlargeImg(item)">{{item.name}}</p>
           <p>¥{{item.price}}</p>
           <div class="bottom-part">
             <p class="badge-num">{{item.valueQty}}Q兔徽章</p>
