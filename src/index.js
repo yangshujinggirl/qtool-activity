@@ -105,7 +105,7 @@ $(document).ready(function() {
           this.visible = value;
         },
         goGiftPage: function () {
-          window.location.href = './exchange.html?accesstoken='+this.accesstoken;
+          window.location.href = './exchange.html';
         },
         getData: function () {
             var vm = this;

@@ -24,7 +24,7 @@
     <ul class="gift-list">
       <li class="item" v-for="item in productList">
         <div class="fl-l">
-          <img :src="fileDomain+item.picUrl" alt="">
+          <img :src="fileDomain+item.picUrl" alt="" v-on:click="enlargeImg(item)">
         </div>
         <div class="fl-r">
           <p class="title">{{item.name}}</p>
@@ -102,6 +102,9 @@
       <p class="item" v-on:click="onCancel('visibleOne')">我在看看</p>
       <p class="item" v-on:click="confirmExchange">确定</p>
     </div>
+  </div>
+  <div class="enlarge-modal modal-common" v-show="visibleFour" v-on:click="onCancel('visibleFour')">
+    <img :src="fileDomain+currentImg" alt="">
   </div>
 </div>
 </body>

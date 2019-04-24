@@ -20,7 +20,9 @@ $(document).ready(function() {
         user:'',
         accesstoken:'',
         fileDomain:'',
-        isLoading:false
+        isLoading:false,
+        visibleFour:false,
+        currentImg:''
       },
       created() {
         window['showAccessToken'] = (getAccessToken) => {
@@ -57,6 +59,11 @@ $(document).ready(function() {
           console.log(value);
           this.currentItem = value;
           this.visibleOne = true;
+          this.visibleCover = true;
+        },
+        enlargeImg: function (value) {
+          this.currentImg = value.picUrl;
+          this.visibleFour = true;
           this.visibleCover = true;
         },
         confirmExchange: function (type) {
@@ -130,7 +137,7 @@ $(document).ready(function() {
         getData: function () {
           var vm = this;
           vm.isLoading = true
-          // vm.accesstoken = "bc5f5dc949c3a9c8c5bf43102aa36f07"
+          vm.accesstoken = "2d61f518afc2aca2f6e18251315c1ccd"
           $.ajax({
             url:'/invitation/exchange/search?accesstoken='+vm.accesstoken,
             type: 'GET',
