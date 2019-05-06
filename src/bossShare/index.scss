@@ -82,5 +82,8 @@ body {
       background: -moz-linear-gradient(#fe3945, #b43f6b); /* Firefox 3.6 - 15 */
       background: linear-gradient(#fe3945, #b43f6b); /* 标准的语法 */
     }
+    .disabled-btn {
+      background: #e2e2e2;
+    }
   }
 }
