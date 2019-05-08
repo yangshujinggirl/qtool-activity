@@ -129,7 +129,7 @@ $(document).ready(function() {
               },
               error: function (err) {
                 vm.isLoading = false;
-                window.Qtools.goLogin(null)
+                // window.Qtools.goLogin(null)
               }
             })
         },
@@ -152,7 +152,7 @@ $(document).ready(function() {
               },
               error: function (err) {
                 vm.isLoading = false;
-                window.Qtools.goLogin(null)
+                // window.Qtools.goLogin(null)
               }
             })
         },

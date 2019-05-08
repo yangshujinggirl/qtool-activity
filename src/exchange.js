@@ -137,7 +137,7 @@ $(document).ready(function() {
         getData: function () {
           var vm = this;
           vm.isLoading = true
-          // vm.accesstoken = "231b0be50f69739ce58bef53d87909a2"
+          // vm.accesstoken = "982bea9314042af59496e47cd4dbe81f"
           $.ajax({
             url:'/invitation/exchange/search?accesstoken='+vm.accesstoken,
             type: 'GET',
@@ -159,7 +159,7 @@ $(document).ready(function() {
             },
             error: function (err) {
               vm.isLoading = false
-              window.Qtools.goLogin(null)
+              // window.Qtools.goLogin(null)
             }
           })
         }
