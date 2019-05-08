@@ -137,7 +137,7 @@ $(document).ready(function() {
         getData: function () {
           var vm = this;
           vm.isLoading = true
-          // vm.accesstoken = "2d61f518afc2aca2f6e18251315c1ccd"
+          // vm.accesstoken = "231b0be50f69739ce58bef53d87909a2"
           $.ajax({
             url:'/invitation/exchange/search?accesstoken='+vm.accesstoken,
             type: 'GET',

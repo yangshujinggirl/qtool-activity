@@ -30,7 +30,7 @@
           <p class="title" v-on:click="enlargeImg(item)">{{item.name}}</p>
           <p>¥{{item.price}}</p>
           <div class="bottom-part">
-            <p class="badge-num">{{item.valueQty}}Q兔徽章</p>
+            <p class="badge-num">{{item.valueQty}}&nbsp;Q兔徽章</p>
             <p v-bind:class="['ex-btn',(item.presentStatus==0||item.presentStatus==3)?'disabled':'']" v-if="item.presentStatus==0" >已兑完</p>
             <p v-bind:class="['ex-btn',(item.presentStatus==0||item.presentStatus==3)?'disabled':'']" v-else-if="item.presentStatus==1" v-on:click="goExchangeDetail(item)">查看兑换详情</p>
             <p v-bind:class="['ex-btn',(item.presentStatus==0||item.presentStatus==3)?'disabled':'']" v-else-if="item.presentStatus==2" v-on:click="goExchange('1',item)">兑换</p>
@@ -53,7 +53,7 @@
           <p class="use-tips">-全场需满{{el.couponFullAmount}}可以使用</p>
           <p class="use-tips">-{{el.couponExplain}}</p>
           <div class="bottom-part">
-            <p class="badge-num">{{el.valueQty}}Q兔徽章</p>
+            <p class="badge-num">{{el.valueQty}}&nbsp;Q兔徽章</p>
             <p v-bind:class="['ex-btn',(el.presentStatus==0||el.presentStatus==3)?'disabled':'']" v-if="el.presentStatus==0">已兑完</p>
             <p v-bind:class="['ex-btn',(el.presentStatus==0||el.presentStatus==3)?'disabled':'']" v-else-if="el.presentStatus==1" v-on:click="goExchangeDetail(el)">查看兑换详情</p>
             <p v-bind:class="['ex-btn',(el.presentStatus==0||el.presentStatus==3)?'disabled':'']" v-else-if="el.presentStatus==2" v-on:click="goExchange('2',el)">兑换</p>
