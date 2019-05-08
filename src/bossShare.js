@@ -16,7 +16,11 @@ const titleMap = {
   5:"进口母婴囤货季，邀请闺蜜还能领好礼！",
 }
 $(document).ready(function() {
-  document.getElementById('goShare').onclick=function() {
+  var shareDom = document.getElementById('goShare');
+  if(!shareDom) {
+    return;
+  }
+  shareDom.onclick=function() {
     var index = Math.floor(Math.random()*6);
     console.log(index)
     let spshopid = getSearchParts('spshopid');
