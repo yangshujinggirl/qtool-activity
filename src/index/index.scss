@@ -161,14 +161,18 @@ body {
 }
 .part-share .btn-wrap {
   text-align: center;
-  display: inline-block;
+  display: block;
   font-size: 20px;
   color: #DC603F;
-  border-bottom: 1px solid #9f4229;
   padding-top:10px;
+  .maodian {
+    display: inline-block;
+    border-bottom: 1px solid #9f4229;
+  }
 }
 .part-share .btn-wrap .go-share{
   color: #DC603F;
+  font-size: 24px;
 }
 .part-share .share-data-list {
   padding: 0 52px;
