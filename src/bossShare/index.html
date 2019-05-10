@@ -15,7 +15,7 @@
       <title>千万优惠用户花，百万差价你来拿</title>
   </head>
   <body>
-    <div id='root'>
+    <div id='root' v-cloak>
       <div class="banner">
         <img src="./imgs/banner.png" alt="">
       </div>
@@ -65,16 +65,16 @@
           <p class="item-rule">3. 通过门店专属页面注册的新用户都属于门店会员；</p>
           <p class="item-rule">4. 详细兑换规则可直接进入活动页面了解，数量有限，先到先得；</p>
           <p class="item-rule">5. 若发现人为作弊情况，Qtools随时终止/取消兑奖资格；</p>
-          <p class="item-rule">6. 奖品发放：活动结束后20个工作日内，Qtools统一安排实物邮寄；优惠券凡满足活动条件的，均即时到账；</p>
-          <p class="item-rule">7. 4月*日进行直播培训，实际操作中仍对活动规则、活动推广有问题的，可电话咨询品牌市场部400-7766-999，选择1；</p>
+          <p class="item-rule">6. 奖品发放：活动结束后3个工作日内，Qtools统一安排实物邮寄；优惠券凡满足活动条件的，均即时到账；</p>
+          <p class="item-rule">7. 5月13日进行直播培训，实际操作中仍对活动规则、活动推广有问题的，可电话咨询品牌市场部400-7766-999，选择1；</p>
           <p class="item-rule">8. 仅可通过邀请新用户累计Q兔徽章；</p>
           <p class="item-rule">9. 优惠券不可叠加使用；</p>
           <p class="item-rule">10. Q兔徽章兑换优惠券仅能在520母婴节（5.17-6.2）中使用。</p>
         </div>
       </div>
       <div class="footer">
-        <!-- <button type="button" name="button" class="share-btn" id="goShare">分享给客户</button> -->
-        <button type="button" name="button" class="share-btn disabled-btn">活动将于5.16正式开始</button>
+        <button type="button" name="button" class="share-btn" id="goShare" v-if="isClick" v-on:click="goShare">分享给客户</button>
+        <button type="button" name="button" class="share-btn disabled-btn" v-else>活动将于5.17正式开始</button>
       </div>
     </div>
   </body>

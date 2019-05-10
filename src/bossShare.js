@@ -4,6 +4,7 @@ import '../common/stylesheet/reset.scss';
 import './bossShare/index.scss';
 import rem from '../common/javascript/rem.js';
 import { getSearchParts } from '../common/javascript/utils';
+import Vue from 'vue';
 
 rem(100,1);
 
@@ -16,22 +17,46 @@ const titleMap = {
   5:"进口母婴囤货季，邀请闺蜜还能领好礼！",
 }
 $(document).ready(function() {
-  var shareDom = document.getElementById('goShare');
-  if(!shareDom) {
-    return;
-  }
-  shareDom.onclick=function() {
-    var index = Math.floor(Math.random()*6);
-    console.log(index)
-    let spshopid = getSearchParts('spshopid');
-    window.Qtools.share(JSON.stringify({
-      type:1,
-      title:titleMap[index],
-      webpageUrl:'https://qtoolsapp-hd.qtoolsbaby.cn/download/',
-      path:'pages/welcome/welcome?scene=0_'+spshopid,
-      imageUrl:'/12345',
-      isPic:1,
-      copyText:'宝宝们，Qtools全球母婴狂欢节来啦，注册即可领取520大礼包，参与邀请闺蜜的活动，还有机会兑换精美礼品，数量有限，先到先得哦！'
-    }))
-  }
+  new Vue({
+    el:'#root',
+    data:{
+      isClick:false,
+      spshopid:null,
+      isStart:false
+    },
+    created() {
+      this.spshopid = getSearchParts('spshopid');
+    },
+    mounted() {
+      this.initPage()
+    },
+    methods: {
+      initPage:function() {
+        let vm = this;
+        if(vm.spshopid=='320') {
+          vm.isClick = true;
+        } else if(vm.isStart) {
+          vm.isClick = true;
+        } else {
+          vm.isClick = false;
+        }
+      },
+      goShare:function() {
+        let vm  = this;
+        var imageUrl = "https://qcampfile.oss-cn-shanghai.aliyuncs.com/activity_share.png";
+        if(this.isClick) {
+          var index = Math.floor(Math.random()*6);
+          window.Qtools.share(JSON.stringify({
+            type:1,
+            title:titleMap[index],
+            webpageUrl:'https://qtoolsapp-hd.qtoolsbaby.cn/download/',
+            path:'pages/welcome/welcome?scene=0_'+vm.spshopid,
+            imageUrl,
+            isPic:1,
+            copyText:'宝宝们，Qtools全球母婴狂欢节来啦，注册即可领取520大礼包，参与邀请闺蜜的活动，还有机会兑换精美礼品，数量有限，先到先得哦！'
+          }))
+        }
+      }
+    }
+  })
 });
