@@ -33,8 +33,6 @@ $(document).ready(function() {
     methods: {
       initPage:function() {
         let vm = this;
-        alert(vm.spshopid)
-        alert(vm.spshopid=='320')
         if(vm.spshopid=='320') {
           vm.isClick = true;
         } else if(vm.isStart) {
