@@ -21,7 +21,7 @@ $(document).ready(function() {
     data:{
       isClick:false,
       spshopid:null,
-      isStart:false
+      isStart:true
     },
     created() {
       this.spshopid = getSearchParts('spshopid');
