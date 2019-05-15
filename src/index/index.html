@@ -12,7 +12,7 @@
       <meta name="keywords" content="Qtools母婴节">
       <meta name="description" content="Qtools母婴节">
       <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5">
-      <title>邀约闺蜜，双重奖励</title>
+      <title>呼唤闺蜜，双重奖励</title>
   </head>
   <body>
     <div id='root' v-cloak>
@@ -22,12 +22,13 @@
       </div>
       <div class="part-redbox">
         <div class="redbox-content">
-          <div class="redbox-title">邀请好友 >好友绑定手机号 >获得Q兔徽章 >兑换超赞好物</div>
-          <button type="button" name="button" class="share-btn" v-on:click="goShareApplte">立即邀请好友</button>
-          <div class="share-btn-list">
+          <div class="redbox-title">呼唤好友 >好友接受呼唤 >获得Q兔徽章 >兑换超赞好物</div>
+          <button type="button" name="button" class="share-btn" v-on:click="goShareApplte">立即呼唤好友</button>
+          <p class="share-face"><span class="bot-line" v-on:click="gosharePtP(true)">面对面组队</span></p>
+          <!-- <div class="share-btn-list">
             <p class="fl fl-l"><span class="bot-line" v-on:click="goShareWx">分享到朋友圈</span></p>
-            <p class="fl fl-r"><span class="bot-line" v-on:click="gosharePtP(true)">面对面邀请</span></p>
-          </div>
+            <p class="fl fl-r"><span class="bot-line" v-on:click="gosharePtP(true)">面对面组队</span></p>
+          </div> -->
         </div>
       </div>
       <div class="part-same">
@@ -50,13 +51,13 @@
       </div>
       <div class="part-same part-share">
         <div class="part-head">
-          <span class="item">我的邀请</span>
+          <span class="item">我的好友</span>
         </div>
         <div class="no-share"  v-if="userList.length==0">
-          暂无邀请好友，赶快点击邀请赢取Q兔徽章
+          暂未成功组队，赶快呼唤闺蜜吧
           <p class="btn-wrap">
             <a href="#shareAction" class="maodian">
-              <button type="button" name="button" class="go-share">立即邀请</button>
+              <button type="button" name="button" class="go-share">立即呼唤</button>
             </a>
           </p>
         </div>
@@ -94,11 +95,12 @@
           2. 活动对象：Qtools未注册新用户与已注册老用户均可参加；
         </p>
         <p class="rule-item">
-          3. 用户可通过邀请好友/分享到朋友圈/面对面邀请等方式邀请好友前来加入活动；
+          3. 用户通过呼唤新好友/面对面组队前来参加活动；
         </p>
-        <p class="rule-item">4. 新用户扫描小程序码进入小程序并成功绑定手机号则视为邀请成功；</p>
-        <p class="rule-item">5. 根据成功邀请的好友人数，随机获得Q兔徽章；</p>
+        <p class="rule-item">4. 呼唤的新好友进入小程序并成功绑定手机号则视为接受呼唤；</p>
+        <p class="rule-item">5. 根据成功呼唤的好友人数，随机获得Q兔徽章；</p>
         <p class="rule-item">6. Q兔徽章可兑换超值优惠券和精美母婴好物。</p>
+        <p class="rule-item">7. 本活动不鼓励使用诱导性质的分享至朋友圈邀请好友，更推荐面对面邀请身边人哦。</p>
       </div>
       <footer>
         <div class="logo-wrap">
@@ -113,7 +115,7 @@
           <div class="middle-content">
             <img :src="userInfo.codePath" alt="">
           </div>
-          <div class="bottom-tips">邀请好友扫描此二维码，<br/>授权绑定手机号即可获得Q兔徽章哦</div>
+          <div class="bottom-tips">呼唤好友扫描此二维码，<br/>授权绑定手机号即可获得Q兔徽章哦</div>
         </div>
       </div>
     </div>

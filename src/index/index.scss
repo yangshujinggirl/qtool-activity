@@ -39,6 +39,13 @@ body {
   display: -webkit-flex;
   display: -ms-flexbox;
 }
+.share-face {
+  font-size: 20px;
+  color: #9F4229;
+  .bot-line {
+    border-bottom: 1px solid #9f4229;
+  }
+}
 .part-redbox .share-btn-list .fl {
   flex: 1;
   font-size: 20px;
