@@ -19,7 +19,7 @@
   <div class="loading-status" v-if="isLoading"></div>
   <div class="content-wrap">
     <div class="top-total">
-      当前Q兔徽章：{{user}}
+      当前阳光值：{{user}}
     </div>
     <ul class="gift-list">
       <li class="item coupon-item" v-for="el in couponList">
@@ -37,11 +37,11 @@
           <p class="use-tips">-全场需满{{el.couponFullAmount}}可以使用</p>
           <p class="use-tips">-{{el.couponExplain}}</p>
           <div class="bottom-part">
-            <p class="badge-num">{{el.valueQty}}&nbsp;Q兔徽章</p>
+            <p class="badge-num">{{el.valueQty}}&nbsp;阳光值</p>
             <p v-bind:class="['ex-btn',(el.presentStatus==0||el.presentStatus==3)?'disabled':'']" v-if="el.presentStatus==0">已兑完</p>
             <p v-bind:class="['ex-btn',(el.presentStatus==0||el.presentStatus==3)?'disabled':'']" v-else-if="el.presentStatus==1" v-on:click="goExchangeDetail(el)">查看兑换详情</p>
             <p v-bind:class="['ex-btn',(el.presentStatus==0||el.presentStatus==3)?'disabled':'']" v-else-if="el.presentStatus==2" v-on:click="goExchange('2',el)">兑换</p>
-            <p v-bind:class="['ex-btn',(el.presentStatus==0||el.presentStatus==3)?'disabled':'']" v-else-if="el.presentStatus==3">徽章不足</p>
+            <p v-bind:class="['ex-btn',(el.presentStatus==0||el.presentStatus==3)?'disabled':'']" v-else-if="el.presentStatus==3">阳光值不足</p>
           </div>
         </div>
       </li>
@@ -53,23 +53,24 @@
           <p class="title" v-on:click="enlargeImg(item)">{{item.name}}</p>
           <p>¥{{item.price}}</p>
           <div class="bottom-part">
-            <p class="badge-num">{{item.valueQty}}&nbsp;Q兔徽章</p>
+            <p class="badge-num">{{item.valueQty}}&nbsp;阳光值</p>
             <p v-bind:class="['ex-btn',(item.presentStatus==0||item.presentStatus==3)?'disabled':'']" v-if="item.presentStatus==0" >已兑完</p>
             <p v-bind:class="['ex-btn',(item.presentStatus==0||item.presentStatus==3)?'disabled':'']" v-else-if="item.presentStatus==1" v-on:click="goExchangeDetail(item)">查看兑换详情</p>
             <p v-bind:class="['ex-btn',(item.presentStatus==0||item.presentStatus==3)?'disabled':'']" v-else-if="item.presentStatus==2" v-on:click="goExchange('1',item)">兑换</p>
-            <p v-bind:class="['ex-btn',(item.presentStatus==0||item.presentStatus==3)?'disabled':'']" v-else-if="item.presentStatus==3">徽章不足</p>
+            <p v-bind:class="['ex-btn',(item.presentStatus==0||item.presentStatus==3)?'disabled':'']" v-else-if="item.presentStatus==3">阳光值不足</p>
           </div>
         </div>
       </li>
     </ul>
     <div class="rule-part">
       <h2 class="rule-title">兑换规则</h2>
-      <p class="rule-item">1. 每成功呼唤一位新用户即可获得随机Q兔徽章；</p>
-      <p class="rule-item">2. 每种奖品只可兑换一次，请根据实际Q兔徽章数进行合理选择；</p>
-      <p class="rule-item">3. 优惠券兑换后即可下单时使用；不可与其他优惠券叠加使用、不可兑现、不找零；使用有效期2019.5.17-2019.6.2</p>
-      <p class="rule-item">4. 实物礼品将在3个工作日内寄出；</p>
-      <p class="rule-item">5. 奖品数量有限，先到先得；</p>
-      <p class="rule-item">6. 若发现人为作弊情况，Qtools将终止/取消兑奖资格,本活动解释权归Qtools所有；</p>
+      <p class="rule-item">1. 阳光值兑换时间：2019年9月10日0：00 - 2019年9月27日24：00，请赢取阳光值用户务必在该周期内填写信息兑换，否则过期阳光值失效；</p>
+      <p class="rule-item">2. 每种奖品只可兑换一次，请根据实际阳光值进行合理选择；</p>
+      <p class="rule-item">3. 实物礼品将在7个工作日内寄出；.5.17-2019.6.2</p>
+      <p class="rule-item">4. 实物礼品如非质量问题不接受退换货，非质量问题产生的运费由兑奖者自行承担；</p>
+      <p class="rule-item">5. 阳光值一旦消耗不可再退还，兑换时请慎重考虑；</p>
+      <p class="rule-item">6. 奖品数量有限，先到先得；</p>
+      <p class="rule-item">7. 若发现人为刷单/作弊情况，Qtools将终止/取消兑奖资格；</p>
     </div>
   </div>
   <div class="cover-mask" v-show="visibleCover"></div>
@@ -97,7 +98,7 @@
   </div>
   <div class="confirm-modal modal-common" v-show="visibleOne">
     <p class="modal-title">兑换确认</p>
-    <p class="modal-content">你确定要使用{{currentItem.valueQty}}Q兔徽章兑换“满{{currentItem.couponFullAmount}}减{{currentItem.couponMoney}}”优惠券吗</p>
+    <p class="modal-content">你确定要使用{{currentItem.valueQty}}阳光值兑换“满{{currentItem.couponFullAmount}}减{{currentItem.couponMoney}}”优惠券吗</p>
     <div class="modal-footer">
       <p class="item" v-on:click="onCancel('visibleOne')">我再看看</p>
       <p class="item" v-on:click="confirmExchange">确定</p>

@@ -1,56 +1,112 @@
 body {
-  background: #fe3945;
+  $mainColor:#FF751F;
+  background: #FFEFE5;
   .fl {
     float: left;
   }
   .fr {
     float: right;
   }
-  .banner {
-    height: 715px;
+  .highlight {
+    color: #FF751F;
   }
   .content-wrap {
-    padding: 0 30px 220px;
+    padding: 0 30px 0;
     position: relative;
-    top: -50px;
-    background:url('./imgs/bg.png') no-repeat left top;
+    top: -400px;
     background-size: cover;
   }
-  .main-action {
+  .part-same {
     background: #fff;
-    border-radius: 32px;
-    padding: 60px 30px;
+    border-radius: 50px;
+    padding: 20px;
     margin-bottom:72px;
-  }
-  .row-item {
-    overflow: hidden;
-    zoom:1;
-    &:not(:last-child) {
-      margin-bottom: 120px;
+    text-align: center;
+    box-shadow: 0 1px 16px 4px #FFA979;
+    .part-title {
+      text-align: center;
+      margin: 60px 0 20px;
+      .title-name {
+        display: inline-block;
+        vertical-align: middle;
+        width: 192px;
+        height: 64px;
+        line-height: 64px;
+        border-radius: 32px;
+        background: #FF945C;
+        font-size: 36px;
+        color: #FFFFFF;
+      }
+      &:before,&:after {
+        content: '';
+        display: inline-block;
+        vertical-align: middle;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: -webkit-linear-gradient(left top, #FFEFE5 , $mainColor); /* Safari 5.1 - 6.0 */
+        background: -o-linear-gradient(bottom right, #FFEFE5, $mainColor); /* Opera 11.1 - 12.0 */
+        background: -moz-linear-gradient(bottom right, #FFEFE5, $mainColor); /* Firefox 3.6 - 15 */
+        background: linear-gradient(to bottom right, #FFEFE5 , $mainColor); /* 标准的语法 */
+      }
+      &:before {
+        margin-right: 20px;
+      }
+      &:after {
+        width: 24px;
+        height: 24px;
+        margin-left: 20px;
+      }
+    }
+    .main-action {
+      border-radius: 50px;
+      position: relative;
+      border: 1px solid #FF8826;
+      box-sizing: border-box;
     }
   }
-  .item-l {
-    width: 320px;
+  .part-one {
+    .main-action {
+      height: 1000px;
+    }
+    .row-list {
+      position: relative;
+    }
+    .row-item {
+      float: left;
+      width: 288px;
+      text-align: center;
+      position: absolute;
+      .icon-item {
+        width: 242px;
+      }
+      &:nth-child(1) {
+        top:0;
+        left: 40px;
+      }
+      &:nth-child(2) {
+        top:144px;
+        right: 40px;
+      }
+      &:nth-child(3) {
+        top:340px;
+        left: 40px;
+      }
+      &:nth-child(4) {
+        top:520px;
+        right: 40px;
+      }
+    }
   }
   .info {
+    font-size: 28px;
+    color: #0F1051;
     padding-top: 8px;
   }
-  .item-r {
-    width: 228px;
-    height: 228px;
-    background: #FFF5F5;
-    border-radius: 50%;
-    text-align: center;
-    // position: relative;
-  }
-  .icon-title {
-    width: 274px;
-    height: 150px;
-  }
-  .rule-action {
-    background: #fff;
-    border-radius: 32px;
-    padding: 20px 30px 0;
+  .part-two {
+    .main-action {
+      padding: 20px 40px 54px;
+    }
     .rule-title {
       font-size: 36px;
       color: #433537;
@@ -59,6 +115,7 @@ body {
       font-size: 24px;
       color: #433537;
       letter-spacing: 1.5;
+      text-align: left;
       padding: 20px 0;
       &:not(:last-child) {
         border-bottom: 1px solid #E3E3E3;
@@ -80,10 +137,7 @@ body {
       border-radius: 50px;
       font-size: 50px;
       color: #fff;
-      background: -webkit-linear-gradient(#fe3945, #b43f6b); /* Safari 5.1 - 6.0 */
-      background: -o-linear-gradient(#fe3945, #b43f6b); /* Opera 11.1 - 12.0 */
-      background: -moz-linear-gradient(#fe3945, #b43f6b); /* Firefox 3.6 - 15 */
-      background: linear-gradient(#fe3945, #b43f6b); /* 标准的语法 */
+      background: $mainColor;
     }
     .disabled-btn {
       background: #e2e2e2;

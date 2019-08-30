@@ -29,7 +29,7 @@ switch (process.env.NODE_ENV) {
       env.lib_env = 'development';
       break;
     case 'production':
-      env.path = `./dist/${pkg.actName}/`;
+      env.path = `./dist/qtoolsActivity/${pkg.actName}/`;
       env.publicPath = './';
       env.cssFileName = '[name].css';
       env.jsFileName = '[name].js';
@@ -168,7 +168,7 @@ module.exports = {
     proxy: {
       '/invitation': {
         // target: 'http://192.168.2.15:8214/',
-        target: 'http://vx.apph5.testin.qtoolsbaby.net:81/',
+        target: 'http://v2.apph5.testin.qtoolsbaby.net:81/',
         // target: 'http://192.168.2.164:8214',
         changeOrigin: true,
       },

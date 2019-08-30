@@ -7,10 +7,9 @@ import showToast from 'show-toast';
 rem(100,1);
 
 const titleMap = {
-  0:'邀请你一起逛明星妈妈都在用的Qtools！',
-  1:'亲爱的，找小众轻奢母婴好物，就上Qtools',
-  2:'推荐！他们家的母婴选品颜值超高，件件是网红潮流款',
-  3:'小红书母婴热门推荐的好物，Qtools全都有',
+  0:"邀请你一起逛明星妈妈都在用的Qtools！",
+  1:"亲爱的，找小众轻奢母婴好物，就上Qtools",
+  2:"推荐！他们家的母婴选品颜值超高，件件是潮流款"
 }
 //邀请
 
@@ -26,7 +25,8 @@ $(document).ready(function() {
         testAccessToken:'',
         userInfo:{},
         isUp:false,
-        isLoading:false
+        isLoading:false,
+        visibleRule:false
       },
       created() {
         this.getAccessToken();
@@ -78,12 +78,12 @@ $(document).ready(function() {
             return;
           }
           const vm = this;
-          var index = Math.floor(Math.random()*4);
+          var index = Math.floor(Math.random()*3);
           var imgUrl = "https://qcampfile.oss-cn-shanghai.aliyuncs.com/activity_share.png";
           window.Qtools.goShareApplte(JSON.stringify({
           	imageUrl: imgUrl,
             title: titleMap[index],
-          	path: 'pages/welcome/welcome?scene=4_'+vm.userInfo.spShopId+'_'+vm.userInfo.userId,
+          	path: `pages/welcome/welcome?spShopId=${vm.userInfo.spShopId}&oldUserId=${vm.userInfo.userId}`,
             webpageUrl:'https://qtoolsapp-hd.qtoolsbaby.cn/download/'
           }));
         },
@@ -104,12 +104,15 @@ $(document).ready(function() {
           }
           this.visible = value;
         },
+        goRuleModal:function(value) {
+          this.visibleRule = value;
+        },
         goGiftPage: function () {
           window.location.href = './exchange.html';
         },
         getData: function () {
             var vm = this;
-            // vm.accesstoken = "231b0be50f69739ce58bef53d87909a2"
+            vm.accesstoken = "ddb09d42a65be34320c590091df4472a"
             $.ajax({
               url: '/invitation/user/search?accesstoken='+vm.accesstoken,
               type: 'GET',
@@ -120,8 +123,56 @@ $(document).ready(function() {
                   window.Qtools.goLogin(null);
                   return;
                 }
-                let topHalfData = res.data.userList.slice(0,4);
-                let botHalfData = res.data.userList.slice(4);
+                let po =[
+                  {
+                  'badgeQty': 100,
+                  'createTime': "2019-08-28 17:22:30",
+                  'mobile': "13125009550",
+                  'newUserId': 81323,
+                  'weiXinPic': "https://wx.qlogo.cn/mmopen/vi_32/DYqaLBFU7MkMchpvS81jvSpQUsHKG05AovDo3K5zrhqLb0fmkBZh7HibPlH5vFicsY5Q66BIbFfvkpAX9A6mibnsg/132"
+
+                },{
+                  'badgeQty': 90,
+                  'createTime': "2019-08-28 17:22:30",
+                  'mobile': "13125009550",
+                  'newUserId': 81324,
+                  'weiXinPic': "https://wx.qlogo.cn/mmopen/vi_32/DYqaLBFU7MkMchpvS81jvSpQUsHKG05AovDo3K5zrhqLb0fmkBZh7HibPlH5vFicsY5Q66BIbFfvkpAX9A6mibnsg/132"
+
+                },{
+                  'badgeQty': 80,
+                  'createTime': "2019-08-28 17:22:30",
+                  'mobile': "13125009550",
+                  'newUserId': 81325,
+                  'weiXinPic': "https://wx.qlogo.cn/mmopen/vi_32/DYqaLBFU7MkMchpvS81jvSpQUsHKG05AovDo3K5zrhqLb0fmkBZh7HibPlH5vFicsY5Q66BIbFfvkpAX9A6mibnsg/132"
+
+                },{
+                  'badgeQty': 70,
+                  'createTime': "2019-08-28 17:22:30",
+                  'mobile': "13125009550",
+                  'newUserId': 81326,
+                  'weiXinPic': "https://wx.qlogo.cn/mmopen/vi_32/DYqaLBFU7MkMchpvS81jvSpQUsHKG05AovDo3K5zrhqLb0fmkBZh7HibPlH5vFicsY5Q66BIbFfvkpAX9A6mibnsg/132"
+
+                },{
+                  'badgeQty': 60,
+                  'createTime': "2019-08-28 17:22:30",
+                  'mobile': "13125009550",
+                  'newUserId': 81327,
+                  'weiXinPic': "https://wx.qlogo.cn/mmopen/vi_32/DYqaLBFU7MkMchpvS81jvSpQUsHKG05AovDo3K5zrhqLb0fmkBZh7HibPlH5vFicsY5Q66BIbFfvkpAX9A6mibnsg/132"
+
+                },{
+                  'badgeQty': 50,
+                  'createTime': "2019-08-28 17:22:30",
+                  'mobile': "13125009550",
+                  'newUserId': 81328,
+                  'weiXinPic': "https://wx.qlogo.cn/mmopen/vi_32/DYqaLBFU7MkMchpvS81jvSpQUsHKG05AovDo3K5zrhqLb0fmkBZh7HibPlH5vFicsY5Q66BIbFfvkpAX9A6mibnsg/132"
+
+                }]
+                let topHalfData = po.slice(0,4);
+                let botHalfData = po.slice(4);
+                // let topHalfData = res.data.userList.slice(0,4);
+                // let botHalfData = res.data.userList.slice(4);
+
+
                 vm.userList = topHalfData;
                 vm.botHalfData = botHalfData;
                 vm.totalBadges = res.data.totalBadges;
@@ -136,7 +187,7 @@ $(document).ready(function() {
         getUserInfo: function () {
             var vm = this;
             vm.isLoading = true
-            // vm.accesstoken = "231b0be50f69739ce58bef53d87909a2"
+            vm.accesstoken = "ddb09d42a65be34320c590091df4472a"
             $.ajax({
               url: '/invitation/h5ShareCode?accesstoken='+vm.accesstoken,
               type: 'GET',
