@@ -112,7 +112,7 @@ $(document).ready(function() {
         },
         getData: function () {
             var vm = this;
-            vm.accesstoken = "ddb09d42a65be34320c590091df4472a"
+            // vm.accesstoken = "ddb09d42a65be34320c590091df4472a"
             $.ajax({
               url: '/invitation/user/search?accesstoken='+vm.accesstoken,
               type: 'GET',
@@ -123,56 +123,8 @@ $(document).ready(function() {
                   window.Qtools.goLogin(null);
                   return;
                 }
-                let po =[
-                  {
-                  'badgeQty': 100,
-                  'createTime': "2019-08-28 17:22:30",
-                  'mobile': "13125009550",
-                  'newUserId': 81323,
-                  'weiXinPic': "https://wx.qlogo.cn/mmopen/vi_32/DYqaLBFU7MkMchpvS81jvSpQUsHKG05AovDo3K5zrhqLb0fmkBZh7HibPlH5vFicsY5Q66BIbFfvkpAX9A6mibnsg/132"
-
-                },{
-                  'badgeQty': 90,
-                  'createTime': "2019-08-28 17:22:30",
-                  'mobile': "13125009550",
-                  'newUserId': 81324,
-                  'weiXinPic': "https://wx.qlogo.cn/mmopen/vi_32/DYqaLBFU7MkMchpvS81jvSpQUsHKG05AovDo3K5zrhqLb0fmkBZh7HibPlH5vFicsY5Q66BIbFfvkpAX9A6mibnsg/132"
-
-                },{
-                  'badgeQty': 80,
-                  'createTime': "2019-08-28 17:22:30",
-                  'mobile': "13125009550",
-                  'newUserId': 81325,
-                  'weiXinPic': "https://wx.qlogo.cn/mmopen/vi_32/DYqaLBFU7MkMchpvS81jvSpQUsHKG05AovDo3K5zrhqLb0fmkBZh7HibPlH5vFicsY5Q66BIbFfvkpAX9A6mibnsg/132"
-
-                },{
-                  'badgeQty': 70,
-                  'createTime': "2019-08-28 17:22:30",
-                  'mobile': "13125009550",
-                  'newUserId': 81326,
-                  'weiXinPic': "https://wx.qlogo.cn/mmopen/vi_32/DYqaLBFU7MkMchpvS81jvSpQUsHKG05AovDo3K5zrhqLb0fmkBZh7HibPlH5vFicsY5Q66BIbFfvkpAX9A6mibnsg/132"
-
-                },{
-                  'badgeQty': 60,
-                  'createTime': "2019-08-28 17:22:30",
-                  'mobile': "13125009550",
-                  'newUserId': 81327,
-                  'weiXinPic': "https://wx.qlogo.cn/mmopen/vi_32/DYqaLBFU7MkMchpvS81jvSpQUsHKG05AovDo3K5zrhqLb0fmkBZh7HibPlH5vFicsY5Q66BIbFfvkpAX9A6mibnsg/132"
-
-                },{
-                  'badgeQty': 50,
-                  'createTime': "2019-08-28 17:22:30",
-                  'mobile': "13125009550",
-                  'newUserId': 81328,
-                  'weiXinPic': "https://wx.qlogo.cn/mmopen/vi_32/DYqaLBFU7MkMchpvS81jvSpQUsHKG05AovDo3K5zrhqLb0fmkBZh7HibPlH5vFicsY5Q66BIbFfvkpAX9A6mibnsg/132"
-
-                }]
-                let topHalfData = po.slice(0,4);
-                let botHalfData = po.slice(4);
-                // let topHalfData = res.data.userList.slice(0,4);
-                // let botHalfData = res.data.userList.slice(4);
-
-
+                let topHalfData = res.data.userList.slice(0,4);
+                let botHalfData = res.data.userList.slice(4);
                 vm.userList = topHalfData;
                 vm.botHalfData = botHalfData;
                 vm.totalBadges = res.data.totalBadges;
