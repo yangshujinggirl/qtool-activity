@@ -139,7 +139,7 @@ $(document).ready(function() {
         getUserInfo: function () {
             var vm = this;
             vm.isLoading = true
-            vm.accesstoken = "ddb09d42a65be34320c590091df4472a"
+            // vm.accesstoken = "ddb09d42a65be34320c590091df4472a"
             $.ajax({
               url: '/invitation/h5ShareCode?accesstoken='+vm.accesstoken,
               type: 'GET',
