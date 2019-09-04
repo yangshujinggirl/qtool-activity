@@ -83,7 +83,7 @@ $(document).ready(function() {
           window.Qtools.goShareApplte(JSON.stringify({
           	imageUrl: imgUrl,
             title: titleMap[index],
-          	path: `pages/welcome/welcome?spShopId=${vm.userInfo.spShopId}&oldUserId=${vm.userInfo.userId}`,
+          	path: `pages/pageActivity/inviteUser/inviteUser?spShopId=${vm.userInfo.spShopId}&oldUserId=${vm.userInfo.userId}`,
             webpageUrl:'https://qtoolsapp-hd.qtoolsbaby.cn/download/'
           }));
         },
@@ -112,7 +112,7 @@ $(document).ready(function() {
         },
         getData: function () {
             var vm = this;
-            // vm.accesstoken = "ddb09d42a65be34320c590091df4472a"
+            // vm.accesstoken = "982bea9314042af59496e47cd4dbe81f"
             $.ajax({
               url: '/invitation/user/search?accesstoken='+vm.accesstoken,
               type: 'GET',
@@ -139,7 +139,7 @@ $(document).ready(function() {
         getUserInfo: function () {
             var vm = this;
             vm.isLoading = true
-            // vm.accesstoken = "ddb09d42a65be34320c590091df4472a"
+            // vm.accesstoken = "982bea9314042af59496e47cd4dbe81f"
             $.ajax({
               url: '/invitation/h5ShareCode?accesstoken='+vm.accesstoken,
               type: 'GET',

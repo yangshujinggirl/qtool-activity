@@ -47,7 +47,7 @@ $(document).ready(function() {
             type:1,
             title:titleMap[index],
             webpageUrl:'https://qtoolsapp-hd.qtoolsbaby.cn/download/',
-            path:'pages/welcome/welcome?spShopId='+vm.spshopid,
+            path:'pages/home/home?spShopId='+vm.spshopid,
             imageUrl,
             isPic:1,
             copyText:'Qtools全球母婴狂欢节来啦！'
