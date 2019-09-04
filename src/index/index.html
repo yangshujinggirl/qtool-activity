@@ -41,7 +41,10 @@
               <span class="ite badge-ite">
                 <img src="./imgs/icon_sun1.png" alt="">
               </span>
-              <span class="ite big-num" v-if="totalBadges!=0">{{totalBadges}}</span>
+              <span v-if="totalBadges!=0">
+                <span class="ite big-num">{{totalBadges}}</span>
+                <span class="unit-sty">阳光值</span>
+              </span>
               <span class="ite" v-else>还没有阳光值哦</span>
             </div>
           </div>

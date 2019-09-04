@@ -141,8 +141,12 @@ $mainColor:#FF751F;
         }
         .big-num {
           font-size: 60px;
-          color: #DC603F;
+          color: $mainColor;
           line-height: 70px;
+        }
+        .unit-sty {
+          display: inline-block;
+          vertical-align: bottom;
         }
       }
     }
