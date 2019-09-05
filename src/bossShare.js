@@ -50,7 +50,7 @@ $(document).ready(function() {
             path:'pages/home/home?spShopId='+vm.spshopid,
             imageUrl,
             isPic:1,
-            copyText:'Qtools全球母婴狂欢节来啦！'
+            copyText:'亲爱的，找小众轻奢母婴好物，就上Qtools'
           }))
         }
       }

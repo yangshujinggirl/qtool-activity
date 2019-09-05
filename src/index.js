@@ -112,7 +112,7 @@ $(document).ready(function() {
         },
         getData: function () {
             var vm = this;
-            // vm.accesstoken = "982bea9314042af59496e47cd4dbe81f"
+            // vm.accesstoken = "4e3e8e3999bfe8dee38e5a4b40918de3"
             $.ajax({
               url: '/invitation/user/search?accesstoken='+vm.accesstoken,
               type: 'GET',
@@ -139,7 +139,7 @@ $(document).ready(function() {
         getUserInfo: function () {
             var vm = this;
             vm.isLoading = true
-            // vm.accesstoken = "982bea9314042af59496e47cd4dbe81f"
+            // vm.accesstoken = "4e3e8e3999bfe8dee38e5a4b40918de3"
             $.ajax({
               url: '/invitation/h5ShareCode?accesstoken='+vm.accesstoken,
               type: 'GET',
