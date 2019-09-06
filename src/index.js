@@ -118,7 +118,8 @@ $(document).ready(function() {
               type: 'GET',
               dataType:'json',
               success:function(res) {
-                vm.isLoading = false
+                vm.isLoading = false;
+                alert(res.code)
                 if(res.code == '401') {
                   window.Qtools.goLogin(null);
                   return;
@@ -132,6 +133,11 @@ $(document).ready(function() {
               },
               error: function (err) {
                 vm.isLoading = false;
+                showToast({
+                  str:err.responseJSON.errorMsg,
+                  time: 2000,
+                  position: 'middle'
+                })
                 // window.Qtools.goLogin(null)
               }
             })
