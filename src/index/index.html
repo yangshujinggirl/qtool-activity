@@ -43,7 +43,7 @@
               </span>
               <span v-if="totalBadges!=0">
                 <span class="ite big-num">{{totalBadges}}</span>
-                <span class="unit-sty">阳光值</span>
+                <!-- <span class="unit-sty">阳光值</span> -->
               </span>
               <span class="ite" v-else>还没有阳光值哦</span>
             </div>
@@ -80,7 +80,7 @@
             </div>
             <div class="flex-r">
               <p>{{ item.createTime }} {{item.mobile}}</p>
-              <p class="row-two">获得<span class="highlight">{{ item.badgeQty }}</span></p>
+              <p class="row-two">获得<span class="highlight">{{ item.badgeQty }}</span>阳光值</p>
             </div>
           </li>
           <li class="handle-item" v-if="botHalfData.length>0">

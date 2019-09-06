@@ -119,7 +119,6 @@ $(document).ready(function() {
               dataType:'json',
               success:function(res) {
                 vm.isLoading = false;
-                alert(res.code)
                 if(res.code == '401') {
                   window.Qtools.goLogin(null);
                   return;
