@@ -137,12 +137,13 @@ $(document).ready(function() {
         getData: function () {
           var vm = this;
           vm.isLoading = true
-          // vm.accesstoken = "bc7f5687ff9c2be53aa7c3862f2569a1"
+          vm.accesstoken = "450624e0454132976ff0528c229aaaec"
           $.ajax({
             url:'/invitation/exchange/search?accesstoken='+vm.accesstoken,
             type: 'GET',
             dataType: 'json',
             success:function(res) {
+              vm.isLoading = false
               if(res.code == '401') {
                 window.Qtools.goLogin(null);
                 return;
@@ -155,7 +156,6 @@ $(document).ready(function() {
               vm.productList = res.data.productList?res.data.productList:[];
               vm.user = res.data.user;
               vm.fileDomain = res.fileDomain;
-              vm.isLoading = false
             },
             error: function (err) {
               vm.isLoading = false
