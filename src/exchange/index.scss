@@ -1,3 +1,9 @@
+body {
+  background: rgba(0,0,0,0);
+}
+.exchange-pages {
+  background: #fff;
+}
 .content-wrap {
   padding: 0 40px;
 }
@@ -49,6 +55,7 @@
  }
 .gift-list .fl-r .describe{
   word-break:break-all;
+  color: #999;
 }
 .gift-list .bottom-part {
   display: flex;
