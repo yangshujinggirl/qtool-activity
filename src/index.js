@@ -5,7 +5,7 @@ import './index/index.scss';
 import showToast from 'show-toast';
 
 rem(100,1);
-
+// 喜欢这个礼物好久了，快帮我助力吧，一起免费兑好礼~爱你哟！
 const titleMap = {
   0:"邀请你一起逛明星妈妈都在用的Qtools！",
   1:"亲爱的，找小众轻奢母婴好物，就上Qtools",
