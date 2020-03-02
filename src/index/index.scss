@@ -1,28 +1,26 @@
 body {
-  background: #FFEFE5;
+  background: #2470D3;
 }
 .highlight {
-  color: #FF751F;
+  color: #FDBC28;
 }
-$mainColor:#FF751F;
+$mainColor:#FDBC28;
 .banner {
   position: relative;
-  margin-bottom:284px;
+  margin-bottom:66px;
 }
 .part-redbox {
   width: 100%;
-  height: 424px;
+  height: 404px;
   background: url('./imgs/redbox.png') center no-repeat;
   background-size: contain;
-  position: absolute;
-  bottom: 0;
-  transform: translateY(50%);
+  margin-bottom:126px;
   .redbox-content {
     width: 670px;
     margin: 0 auto;
     text-align: center;
     font-size: 20px;
-    padding-top: 28px;
+    padding-top: 24px;
   }
   .redbox-title {
     margin-bottom: 130px;
@@ -81,7 +79,7 @@ $mainColor:#FF751F;
   margin-bottom: 88px;
   .part-head {
     font-size: 40px;
-    color: #321D19;
+    color: $mainColor;
     margin-bottom: 54px;
     .item {
       line-height: 64px;
@@ -102,8 +100,8 @@ $mainColor:#FF751F;
   }
   .part-content {
     height: 200px;
-    background: #FF843E;
-    box-shadow: 9px 2px 20px 0 rgba(0,0,0,0.09);
+    background: $mainColor;
+    box-shadow: 0 2px 30px 0 #FFC3B4;
     border-radius: 24px;
     display: flex;
     display: -webkit-box;
@@ -113,8 +111,7 @@ $mainColor:#FF751F;
     .ac-left {
       width: 396px;
       height: 100%;
-      background: #F3660E;
-      box-shadow: -9px 2px 20px 0 rgba(0,0,0,0.09);
+      background: #F8CA60;
       border-radius: 24px;
       box-sizing: border-box;
       position: relative;
@@ -187,24 +184,29 @@ $mainColor:#FF751F;
     }
   }
   .share-data-list {
-    padding: 0 52px;
+    padding: 0 32px;
     background: #FFFFFF;
     border-radius: 24px;
     .share-item {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 18px 0;
+      padding: 32px 0;
       &:not(:last-child) {
         border-bottom: 1px solid #979797;
       }
       .flex-l {
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-        background: red;
+        width: 382px;
+        // height: 80px;
         flex-shrink: 0;
         overflow: hidden;
+        text-align: left;
+        color: #4A4A4A;;
+        font-size: 22px;
+        .mob-sty {
+          color: #333;
+          // font-weight: bold;
+        }
       }
       .flex-r {
         font-size: 24px;

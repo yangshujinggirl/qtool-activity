@@ -8,11 +8,6 @@ import Vue from 'vue';
 
 rem(100,1);
 
-const titleMap = {
-  0:"邀请你一起逛明星妈妈都在用的Qtools！",
-  1:"亲爱的，找小众轻奢母婴好物，就上Qtools",
-  2:"推荐！他们家的母婴选品颜值超高，件件是潮流款"
-}
 $(document).ready(function() {
   new Vue({
     el:'#root',
@@ -40,12 +35,11 @@ $(document).ready(function() {
       },
       goShare:function() {
         let vm  = this;
-        var imageUrl = "https://qcampfile.oss-cn-shanghai.aliyuncs.com/activity_share.png";
+        var imageUrl = "https://qcampfile.oss-cn-shanghai.aliyuncs.com/marchActivity_share.png";
         if(this.isClick) {
-          var index = Math.floor(Math.random()*3);
           window.Qtools.share(JSON.stringify({
             type:1,
-            title:titleMap[index],
+            title:'喜欢这个礼物好久了，快帮我助力吧，一起免费兑好礼~爱你哟！',
             webpageUrl:'https://qtoolsapp-hd.qtoolsbaby.cn/download/',
             path:'pages/home/home?spShopId='+vm.spshopid,
             imageUrl,

@@ -5,12 +5,6 @@ import './index/index.scss';
 import showToast from 'show-toast';
 
 rem(100,1);
-// 喜欢这个礼物好久了，快帮我助力吧，一起免费兑好礼~爱你哟！
-const titleMap = {
-  0:"邀请你一起逛明星妈妈都在用的Qtools！",
-  1:"亲爱的，找小众轻奢母婴好物，就上Qtools",
-  2:"推荐！他们家的母婴选品颜值超高，件件是潮流款"
-}
 //邀请
 
 $(document).ready(function() {
@@ -26,7 +20,8 @@ $(document).ready(function() {
         userInfo:{},
         isUp:false,
         isLoading:false,
-        visibleRule:false
+        visibleRule:false,
+        shareText:''
       },
       created() {
         this.getAccessToken();
@@ -78,11 +73,10 @@ $(document).ready(function() {
             return;
           }
           const vm = this;
-          var index = Math.floor(Math.random()*3);
-          var imgUrl = "https://qcampfile.oss-cn-shanghai.aliyuncs.com/activity_share.png";
+          var imgUrl = "https://qcampfile.oss-cn-shanghai.aliyuncs.com/marchActivity_share.png";
           window.Qtools.goShareApplte(JSON.stringify({
           	imageUrl: imgUrl,
-            title: titleMap[index],
+            title: vm.shareTitle,
           	path: `pages/pageActivity/inviteUser/inviteUser?spShopId=${vm.userInfo.spShopId}&oldUserId=${vm.userInfo.userId}`,
             webpageUrl:'https://qtoolsapp-hd.qtoolsbaby.cn/download/'
           }));
@@ -112,7 +106,7 @@ $(document).ready(function() {
         },
         getData: function () {
             var vm = this;
-            // vm.accesstoken = "4e3e8e3999bfe8dee38e5a4b40918de3"
+            vm.accesstoken = "82621ddede2cb40590c5c4714415d10e"
             $.ajax({
               url: '/invitation/user/search?accesstoken='+vm.accesstoken,
               type: 'GET',
@@ -129,6 +123,8 @@ $(document).ready(function() {
                 vm.botHalfData = botHalfData;
                 vm.totalBadges = res.data.totalBadges;
                 vm.userId = res.data.userId;
+                vm.shareText = res.data.shareStepTip;
+                vm.shareTitle = res.data.shareTitle;
               },
               error: function (err) {
                 vm.isLoading = false;
@@ -144,7 +140,7 @@ $(document).ready(function() {
         getUserInfo: function () {
             var vm = this;
             vm.isLoading = true
-            // vm.accesstoken = "4e3e8e3999bfe8dee38e5a4b40918de3"
+            vm.accesstoken = "82621ddede2cb40590c5c4714415d10e"
             $.ajax({
               url: '/invitation/h5ShareCode?accesstoken='+vm.accesstoken,
               type: 'GET',
