@@ -73,7 +73,7 @@ $(document).ready(function() {
             return;
           }
           const vm = this;
-          var imgUrl = "https://qcampfile.oss-cn-shanghai.aliyuncs.com/marchActivity_share.png";
+          var imgUrl = "https://qcampfile.oss-cn-shanghai.aliyuncs.com/qtoolsapp/marchActivity/marchActivity_share.png";
           window.Qtools.goShareApplte(JSON.stringify({
           	imageUrl: imgUrl,
             title: vm.shareTitle,
@@ -106,7 +106,7 @@ $(document).ready(function() {
         },
         getData: function () {
             var vm = this;
-            vm.accesstoken = "3ffbe8b92a01ccf6552d4524bbde1c32"
+            // vm.accesstoken = "3ffbe8b92a01ccf6552d4524bbde1c32"
             $.ajax({
               url: '/invitation/user/search?accesstoken='+vm.accesstoken,
               type: 'GET',
@@ -117,8 +117,8 @@ $(document).ready(function() {
                   window.Qtools.goLogin(null);
                   return;
                 }
-                let userList = res.data.userList;
-                userList&&userList.map((el)=> {
+                let userList = res.data.userList?res.data.userList:[];
+                userList.length>0&&userList.map((el)=> {
                   el.mobile = el.mobile.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2');
                   return el;
                 })
@@ -145,7 +145,7 @@ $(document).ready(function() {
         getUserInfo: function () {
             var vm = this;
             vm.isLoading = true
-            vm.accesstoken = "3ffbe8b92a01ccf6552d4524bbde1c32"
+            // vm.accesstoken = "3ffbe8b92a01ccf6552d4524bbde1c32"
             $.ajax({
               url: '/invitation/h5ShareCode?accesstoken='+vm.accesstoken,
               type: 'GET',

@@ -35,7 +35,7 @@ $(document).ready(function() {
       },
       goShare:function() {
         let vm  = this;
-        var imageUrl = "https://qcampfile.oss-cn-shanghai.aliyuncs.com/marchActivity_share.png";
+        var imageUrl = "https://qcampfile.oss-cn-shanghai.aliyuncs.com/qtoolsapp/marchActivity/marchActivity_share.png";
         if(this.isClick) {
           window.Qtools.share(JSON.stringify({
             type:1,
