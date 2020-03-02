@@ -106,7 +106,7 @@ $(document).ready(function() {
         },
         getData: function () {
             var vm = this;
-            // vm.accesstoken = "82621ddede2cb40590c5c4714415d10e"
+            vm.accesstoken = "3ffbe8b92a01ccf6552d4524bbde1c32"
             $.ajax({
               url: '/invitation/user/search?accesstoken='+vm.accesstoken,
               type: 'GET',
@@ -117,8 +117,13 @@ $(document).ready(function() {
                   window.Qtools.goLogin(null);
                   return;
                 }
-                let topHalfData = res.data.userList.slice(0,4);
-                let botHalfData = res.data.userList.slice(4);
+                let userList = res.data.userList;
+                userList&&userList.map((el)=> {
+                  el.mobile = el.mobile.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2');
+                  return el;
+                })
+                let topHalfData = userList.slice(0,4);
+                let botHalfData = userList.slice(4);
                 vm.userList = topHalfData;
                 vm.botHalfData = botHalfData;
                 vm.totalBadges = res.data.totalBadges;
@@ -140,7 +145,7 @@ $(document).ready(function() {
         getUserInfo: function () {
             var vm = this;
             vm.isLoading = true
-            // vm.accesstoken = "82621ddede2cb40590c5c4714415d10e"
+            vm.accesstoken = "3ffbe8b92a01ccf6552d4524bbde1c32"
             $.ajax({
               url: '/invitation/h5ShareCode?accesstoken='+vm.accesstoken,
               type: 'GET',
