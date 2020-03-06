@@ -106,7 +106,7 @@ $(document).ready(function() {
         },
         getData: function () {
             var vm = this;
-            // vm.accesstoken = "3ffbe8b92a01ccf6552d4524bbde1c32"
+            // vm.accesstoken = "fc447ab53ba6c78bce03d410aa28ad80"
             $.ajax({
               url: '/invitation/user/search?accesstoken='+vm.accesstoken,
               type: 'GET',
@@ -119,7 +119,7 @@ $(document).ready(function() {
                 }
                 let userList = res.data.userList?res.data.userList:[];
                 userList.length>0&&userList.map((el)=> {
-                  el.mobile = el.mobile.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2');
+                  el.mobile = el.mobile&&el.mobile.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2');
                   return el;
                 })
                 let topHalfData = userList.slice(0,4);
@@ -145,7 +145,7 @@ $(document).ready(function() {
         getUserInfo: function () {
             var vm = this;
             vm.isLoading = true
-            // vm.accesstoken = "3ffbe8b92a01ccf6552d4524bbde1c32"
+            // vm.accesstoken = "fc447ab53ba6c78bce03d410aa28ad80"
             $.ajax({
               url: '/invitation/h5ShareCode?accesstoken='+vm.accesstoken,
               type: 'GET',
