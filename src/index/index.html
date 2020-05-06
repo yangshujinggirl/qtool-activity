@@ -17,87 +17,176 @@
   <body>
     <div id='root' v-cloak>
       <div class="loading-status" v-if="isLoading"></div>
-      <div class="banner" id="shareAction">
-        <img src="./imgs/banner.png" alt="">
-      </div>
-      <div class="part-redbox">
-        <div class="redbox-content">
-          <div class="redbox-title">{{shareText}}</div>
-          <button type="button" name="button" class="share-btn" v-on:click="goShareApplte">立即邀请好友</button>
-          <p class="share-face"><span class="bot-line" v-on:click="goShareWx">分享到朋友圈</span></p>
-          <!-- <div class="share-btn-list">
-            <p class="fl fl-l"><span class="bot-line" v-on:click="goShareWx">分享到朋友圈</span></p>
-            <p class="fl fl-r"><span class="bot-line" v-on:click="gosharePtP(true)">面对面组队</span></p>
-          </div> -->
+      <div class="part-one-banner" id="shareAction">
+        <div class="wrap">
+          <div class="box-flex share-step">
+            <div class="item">
+              <span class="step">1</span>
+              <span class="text">发起邀请</span>
+              <span class="icon-arrow"></span>
+            </div>
+            <div class="item">
+              <span class="step">2</span>
+              <span class="text">好友7天内下单成功</span>
+              <span class="icon-arrow"></span>
+            </div>
+            <div class="item">
+              <span class="step">3</span>
+              <span class="text">0元领好物</span>
+            </div>
+
+          </div>
+          <button type="button" name="button" class="share-btn">
+            <img src="./imgs/icon_wx.png" alt="" class="icon-wx">
+            立即邀请好友
+          </button>
+          <div class="img-share">
+            <img src="./imgs/icon_share.png" alt="" class="icon-share">
+            生成海报分享
+          </div>
         </div>
       </div>
-      <div class="part-same">
-        <div class="part-head">
-          <span class="item">当前阳光值</span>
-        </div>
-        <div class="part-content">
-          <div class="ac-left">
-            <div class="top-cover">
-              <span class="ite badge-ite">
-                <img src="./imgs/icon_sun1.png" alt="">
-              </span>
-              <span v-if="totalBadges!=0">
-                <span class="ite big-num">{{totalBadges}}</span>
-                <!-- <span class="unit-sty">阳光值</span> -->
-              </span>
-              <span class="ite" v-else>还没有阳光值哦</span>
+      <div class="main-components">
+        <div class="head-action"> 活动时间：2020.5.20-2020.5.31</div>
+        <div class="part-two-coupon part-same">
+          <div class="title-action"> 好友注册领超值券 </div>
+          <div class="box-flex coupon-list">
+            <div class="item">
+              <div class="top-text">
+                <p>¥ <span class="money">5</span></p>
+                <p>满99元使用</p>
+              </div>
+              <div class="bottom-action">
+                <button type="button" name="button" class="btn">已领取</button>
+                <p>领取后7天有效</p>
+              </div>
+            </div>
+            <div class="item">
+              <div class="top-text">
+                <p>¥ <span class="money">25</span></p>
+                <p>满99元使用</p>
+              </div>
+              <div class="bottom-action">
+                <button type="button" name="button" class="btn">点击领取</button>
+                <p>领取后7天有效</p>
+              </div>
+            </div>
+            <div class="item">
+              <div class="top-text">
+                <p>¥ <span class="money">25</span></p>
+                <p>满99元使用</p>
+              </div>
+              <div class="bottom-action">
+                <button type="button" name="button" class="btn">点击领取</button>
+                <p>领取后7天有效</p>
+              </div>
             </div>
           </div>
-          <div class="ac-right" v-on:click="goGiftPage" v-if="totalBadges!=0">立即兑换好物 >></div>
-          <div class="ac-right" v-on:click="goGiftPage" v-else>看看神秘好物 >></div>
+          <div class="share-process">
+            <div class="wrap">
+              <div class="circle-wrap">
+                <span class="out-circle">
+                  <span class="inner-circle">领</span>
+                </span>
+                <span class="pro-text">邀请1人注册</span>
+              </div>
+              <div class="circle-wrap process-two">
+                <span class="out-circle">
+                  <span class="inner-circle">领</span>
+                </span>
+                <span class="pro-text">邀请3人注册</span>
+              </div>
+              <div class="circle-wrap process-thr activity">
+                <span class="out-circle">
+                  <span class="inner-circle">领</span>
+                </span>
+                <span class="pro-text">邀请8人注册</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="part-thr-goods part-same">
+          <div class="title-wrap">
+            <div class="title-action"> 好友下单领0元好礼 </div>
+            <div class="record-btn"> 领取记录 ></div>
+          </div>
+          <div class="box-flex goods-list">
+            <div class="item">
+              <div class="top-goods">
+                <img src="./imgs/banner.png" alt="">
+                <span class="qty">剩10件</span>
+              </div>
+              <div class="bottom-action">已领取</div>
+            </div>
+            <div class="item">
+              <div class="top-goods">
+                <img src="./imgs/banner.png" alt="">
+                <span class="qty">剩10件</span>
+              </div>
+              <div class="bottom-action">已领取</div>
+            </div>
+            <div class="item">
+              <div class="top-goods">
+                <img src="./imgs/banner.png" alt="">
+                <span class="qty">剩10件</span>
+              </div>
+              <div class="bottom-action">已领取</div>
+            </div>
+          </div>
+          <div class="share-process">
+            <div class="wrap">
+              <div class="circle-wrap">
+                <span class="out-circle">
+                  <span class="inner-circle">领</span>
+                </span>
+                <span class="pro-text">邀请1人下单</span>
+              </div>
+              <div class="circle-wrap process-two">
+                <span class="out-circle">
+                  <span class="inner-circle">领</span>
+                </span>
+                <span class="pro-text">邀请3人下单</span>
+              </div>
+              <div class="circle-wrap process-thr activity">
+                <span class="out-circle">
+                  <span class="inner-circle">领</span>
+                </span>
+                <span class="pro-text">邀请6人下单</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="part-four part-same">
+          <div class="title-action"> 本期邀请 </div>
+          <div class="invit-list">
+              <div class="item box-flex">
+                <div class=""> 134****1452绑定手机号</div>
+                <div class=""> 2019/5/13 12:09 </div>
+              </div>
+              <div class="item box-flex">
+                <div class=""> 134****1452绑定手机号</div>
+                <div class=""> 2019/5/13 12:09 </div>
+              </div>
+              <div class="item box-flex">
+                <div class=""> 134****1452绑定手机号</div>
+                <div class=""> 2019/5/13 12:09 </div>
+              </div>
+              <div class="item box-flex">
+                <div class=""> 134****1452绑定手机号</div>
+                <div class=""> 2019/5/13 12:09 </div>
+              </div>
+              <div class="item box-flex">
+                <div class=""> 134****1452绑定手机号</div>
+                <div class=""> 2019/5/13 12:09 </div>
+              </div>
+            <div class="more">
+              <span class="text">查看更多</span>
+              <img src="./imgs/icon_open.png" alt="" class="icon-more">
+            </div>
+          </div>
         </div>
       </div>
-      <div class="part-same part-share">
-        <div class="part-head">
-          <span class="item">我的邀请</span>
-        </div>
-        <div class="no-share"  v-if="userList.length==0">
-          暂无邀请好友，赶快点击邀请赢取阳光值哦
-          <p class="btn-wrap">
-            <a href="#shareAction" class="maodian">
-              <button type="button" name="button" class="go-share">立即邀请</button>
-            </a>
-          </p>
-        </div>
-        <ul class="share-data-list" v-else>
-          <li class="share-item" v-for="(item,index) in userList">
-            <div class="flex-l">
-              <p class="mob-sty">{{ item.mobile}}绑定手机号</p>
-              <p>{{ item.createTime }} </p>
-            </div>
-            <div class="flex-r">
-              <p class="row-two highlight">+{{ item.badgeQty }}阳光值</p>
-            </div>
-          </li>
-          <li class="share-item" v-for="(item,index) in botHalfData" v-if="isUp">
-            <div class="flex-l">
-              <p class="mob-sty">{{ item.mobile}}绑定手机号</p>
-              <p>{{ item.createTime }} </p>
-            </div>
-            <div class="flex-r">
-              <p class="row-two highlight">+{{ item.badgeQty }}阳光值</p>
-            </div>
-          </li>
-          <li class="handle-item" v-if="botHalfData.length>0">
-            <span class="icon-handle" v-on:click="toggleList">
-              <label class="handle-text">{{isUp?'收起':'展开'}}</label>
-              <span v-bind:class="['icon-arrow',(isUp?'bot-arrow':'up-arrow')]"></span>
-            </span>
-          </li>
-        </ul>
-      </div>
-
       <div class="rule-btn-re" v-on:click="goRuleModal(true)">活动规则</div>
-      <footer>
-        <div class="logo-wrap">
-          <img src="./imgs/logo1.png" alt="qtools">
-        </div>
-      </footer>
       <div class="cover-mask"  v-show="visible" v-on:click="gosharePtP(false)">
         <div class="modal-share modal-common">
           <div class="top-title">
