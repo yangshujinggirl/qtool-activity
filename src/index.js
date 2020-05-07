@@ -11,13 +11,108 @@ $(document).ready(function() {
   new Vue({
       el: '#root',
       data: {
-        userList:[],
-        botHalfData:[],
+        userInfo:{},//信息
+        broadcastList:[],//广播信息
+        couponRule:['1','3','8'],
+        couponActivity:1,
+        couponList:[
+          {
+            presentId:'1',
+            couponAmount:'10',
+            couponDiscountStr:'满199元使用',
+            couponValidStr:'领取后2天有效',
+            gainStatus:'1',
+            gainStatusStr:'不可领',
+            gainThreshold:'1',
+          },
+          {
+            presentId:'2',
+            couponAmount:'15',
+            couponDiscountStr:'满99元使用',
+            couponValidStr:'领取后8天有效',
+            gainStatus:'2',
+            gainStatusStr:'可领取',
+            gainThreshold:'1',
+          },
+          {
+            presentId:'3',
+            couponAmount:'20',
+            couponDiscountStr:'满299元使用',
+            couponValidStr:'领取后8天有效',
+            gainStatus:'3',
+            gainStatusStr:'已领取',
+            gainThreshold:'1',
+          },
+        ],//优惠券列表
+        productList:[
+          {
+            presentId:'1',
+            pic:"https://qcampfile.oss-cn-shanghai.aliyuncs.com/activity_share.png",
+            remainQty:'10',
+            warningQty:'2',
+            gainStatus:'1',
+            gainStatusStr:'不可领',
+            gainThreshold:'1',
+          },
+          {
+            presentId:'2',
+            pic:"https://qcampfile.oss-cn-shanghai.aliyuncs.com/activity_share.png",
+            remainQty:'20',
+            warningQty:'3',
+            gainStatus:'2',
+            gainStatusStr:'可领取',
+            gainThreshold:'1',
+          },
+          {
+            presentId:'1',
+            pic:"https://qcampfile.oss-cn-shanghai.aliyuncs.com/activity_share.png",
+            remainQty:'10',
+            warningQty:'2',
+            gainStatus:'3',
+            gainStatusStr:'已领取',
+            gainThreshold:'1',
+          },
+        ],//实物列表
+        productRule:['1','3','8'],
+        productActivity:0,
+        inviteInfoList:[],//邀请列表
+        lasteList:[
+          {
+            mobile:'13562768899',
+            type:'1',
+            recordTime:'2020-05-08 22:33',
+          },
+          {
+            mobile:'13562768899',
+            type:'1',
+            recordTime:'2020-05-08 22:33',
+          },
+          {
+            mobile:'13562768899',
+            type:'1',
+            recordTime:'2020-05-08 22:33',
+          },
+        ],//前4条
+        botHalfList:[
+          {
+            mobile:'13162768899',
+            type:'1',
+            recordTime:'2020-05-08 22:33',
+          },
+          {
+            mobile:'13262768899',
+            type:'1',
+            recordTime:'2020-05-08 22:33',
+          },
+          {
+            mobile:'13362768899',
+            type:'1',
+            recordTime:'2020-05-08 22:33',
+          },
+        ],//所有
         totalBadges:0,
         visible:null,
         accesstoken:'',
-        testAccessToken:'',
-        userInfo:{},
         isUp:false,
         isLoading:false,
         visibleRule:false,
@@ -73,11 +168,10 @@ $(document).ready(function() {
             return;
           }
           const vm = this;
-          var imgUrl = "https://qcampfile.oss-cn-shanghai.aliyuncs.com/qtoolsapp/marchActivity/marchActivity_share.png";
           window.Qtools.goShareApplte(JSON.stringify({
-          	imageUrl: imgUrl,
-            title: vm.shareTitle,
-          	path: `pages/pageActivity/inviteUser/inviteUser?spShopId=${vm.userInfo.spShopId}&oldUserId=${vm.userInfo.userId}`,
+          	imageUrl: vm.userInfo.sharePic,
+            title: vm.userInfo.shareTitle,
+          	path: `pages/pageActivity/inviteUser/inviteUser?spShopId=${vm.userInfo.spShopId}&oldUserId=${vm.userInfo.oldUserId}`,
             webpageUrl:'https://qtoolsapp-hd.qtoolsbaby.cn/download/'
           }));
         },
@@ -87,49 +181,45 @@ $(document).ready(function() {
             isPic: 1,
           }));
         },
-        gosharePtP:function(value) {
-          if(!this.valdateStatus()) {
-            showToast({
-              str: "网络开小差了，重新打开页面试试",
-              time: 2000,
-              position: 'middle'
-            })
-            return;
-          }
-          this.visible = value;
-        },
         goRuleModal:function(value) {
           this.visibleRule = value;
         },
         goGiftPage: function () {
-          window.location.href = './exchange.html';
+          window.location.href = './exchangeRecord.html';
         },
         getData: function () {
             var vm = this;
             // vm.accesstoken = "fc447ab53ba6c78bce03d410aa28ad80"
             $.ajax({
-              url: '/invitation/user/search?accesstoken='+vm.accesstoken,
+              url: '/invitation/index',
               type: 'GET',
               dataType:'json',
+              data:{ accesstoken: vm.accesstoken },
               success:function(res) {
                 vm.isLoading = false;
                 if(res.code == '401') {
                   window.Qtools.goLogin(null);
                   return;
                 }
-                let userList = res.data.userList?res.data.userList:[];
-                userList.length>0&&userList.map((el)=> {
+                let { invitationActInfo, broadcastList, couponList, productList, inviteInfoList } =res;
+                inviteInfoList = inviteInfoList?inviteInfoList:[];
+                broadcastList = broadcastList?broadcastList:[];
+                couponList = couponList?couponList:[];
+                productList = productList?productList:[];
+
+                inviteInfoList.map((el)=> {
                   el.mobile = el.mobile&&el.mobile.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2');
                   return el;
                 })
-                let topHalfData = userList.slice(0,4);
-                let botHalfData = userList.slice(4);
-                vm.userList = topHalfData;
-                vm.botHalfData = botHalfData;
-                vm.totalBadges = res.data.totalBadges;
-                vm.userId = res.data.userId;
-                vm.shareText = res.data.shareStepTip;
-                vm.shareTitle = res.data.shareTitle;
+                let topHalfData = inviteInfoList.slice(0,4);
+                let botHalfData = inviteInfoList.slice(4);
+                vm.inviteInfoList = inviteInfoList;
+                vm.lasteList = topHalfData;
+                vm.botHalfList = botHalfData;
+                vm.userInfo = invitationActInfo;
+                vm.broadcastList = broadcastList;
+                vm.couponList = couponList;
+                vm.productList = productList;
               },
               error: function (err) {
                 vm.isLoading = false;
@@ -138,30 +228,6 @@ $(document).ready(function() {
                   time: 2000,
                   position: 'middle'
                 })
-                // window.Qtools.goLogin(null)
-              }
-            })
-        },
-        getUserInfo: function () {
-            var vm = this;
-            vm.isLoading = true
-            // vm.accesstoken = "fc447ab53ba6c78bce03d410aa28ad80"
-            $.ajax({
-              url: '/invitation/h5ShareCode?accesstoken='+vm.accesstoken,
-              type: 'GET',
-              dataType:'json',
-              success:function(res) {
-                if(res.code == '401') {
-                  vm.isLoading = false
-                  window.Qtools.goLogin(null);
-                  return;
-                }
-                var fileDomain = res.fileDomain;
-                vm.userInfo = {...res.data,...{fileDomain}};
-              },
-              error: function (err) {
-                vm.isLoading = false;
-                // window.Qtools.goLogin(null)
               }
             })
         },

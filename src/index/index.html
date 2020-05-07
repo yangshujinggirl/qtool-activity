@@ -51,56 +51,35 @@
         <div class="part-two-coupon part-same">
           <div class="title-action"> 好友注册领超值券 </div>
           <div class="box-flex coupon-list">
-            <div class="item">
+            <div class="item" v-for="item in couponList">
               <div class="top-text">
-                <p>¥ <span class="money">5</span></p>
-                <p>满99元使用</p>
+                <p>¥ <span class="money">{{item.couponAmount}}</span></p>
+                <p>{{item.couponDiscountStr}}</p>
               </div>
               <div class="bottom-action">
-                <button type="button" name="button" class="btn">已领取</button>
-                <p>领取后7天有效</p>
-              </div>
-            </div>
-            <div class="item">
-              <div class="top-text">
-                <p>¥ <span class="money">25</span></p>
-                <p>满99元使用</p>
-              </div>
-              <div class="bottom-action">
-                <button type="button" name="button" class="btn">点击领取</button>
-                <p>领取后7天有效</p>
-              </div>
-            </div>
-            <div class="item">
-              <div class="top-text">
-                <p>¥ <span class="money">25</span></p>
-                <p>满99元使用</p>
-              </div>
-              <div class="bottom-action">
-                <button type="button" name="button" class="btn">点击领取</button>
-                <p>领取后7天有效</p>
+                <button
+                  type="button"
+                  name="button"
+                  class="btn"
+                  v-bind:disabled="item.gainStatus!=2"
+                  v-bind:class="{ disabled: item.gainStatus!=2 }">
+                  {{item.gainStatusStr}}
+                </button>
+                <p>{{item.couponValidStr}}</p>
               </div>
             </div>
           </div>
           <div class="share-process">
             <div class="wrap">
-              <div class="circle-wrap">
+              <span class="process-line" v-bind:class="`step${couponActivity}`"></span>
+              <div
+                class="circle-wrap"
+                v-for="(item,index) in couponRule"
+                v-bind:class="[`process${index}`,{ activity: couponActivity == index}]">
                 <span class="out-circle">
                   <span class="inner-circle">领</span>
                 </span>
-                <span class="pro-text">邀请1人注册</span>
-              </div>
-              <div class="circle-wrap process-two">
-                <span class="out-circle">
-                  <span class="inner-circle">领</span>
-                </span>
-                <span class="pro-text">邀请3人注册</span>
-              </div>
-              <div class="circle-wrap process-thr activity">
-                <span class="out-circle">
-                  <span class="inner-circle">领</span>
-                </span>
-                <span class="pro-text">邀请8人注册</span>
+                <span class="pro-text">邀请{{item}}人注册</span>
               </div>
             </div>
           </div>
@@ -108,50 +87,35 @@
         <div class="part-thr-goods part-same">
           <div class="title-wrap">
             <div class="title-action"> 好友下单领0元好礼 </div>
-            <div class="record-btn"> 领取记录 ></div>
+            <div class="record-btn" v-on:click="goGiftPage"> 领取记录 ></div>
           </div>
           <div class="box-flex goods-list">
-            <div class="item">
+            <div class="item" v-for="(item,index) in productList">
               <div class="top-goods">
                 <img src="./imgs/banner.png" alt="">
-                <span class="qty">剩10件</span>
+                <span class="qty">剩{{item.remainQty}}件</span>
               </div>
-              <div class="bottom-action">已领取</div>
-            </div>
-            <div class="item">
-              <div class="top-goods">
-                <img src="./imgs/banner.png" alt="">
-                <span class="qty">剩10件</span>
-              </div>
-              <div class="bottom-action">已领取</div>
-            </div>
-            <div class="item">
-              <div class="top-goods">
-                <img src="./imgs/banner.png" alt="">
-                <span class="qty">剩10件</span>
-              </div>
-              <div class="bottom-action">已领取</div>
+              <button
+                type="button"
+                name="button"
+                class="bottom-action"
+                v-bind:disabled="item.gainStatus!=2"
+                v-bind:class="{ disabled: item.gainStatus!=2 }">
+                {{item.gainStatusStr}}
+              </button>
             </div>
           </div>
           <div class="share-process">
             <div class="wrap">
-              <div class="circle-wrap">
+              <span class="process-line" v-bind:class="`step${productActivity}`"></span>
+              <div
+                class="circle-wrap"
+                v-for="(item,index) in productRule"
+                v-bind:class="[`process${index}`,{ activity: productActivity == index}]">
                 <span class="out-circle">
                   <span class="inner-circle">领</span>
                 </span>
-                <span class="pro-text">邀请1人下单</span>
-              </div>
-              <div class="circle-wrap process-two">
-                <span class="out-circle">
-                  <span class="inner-circle">领</span>
-                </span>
-                <span class="pro-text">邀请3人下单</span>
-              </div>
-              <div class="circle-wrap process-thr activity">
-                <span class="out-circle">
-                  <span class="inner-circle">领</span>
-                </span>
-                <span class="pro-text">邀请6人下单</span>
+                <span class="pro-text">邀请{{item}}人注册</span>
               </div>
             </div>
           </div>
@@ -159,27 +123,15 @@
         <div class="part-four part-same">
           <div class="title-action"> 本期邀请 </div>
           <div class="invit-list">
-              <div class="item box-flex">
-                <div class=""> 134****1452绑定手机号</div>
-                <div class=""> 2019/5/13 12:09 </div>
+              <div class="item box-flex" v-for="item in lasteList">
+                <div class=""> {{item.mobile}}绑定手机号</div>
+                <div class=""> {{item.recordTime}} </div>
               </div>
-              <div class="item box-flex">
-                <div class=""> 134****1452绑定手机号</div>
-                <div class=""> 2019/5/13 12:09 </div>
+              <div class="item box-flex" v-for="item in botHalfList" v-if="isUp">
+                <div class=""> {{item.mobile}}绑定手机号</div>
+                <div class=""> {{item.recordTime}} </div>
               </div>
-              <div class="item box-flex">
-                <div class=""> 134****1452绑定手机号</div>
-                <div class=""> 2019/5/13 12:09 </div>
-              </div>
-              <div class="item box-flex">
-                <div class=""> 134****1452绑定手机号</div>
-                <div class=""> 2019/5/13 12:09 </div>
-              </div>
-              <div class="item box-flex">
-                <div class=""> 134****1452绑定手机号</div>
-                <div class=""> 2019/5/13 12:09 </div>
-              </div>
-            <div class="more">
+            <div class="more" v-on:click="toggleList">
               <span class="text">查看更多</span>
               <img src="./imgs/icon_open.png" alt="" class="icon-more">
             </div>

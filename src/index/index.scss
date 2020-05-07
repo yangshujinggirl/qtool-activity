@@ -144,19 +144,36 @@ $mainColor:#FDBC28;
       padding:20px 0 50px;
       .wrap {
         height: 16px;
-        background: #DB6E56;
+        background: #FFE4C8;
         border-radius: 16px;
         position: relative;
+        .process-line {
+          height: 16px;
+          background: #DB6E56;
+          border-radius: 16px;
+          position: absolute;
+          left: 0;
+          top: 0;
+          &.step0 {
+            width: 16%;
+          }
+          &.step1 {
+            width: 50%;
+          }
+          &.step2 {
+            width: 100%;
+          }
+        }
         .circle-wrap {
           width: 140px;
           position: absolute;
           left: 20px;
           top: 50%;
           transform: translateY(-50%);
-          &.process-two {
-            left: 220px;
+          &.process1 {
+            left: 250px;
           }
-          &.process-thr {
+          &.process2 {
             left: auto;
             right: 0px;
           }
@@ -238,6 +255,9 @@ $mainColor:#FDBC28;
             background-image: linear-gradient(180deg, #FFD87C 0%, #FDBA5D 37%);
             box-shadow: 0 2px 21px 0 #CE2F2D, inset 0 2px 2px 0 rgba(255,255,255,0.50);
             margin-bottom: 6px;
+            &.disabled {
+              background: #ccc;
+            }
           }
         }
       }
@@ -287,6 +307,7 @@ $mainColor:#FDBC28;
         width: 100%;
         height: 46px;
         line-height: 46px;
+        font-size: 24px;
         color: #fff;
         border-radius: 0 0 16px 16px;
         background-image: linear-gradient(180deg, #F69392 0%, #E95A59 62%);

@@ -1,0 +1,150 @@
+<html>
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="Content-Type" content="text/html; charset=GBK">
+      <meta name="author" content="qtoolsApp">
+      <meta http-equiv="cleartype" content="on">
+      <meta name="apple-mobile-web-app-capable" content="yes">
+      <meta name="apple-mobile-web-app-status-bar-style" content="black">
+      <meta name="format-detection" content="telephone=no">
+      <meta http-equiv="Expires" content="-1">
+      <meta http-equiv="Cache-Control" content="no-cache">
+      <meta name="keywords" content="Qtools母婴节">
+      <meta name="description" content="Qtools母婴节">
+      <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5">
+      <title>邀闺蜜，兑好礼</title>
+  </head>
+  <body>
+    <div id='root' v-cloak class="newuser-gift-pages">
+      <div class="loading-status" v-if="isLoading"></div>
+      <div class="part-one-banner" id="shareAction">
+        <img src="./imgs/banner.png" alt="">
+        <div class="coupon-components">
+          <div class="wrap">
+            <div class="top-content">
+              <div class="title-action">
+                <img src="./imgs/icon_logo.png" alt="" class="logo">
+                <span class="text">引领育儿新潮范儿</span>
+              </div>
+              <div class="box-flex">
+                <div class="item">新潮育儿</div>
+                <div class="item">专业测评</div>
+                <div class="item">正品保障</div>
+                <div class="item">无忧售后</div>
+              </div>
+            </div>
+            <div class="bottom-content clear">
+              <div class="coupon-item" v-for="item in couponList">
+                <div class="cou-l">
+                  ¥ <span class="amount">{{item.couponMoney}}</span>
+                  <p>{{item.couponFullAmount}}</p>
+                </div>
+                <div class="cou-r">
+                  {{item.couponValid}}
+                  <p class="goods-type">{{item.spuScope}}</p>
+                  <button type="button" name="button" class="use-btn">
+                    去使用
+                  </button>
+                </div>
+              </div>
+              <button
+                type="button"
+                name="button"
+                class="gain-btn"
+                v-bind:class="{disabled: !isShowBtn}"
+                v-bind:disabled="!isShowBtn">
+                  {{isShowBtn?'一键领取':'已领取'}}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hotSale-components">
+        <p class="title-action">新人热卖榜单</p>
+        <div class="goods-list clear">
+          <div class="item">
+            <div class="goods-img">
+              <img src="" alt="">
+              <img src="./imgs/icon_gift0.png" class="icon-gift" />
+            </div>
+            <div class="goods-info">
+              <div class="country">
+                <img src="" alt="" class="coutry-logo">
+                <span class="brand-name">日本品牌</span>
+              </div>
+              <p class="gods-name lineClamp">
+                <span class="label">国内首发</span>
+                ToBeUs 意大利知名木玩木玩款不一好玩意大利知名木玩木玩款不一好玩意大利知名木玩木玩款不一好玩
+              </p>
+              <div class="tag-list box-flex">
+                <span class="item-tag">新品</span>
+                <span class="item-tag">组合满件免</span>
+              </div>
+              <p class="price">¥1349.9 <span class="through">12349.9</span></p>
+            </div>
+          </div>
+          <div class="item">
+            <div class="goods-img">
+              <img src="" alt="">
+            </div>
+            <div class="goods-info">
+              <div class="country">
+                <img src="" alt="" class="coutry-logo">
+                <span class="brand-name">日本品牌</span>
+              </div>
+              <p class="gods-name lineClamp">
+                <span class="label">国内首发</span>
+                ToBeUs 意大利知名木玩木玩款不一好玩意大利知名木玩木玩款不一好玩意大利知名木玩木玩款不一好玩
+              </p>
+              <div class="tag-list box-flex">
+                <span class="item-tag">新品</span>
+                <span class="item-tag">组合满件免</span>
+              </div>
+              <p class="price">¥1349.9 <span class="through">12349.9</span></p>
+            </div>
+          </div>
+          <div class="item">
+            <div class="goods-img">
+              <img src="" alt="">
+            </div>
+            <div class="goods-info">
+              <div class="country">
+                <img src="" alt="" class="coutry-logo">
+                <span class="brand-name">日本品牌</span>
+              </div>
+              <p class="gods-name lineClamp">
+                <span class="label">国内首发</span>
+                ToBeUs 意大利知名木玩木玩款不一好玩意大利知名木玩木玩款不一好玩意大利知名木玩木玩款不一好玩
+              </p>
+              <div class="tag-list box-flex">
+                <span class="item-tag">新品</span>
+                <span class="item-tag">组合满件免</span>
+              </div>
+              <p class="price">¥1349.9 <span class="through">12349.9</span></p>
+            </div>
+          </div>
+          <div class="item">
+            <div class="goods-img">
+              <img src="" alt="">
+            </div>
+            <div class="goods-info">
+              <div class="country">
+                <img src="" alt="" class="coutry-logo">
+                <span class="brand-name">日本品牌</span>
+              </div>
+              <p class="gods-name lineClamp">
+                <span class="label">国内首发</span>
+                ToBeUs 意大利知名木玩木玩款不一好玩意大利知名木玩木玩款不一好玩意大利知名木玩木玩款不一好玩
+              </p>
+              <div class="tag-list box-flex">
+                <span class="item-tag">新品</span>
+                <span class="item-tag">组合满件免</span>
+              </div>
+              <p class="price">¥1349.9 <span class="through">12349.9</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
