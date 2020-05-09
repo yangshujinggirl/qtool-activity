@@ -11,6 +11,7 @@ $(document).ready(function() {
   new Vue({
       el: '#root',
       data: {
+        err:'',
         visibleRule:false,
         visibleCover:false,
         visibleThr:false,
@@ -209,6 +210,7 @@ $(document).ready(function() {
               },
               error: function (err) {
                 vm.isLoading = false;
+                vm.err = JSON.stringify(err)
                 showToast({
                   str:err.responseJSON.errorMsg,
                   time: 2000,
