@@ -124,7 +124,7 @@
         </div>
         <div class="part-four part-same">
           <div class="title-action"> 本期邀请 </div>
-          <div class="invit-list">
+          <div class="invit-list" v-if="inviteInfoList.length>0">
               <div class="item box-flex" v-for="item in lasteList">
                 <div class=""> {{item.mobile}}绑定手机号</div>
                 <div class=""> {{item.recordTime}} </div>
