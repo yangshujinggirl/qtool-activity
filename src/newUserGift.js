@@ -45,6 +45,21 @@ $(document).ready(function() {
             receiveStatus:'1',
             couponValid:'领取后7天有效',
           },
+        ],
+        productList:[
+          {
+            pdSpuId:'1',
+            name:'奶瓶',
+            mainPicUrl:'',
+            showPrice:'1239',
+            hiddenPrice:'2999',
+            iconList:[
+              {
+                iconName:'新品'
+              }
+            ],
+            sellingPoints:'卖点'
+          }
         ]
       },
       created() {

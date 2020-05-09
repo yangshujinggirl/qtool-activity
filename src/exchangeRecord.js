@@ -59,7 +59,7 @@ $(document).ready(function() {
         getData: function () {
           var vm = this;
           vm.isLoading = true
-          // vm.accesstoken = "82621ddede2cb40590c5c4714415d10e"
+          vm.accesstoken = "e7b68e06a21678b7e9cf04079a07db4e"
           $.ajax({
             url:'/invitation/exchange/search',
             type: 'GET',
@@ -74,8 +74,8 @@ $(document).ready(function() {
                 window.Qtools.goLogin(null);
                 return;
               }
-              data = data?data:[];
-              vm.productList = data;
+              let gainRecord = data.gainRecord?data.gainRecord:[];
+              vm.productList = gainRecord;
               vm.fileDomain = fileDomain;
             },
             error: function (err) {

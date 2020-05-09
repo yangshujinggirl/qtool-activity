@@ -11,105 +11,24 @@ $(document).ready(function() {
   new Vue({
       el: '#root',
       data: {
+        visibleRule:false,
+        visibleCover:false,
+        visibleThr:false,
+        visibleOne:false,
+        visibleTwo:false,
+        fileDomain:'',
+        currentItem:{},
         userInfo:{},//信息
         broadcastList:[],//广播信息
+        couponLeve:0,
         couponRule:['1','3','8'],
-        couponActivity:1,
-        couponList:[
-          {
-            presentId:'1',
-            couponAmount:'10',
-            couponDiscountStr:'满199元使用',
-            couponValidStr:'领取后2天有效',
-            gainStatus:'1',
-            gainStatusStr:'不可领',
-            gainThreshold:'1',
-          },
-          {
-            presentId:'2',
-            couponAmount:'15',
-            couponDiscountStr:'满99元使用',
-            couponValidStr:'领取后8天有效',
-            gainStatus:'2',
-            gainStatusStr:'可领取',
-            gainThreshold:'1',
-          },
-          {
-            presentId:'3',
-            couponAmount:'20',
-            couponDiscountStr:'满299元使用',
-            couponValidStr:'领取后8天有效',
-            gainStatus:'3',
-            gainStatusStr:'已领取',
-            gainThreshold:'1',
-          },
-        ],//优惠券列表
-        productList:[
-          {
-            presentId:'1',
-            pic:"https://qcampfile.oss-cn-shanghai.aliyuncs.com/activity_share.png",
-            remainQty:'10',
-            warningQty:'2',
-            gainStatus:'1',
-            gainStatusStr:'不可领',
-            gainThreshold:'1',
-          },
-          {
-            presentId:'2',
-            pic:"https://qcampfile.oss-cn-shanghai.aliyuncs.com/activity_share.png",
-            remainQty:'20',
-            warningQty:'3',
-            gainStatus:'2',
-            gainStatusStr:'可领取',
-            gainThreshold:'1',
-          },
-          {
-            presentId:'1',
-            pic:"https://qcampfile.oss-cn-shanghai.aliyuncs.com/activity_share.png",
-            remainQty:'10',
-            warningQty:'2',
-            gainStatus:'3',
-            gainStatusStr:'已领取',
-            gainThreshold:'1',
-          },
-        ],//实物列表
+        couponList:[],//优惠券列表
+        productList:[],//实物列表
+        productLeve:0,
         productRule:['1','3','8'],
-        productActivity:0,
         inviteInfoList:[],//邀请列表
-        lasteList:[
-          {
-            mobile:'13562768899',
-            type:'1',
-            recordTime:'2020-05-08 22:33',
-          },
-          {
-            mobile:'13562768899',
-            type:'1',
-            recordTime:'2020-05-08 22:33',
-          },
-          {
-            mobile:'13562768899',
-            type:'1',
-            recordTime:'2020-05-08 22:33',
-          },
-        ],//前4条
-        botHalfList:[
-          {
-            mobile:'13162768899',
-            type:'1',
-            recordTime:'2020-05-08 22:33',
-          },
-          {
-            mobile:'13262768899',
-            type:'1',
-            recordTime:'2020-05-08 22:33',
-          },
-          {
-            mobile:'13362768899',
-            type:'1',
-            recordTime:'2020-05-08 22:33',
-          },
-        ],//所有
+        lasteList:[],//前4条
+        botHalfList:[],//所有
         totalBadges:0,
         visible:null,
         accesstoken:'',
@@ -127,17 +46,28 @@ $(document).ready(function() {
       mounted() {
         let vm = this;
         setTimeout(function(){
-          vm.getUserInfo();
           vm.getData();
         });
       },
       methods: {
-        valdateStatus:function() {
-          if(this.userInfo.spShopId&&this.userInfo.userId) {
-            return true;
-          } else {
-            return false;
-          }
+        getAccessToken:function() {
+          let accesstoken = window.Qtools.getAccessToken(null);
+          this.accesstoken = accesstoken;
+        },
+        showAccessToken:function(accesstoken) {
+          this.accesstoken = accesstoken;
+        },
+        goShareApplte: function () {
+          const vm = this;
+          window.Qtools.goShareApplte(JSON.stringify({
+            imageUrl: vm.userInfo.sharePic,
+            title: vm.userInfo.shareTitle,
+            path: `pages/pageActivity/inviteUser/inviteUser?spShopId=${vm.userInfo.spShopId}&oldUserId=${vm.userInfo.oldUserId}`,
+            webpageUrl:'https://qtoolsapp-hd.qtoolsbaby.cn/download/'
+          }));
+        },
+        goShareWx: function () {
+          window.Qtools.goPosterShare(null);
         },
         toggleList:function() {
           let isUp = this.isUp;
@@ -151,45 +81,80 @@ $(document).ready(function() {
             index:0
           }))
         },
-        getAccessToken:function() {
-          let accesstoken = window.Qtools.getAccessToken(null);
-          this.accesstoken = accesstoken;
+        onCancel:function(key) {
+          this[key] = false;
+          this.visibleCover = false;
+          if(key == 'visibleThr') {
+            window.location.reload();
+          }
         },
-        showAccessToken:function(accesstoken) {
-          this.accesstoken = accesstoken;
-        },
-        goShareApplte: function () {
-          if(!this.valdateStatus()) {
-            showToast({
-              str: "网络开小差了，重新打开页面试试",
-              time: 2000,
-              position: 'middle'
-            })
+        //领取
+        goExchange: function (value, giftType) {
+          if(giftType == '2') {
+            window.Qtools.goWebPage(JSON.stringify({
+              num:8,
+              presentId:value.presentId,
+              mainPicUrl:value.pic,
+              name:value.name,
+            }));
             return;
           }
-          const vm = this;
-          window.Qtools.goShareApplte(JSON.stringify({
-          	imageUrl: vm.userInfo.sharePic,
-            title: vm.userInfo.shareTitle,
-          	path: `pages/pageActivity/inviteUser/inviteUser?spShopId=${vm.userInfo.spShopId}&oldUserId=${vm.userInfo.oldUserId}`,
-            webpageUrl:'https://qtoolsapp-hd.qtoolsbaby.cn/download/'
-          }));
+          this.currentItem = value;
+          this.visibleOne = true;
+          this.visibleCover = true;
         },
-        goShareWx: function () {
-          window.Qtools.goShareWx(JSON.stringify({
-            index:1,
-            isPic: 1,
-          }));
+        //确定领取
+        confirmExchange: function(value) {
+           var vm = this;
+           var data = {
+             accesstoken:vm.accesstoken,
+             invitationActId:vm.userInfo.invitationActId,
+             presentId:vm.currentItem.presentId,
+           };
+           data = JSON.stringify(data);
+           $.ajax({
+             url: '/invitation/exchange/coupon',
+             type: 'POST',
+             headers:{
+               "Content-Type":"application/json;charset=utf-8",
+             },
+             data:data,
+             dataType:'json',
+             success:function(res) {
+               vm.visibleOne = false;
+               let { data } =res;
+               let gainResult = data.gainResult;
+               if(gainResult != '1') {
+                 vm.visibleTwo = true;
+               } else {
+                 vm.currentItem=data;
+                 vm.visibleThr = true;
+               }
+             },
+             err: function (err) {
+               vm.visibleOne = false;
+             }
+           })
+        },
+        goUseCoupon: function(value) {
+          this.onCancel('visibleThr')
+          let vm =this;
+          window.Qtools.goCouponUseStyle(JSON.stringify({
+            linkInfoType: vm.currentItem.linkInfoType,
+            linkInfo: vm.currentItem.linkInfo,
+          }))
         },
         goRuleModal:function(value) {
           this.visibleRule = value;
+          this.visibleCover = value;
         },
         goGiftPage: function () {
           window.location.href = './exchangeRecord.html';
         },
         getData: function () {
             var vm = this;
-            // vm.accesstoken = "fc447ab53ba6c78bce03d410aa28ad80"
+            vm.isLoading = true
+            vm.accesstoken = "e7b68e06a21678b7e9cf04079a07db4e"
             $.ajax({
               url: '/invitation/index',
               type: 'GET',
@@ -201,18 +166,37 @@ $(document).ready(function() {
                   window.Qtools.goLogin(null);
                   return;
                 }
-                let { invitationActInfo, broadcastList, couponList, productList, inviteInfoList } =res;
+                let { invitationActInfo, broadcastList, couponList, productList, inviteInfoList } =res.data;
                 inviteInfoList = inviteInfoList?inviteInfoList:[];
                 broadcastList = broadcastList?broadcastList:[];
                 couponList = couponList?couponList:[];
                 productList = productList?productList:[];
-
+                couponList.map((el) => {
+                  vm.couponRule = el.gainThreshold;
+                })
+                productList.map((el) => {
+                  vm.productRule = el.gainThreshold;
+                })
                 inviteInfoList.map((el)=> {
                   el.mobile = el.mobile&&el.mobile.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2');
                   return el;
                 })
                 let topHalfData = inviteInfoList.slice(0,4);
                 let botHalfData = inviteInfoList.slice(4);
+                if(invitationActInfo.inviteNum >= 8) {
+                  vm.couponLeve = 2;
+                } else if(invitationActInfo.inviteNum >= 3) {
+                  vm.couponLeve = 1;
+                } else if(invitationActInfo.inviteNum >= 1){
+                  vm.couponLeve = 0;
+                }
+                if(invitationActInfo.inviteOrderNum >= 6) {
+                  vm.productLeve = 2;
+                } else if(invitationActInfo.inviteOrderNum >= 3) {
+                  vm.productLeve = 1;
+                } else if(invitationActInfo.inviteOrderNum >= 1){
+                  vm.productLeve = 0;
+                }
                 vm.inviteInfoList = inviteInfoList;
                 vm.lasteList = topHalfData;
                 vm.botHalfList = botHalfData;
@@ -220,6 +204,7 @@ $(document).ready(function() {
                 vm.broadcastList = broadcastList;
                 vm.couponList = couponList;
                 vm.productList = productList;
+                vm.fileDomain = res.fileDomain;
               },
               error: function (err) {
                 vm.isLoading = false;

@@ -60,22 +60,27 @@ $mainColor:#FDBC28;
   }
 
   .share-btn {
+    display: block;
     width: 450px;
     height: 112px;
     line-height: 92px;
+    padding-bottom: 10px;
+    box-sizing: border-box;
     background: url('./imgs/icon_btn.png') left top no-repeat;
     background-size: contain;
     font-size: 36px;
     color: #fff;
-    margin-bottom: 12px;
+    margin: 0 auto;
     .icon-wx {
       width: 44px;
       height: 44px;
     }
   }
   .img-share {
+    display: inline-block;
     font-size: 26px;
     color: #653d17;
+    padding-top: 14px;
     .icon-share {
       width: 38px;
     }
@@ -238,6 +243,7 @@ $mainColor:#FDBC28;
           line-height: 56px;
         }
         .bottom-action {
+          width: 100%;
           font-size: 22px;
           color: #fff;
           position: absolute;
@@ -358,48 +364,48 @@ footer {
 .rule-btn-re {
   width: 154px;
   height: 54px;
-  color: $mainColor;
+  color:#8b381b;
   line-height: 54px;
   text-align: center;
   border-radius:27px 0 0 27px;
   background: #fff;
   position: fixed;
-  top: 56px;
+  top: 48px;
   right: 0;
   font-weight: bold;
 }
-.modal-common {
-  background: rgba(252,252,252,0.80);
-  background: #FFFFFF;
-  border-radius: 24px;
-  width: 540px;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-  z-index: 4;
-  .modal-title {
-    text-align: center;
-    font-size: 34px;
-    color: #4A4A4A;
-    height: 100px;
-    line-height: 100px;
-    border-bottom: 1px solid #9B9B9B;
-    font-weight: bold;
-  }
-  .modal-content {
-    padding: 32px;
-  }
-  .modal-footer {
-    text-align: center;
-    font-size: 34px;
-    color: #4A4A4A;
-    height: 100px;
-    line-height: 100px;
-    border-top: 1px solid #9B9B9B;
-  }
-}
 .rule-modal {
+  &.modal-common {
+    background: rgba(252,252,252,0.80);
+    background: #FFFFFF;
+    border-radius: 24px;
+    width: 540px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 4;
+    .modal-title {
+      text-align: center;
+      font-size: 34px;
+      color: #4A4A4A;
+      height: 100px;
+      line-height: 100px;
+      border-bottom: 1px solid #9B9B9B;
+      font-weight: bold;
+    }
+    .modal-content {
+      padding: 32px;
+    }
+    .modal-footer {
+      text-align: center;
+      font-size: 34px;
+      color: #4A4A4A;
+      height: 100px;
+      line-height: 100px;
+      border-top: 1px solid #9B9B9B;
+    }
+  }
   .modal-content {
     font-size: 24px;
     color: #666666;
@@ -414,25 +420,79 @@ footer {
     overflow-y: auto;
   }
 }
-.modal-share {
+
+.modal-error{
+  .modal-content {
+    padding: 64px 20px;
+    text-align: center;
+    font-size: 30px;
+    color: #464646;
+    line-height: 40px;
+    box-sizing: border-box;
+  }
+  .modal-footer {
+    text-align: center;
+    font-size: 34px;
+    padding: 30px 0;
+    color: #9B9B9B;
+    border-top: 1px solid rgba(77,77,77,0.78);
+  }
+}
+.modal-success  {
+  color: #4A4A4A;
+  padding: 40px 20px 60px;
   text-align: center;
-  padding:52px 40px 100px;
-  box-sizing: border-box;
+  .modal-title {
+    font-size: 34px;
+    font-weight: bold;
+    padding-top: 40px;
+  }
+  .modal-content {
+    font-size: 30px;
+    padding: 16px 0 0;
+    text-align: center;
+    .exchange-info {
+      margin-bottom: 40px;
+    }
+  }
+  .use-btn {
+    width: 396px;
+    height: 75px;
+    background: #FDBC28;
+    border-radius: 36px;
+    font-size: 30px;
+    color: #FFFFFF;
+    line-height: 75px;
+  }
 }
-.top-title {
-  width: 110px;
-  height: 110px;
-  margin:0 auto 32px;
-}
-.middle-content {
-  width: 300px;
-  height: 300px;
-  border: 1px solid #ccc;
-  margin:0 auto 30px;
-  border-radius: 6px;
-  overflow: hidden;
-}
-.bottom-tips {
-  font-size: 24px;
-  color: #272727;
-}
+/*确认弹框*/
+.confirm-modal{
+  text-align: center;
+  .modal-title,.modal-content {
+    padding: 0 30px;
+    margin-bottom: 30px;
+  }
+  .modal-title {
+     font-size: 34px;
+     color: #4A4A4A;
+     padding-top: 40px;
+   }
+   .modal-content {
+     font-size: 26px;
+     color: #9B9B9B;
+   }
+   .modal-footer{
+     display: flex;
+     font-size: 34px;
+     color: #9B9B9B;
+     border-top: 1px solid #9B9B9B;
+     .item {
+       flex:1;
+       padding: 30px 0;
+       &:not(:first-child) {
+         border-left: 1px solid #9B9B9B;
+         color: #464646;
+       }
+     }
+   }
+ }

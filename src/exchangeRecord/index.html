@@ -21,11 +21,11 @@
         <ul class="gift-list">
           <li class="item" v-for="item in productList">
             <div class="fl-l">
-              <img :src="fileDomain+item.gainRecord.pic" alt="">
+              <img :src="fileDomain+item.pic" alt="">
             </div>
             <div class="fl-r">
-              <p class="title">{{item.gainRecord.name}}</p>
-              <div class="bottom-part">{{item.gainRecord.createTime}}</div>
+              <p class="title">{{item.name}}</p>
+              <div class="bottom-part">{{item.createTime}}</div>
             </div>
           </li>
         </ul>
