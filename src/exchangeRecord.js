@@ -9,31 +9,9 @@ $(document).ready(function() {
   new Vue({
       el: '#root',
       data: {
+        isLoading:false,
         fileDomain:'',
-        productList: [
-          {
-            invitationActId:'1',
-            oldUserId:'1',
-            gainRecord:{
-              userPresentId:'1',
-              presentId:'1',
-              pic:'https://qcampfile.oss-cn-shanghai.aliyuncs.com/activity_share.png',
-              name:'Lansinoh兰思诺 Lansinoh兰思诺 羊毛脂膏40ml 新手妈妈必备好用产品很好用的羊毛脂膏40ml 新手妈妈必备好用产品很好用的',
-              createTime:'2020-04-20',
-            }
-          },
-          {
-            invitationActId:'2',
-            oldUserId:'1',
-            gainRecord:{
-              userPresentId:'2',
-              presentId:'1',
-              pic:'https://qcampfile.oss-cn-shanghai.aliyuncs.com/activity_share.png',
-              name:'Lansinoh兰思诺 羊毛脂膏40ml 新手妈妈必备好用产品很好用的',
-              createTime:'2020-04-20',
-            }
-          },
-        ],
+        productList: [],
         accesstoken:'',
       },
       created() {
