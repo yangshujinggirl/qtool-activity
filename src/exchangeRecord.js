@@ -34,12 +34,19 @@ $(document).ready(function() {
         showAccessToken:function(accesstoken) {
           this.accesstoken = accesstoken;
         },
+        //领取
+        goDetail: function (value) {
+          window.Qtools.goWebPage(JSON.stringify({
+            num:9,
+            userPresentId:value.userPresentId,
+          }));
+        },
         getData: function () {
           var vm = this;
           vm.isLoading = true
-          vm.accesstoken = "e7b68e06a21678b7e9cf04079a07db4e"
+          // vm.accesstoken = "864fd07eadd9e1eaeb7fc8b923cd1be1"
           $.ajax({
-            url:'/invitation/exchange/search',
+            url:'/qtoolsApp/invitation/exchange/search',
             type: 'GET',
             dataType: 'json',
             data:{

@@ -62,10 +62,11 @@ $(document).ready(function() {
           window.Qtools.goShareApplte(JSON.stringify({
             imageUrl: vm.userInfo.sharePic,
             title: vm.userInfo.shareTitle,
-            path: `pages/pageActivity/inviteUser/inviteUser?spShopId=${vm.userInfo.spShopId}&oldUserId=${vm.userInfo.oldUserId}`,
+            path: `pages/pageActivity/inviteUser/inviteUser?B=${vm.userInfo.spShopId}&A=${vm.userInfo.oldUserId}&C=${vm.userInfo.invitationActId}`,
             webpageUrl:'https://qtoolsapp-hd.qtoolsbaby.cn/download/'
           }));
         },
+        //图片分享
         goShareWx: function () {
           window.Qtools.goPosterShare(null);
         },
@@ -113,7 +114,7 @@ $(document).ready(function() {
            };
            data = JSON.stringify(data);
            $.ajax({
-             url: '/invitation/exchange/coupon',
+             url: '/qtoolsApp/invitation/exchange/coupon',
              type: 'POST',
              headers:{
                "Content-Type":"application/json;charset=utf-8",
@@ -154,9 +155,9 @@ $(document).ready(function() {
         getData: function () {
             var vm = this;
             vm.isLoading = true
-            vm.accesstoken = "e7b68e06a21678b7e9cf04079a07db4e"
+            // vm.accesstoken = "864fd07eadd9e1eaeb7fc8b923cd1be1"
             $.ajax({
-              url: '/invitation/index',
+              url: '/qtoolsApp/invitation/index',
               type: 'GET',
               dataType:'json',
               data:{ accesstoken: vm.accesstoken },

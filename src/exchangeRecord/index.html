@@ -12,14 +12,14 @@
       <meta name="keywords" content="Qtools母婴节">
       <meta name="description" content="Qtools母婴节">
       <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5">
-      <title>邻取记录</title>
+      <title>领取记录</title>
   </head>
   <body>
     <div id='root' v-cloak class="exchange-pages">
       <div class="loading-status" v-if="isLoading"></div>
       <div class="content-wrap">
         <ul class="gift-list">
-          <li class="item" v-for="item in productList">
+          <li class="item" v-for="item in productList" v-on:click="goDetail(item)">
             <div class="fl-l">
               <img :src="fileDomain+item.pic" alt="">
             </div>

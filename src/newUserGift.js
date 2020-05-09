@@ -89,35 +89,37 @@ $(document).ready(function() {
             var vm = this;
             // vm.accesstoken = "fc447ab53ba6c78bce03d410aa28ad80"
             $.ajax({
-              url: '/invitation/index',
+              url: '/qtoolsApp/newUserGift/area',
               type: 'GET',
               dataType:'json',
               data:{ accesstoken: vm.accesstoken },
               success:function(res) {
+                let { data } =res;
+                let coupons = data.coupons?data.coupons:[];
+                this.couponList = coupons;
+              },
+              error: function (err) {
                 vm.isLoading = false;
-                if(res.code == '401') {
-                  window.Qtools.goLogin(null);
-                  return;
-                }
-                let { invitationActInfo, broadcastList, couponList, productList, inviteInfoList } =res;
-                inviteInfoList = inviteInfoList?inviteInfoList:[];
-                broadcastList = broadcastList?broadcastList:[];
-                couponList = couponList?couponList:[];
-                productList = productList?productList:[];
-
-                inviteInfoList.map((el)=> {
-                  el.mobile = el.mobile&&el.mobile.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2');
-                  return el;
+                showToast({
+                  str:err.responseJSON.errorMsg,
+                  time: 2000,
+                  position: 'middle'
                 })
-                let topHalfData = inviteInfoList.slice(0,4);
-                let botHalfData = inviteInfoList.slice(4);
-                vm.inviteInfoList = inviteInfoList;
-                vm.lasteList = topHalfData;
-                vm.botHalfList = botHalfData;
-                vm.userInfo = invitationActInfo;
-                vm.broadcastList = broadcastList;
-                vm.couponList = couponList;
-                vm.productList = productList;
+              }
+            })
+        },
+        getProductData: function () {
+            var vm = this;
+            // vm.accesstoken = "fc447ab53ba6c78bce03d410aa28ad80"
+            $.ajax({
+              url: '/qtoolsApp/newUserGift/spus',
+              type: 'GET',
+              dataType:'json',
+              data:{ accesstoken: vm.accesstoken },
+              success:function(res) {
+                let { data } =res;
+                data = data?data:[];
+                this.couponList = data;
               },
               error: function (err) {
                 vm.isLoading = false;

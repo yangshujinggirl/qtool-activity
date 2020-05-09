@@ -166,9 +166,14 @@ module.exports = {
     host: Ip.address(),
     port:3006,
     proxy: {
-      '/invitation': {
+      // '/invitation': {
+      //   target: 'http://192.168.2.35:8214/',
+      //   // target: 'http://v5.apph5.testin.qtoolsbaby.net:81/',
+      //   changeOrigin: true,
+      // },
+      '/qtoolsApp': {
         target: 'http://192.168.2.35:8214/',
-        // target: 'http://v5.apph5.testin.qtoolsbaby.net:81/',
+        pathRewrite: {"^/qtoolsApp" : ""},
         changeOrigin: true,
       },
     }
