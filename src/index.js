@@ -46,6 +46,8 @@ $(document).ready(function() {
       mounted() {},
       methods: {
         getAccessToken:function() {
+          // this.accesstoken = '7f3426120292e10d4a9c9b8f637202b2';
+          // this.getData();
           window.Qtools.getAccessToken(null);
         },
         showAccessToken:function(accesstoken) {
@@ -154,7 +156,7 @@ $(document).ready(function() {
         getData: function () {
             var vm = this;
             vm.isLoading = true
-            // vm.accesstoken = "92013e64427cda9311f1654e5e4aa176"
+
             $.ajax({
               url: '/qtoolsApp/invitation/index',
               type: 'GET',
