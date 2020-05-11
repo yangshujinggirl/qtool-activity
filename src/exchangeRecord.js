@@ -20,19 +20,18 @@ $(document).ready(function() {
         };
         this.getAccessToken();
       },
-      mounted() {
-        let vm = this;
-        setTimeout(function(){
-          vm.getData();
-        });
-      },
+      mounted() {},
       methods: {
         getAccessToken:function() {
-          let accesstoken = window.Qtools.getAccessToken(null);
-          this.accesstoken = accesstoken;
+          window.Qtools.getAccessToken(null);
         },
         showAccessToken:function(accesstoken) {
-          this.accesstoken = accesstoken;
+          if(accesstoken == '') {
+            window.Qtools.goLogin(null);
+          } else {
+            this.accesstoken = accesstoken;
+            this.getData();
+          }
         },
         //领取
         goDetail: function (value) {

@@ -23,23 +23,19 @@ $(document).ready(function() {
           this.showAccessToken(getAccessToken)
         };
       },
-      mounted() {
-        let vm = this;
-        setTimeout(function(){
-          vm.getData();
-          vm.getProductData();
-        });
-      },
+      mounted() {},
       methods: {
-        goLogin:function() {
-          window.Qtools.goLogin(null)
-        },
         getAccessToken:function() {
-          let accesstoken = window.Qtools.getAccessToken(null);
-          this.accesstoken = accesstoken;
+          window.Qtools.getAccessToken(null);
         },
         showAccessToken:function(accesstoken) {
-          this.accesstoken = accesstoken;
+          if(accesstoken == '') {
+            window.Qtools.goLogin(null);
+          } else {
+            this.accesstoken = accesstoken;
+            vm.getData();
+            vm.getProductData();
+          }
         },
         goUseCoupon: function(value) {
           window.Qtools.goCouponUseStyle(JSON.stringify({
@@ -49,9 +45,9 @@ $(document).ready(function() {
         },
         getCoupon:function() {
           var vm = this;
-          // vm.accesstoken = "6dd6a873be5eec55c3fba2d0786c4e7b";
+          // vm.accesstoken = "39a4989708c0cfa2c34a00f1057df7b2";
           $.ajax({
-            url: '/qtoolsApp/coupons/voucherNewUserGiftCoupon',
+            url: '/qtoolsApp/coupons/voucherNewUserGiftCouponH5',
             type: 'GET',
             dataType:'json',
             data:{ accessToken: vm.accesstoken },
@@ -80,7 +76,7 @@ $(document).ready(function() {
         getData: function () {
             var vm = this;
             vm.isLoading = true;
-            // vm.accesstoken = "92013e64427cda9311f1654e5e4aa176"
+            // vm.accesstoken = "39a4989708c0cfa2c34a00f1057df7b2"
             $.ajax({
               url: '/qtoolsApp/newUserGift/area',
               type: 'GET',
@@ -109,7 +105,7 @@ $(document).ready(function() {
         getProductData: function () {
             var vm = this;
             vm.isLoading = true;
-            vm.accesstoken = "92013e64427cda9311f1654e5e4aa176"
+            // vm.accesstoken = "39a4989708c0cfa2c34a00f1057df7b2"
             $.ajax({
               url: '/qtoolsApp/newUserGift/spus',
               type: 'GET',

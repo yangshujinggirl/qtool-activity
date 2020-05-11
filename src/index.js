@@ -40,22 +40,21 @@ $(document).ready(function() {
       created() {
         this.getAccessToken();
         window['showAccessToken'] = (getAccessToken) => {
-          this.showAccessToken(getAccessToken)
+          this.showAccessToken(getAccessToken);
         };
       },
-      mounted() {
-        let vm = this;
-        setTimeout(function(){
-          vm.getData();
-        });
-      },
+      mounted() {},
       methods: {
         getAccessToken:function() {
-          let accesstoken = window.Qtools.getAccessToken(null);
-          this.accesstoken = accesstoken;
+          window.Qtools.getAccessToken(null);
         },
         showAccessToken:function(accesstoken) {
-          this.accesstoken = accesstoken;
+          if(accesstoken == '') {
+            window.Qtools.goLogin(null);
+          } else {
+            this.accesstoken = accesstoken;
+            this.getData();
+          }
         },
         goShareApplte: function () {
           const vm = this;
@@ -178,6 +177,10 @@ $(document).ready(function() {
                 productList.map((el) => {
                   vm.productRule = el.gainThreshold;
                 })
+                broadcastList.map((el)=> {
+                  el.mobile = el.mobile&&el.mobile.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2');
+                  return el;
+                })
                 inviteInfoList.map((el)=> {
                   el.mobile = el.mobile&&el.mobile.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2');
                   return el;
@@ -206,7 +209,6 @@ $(document).ready(function() {
                 vm.couponList = couponList;
                 vm.productList = productList;
                 vm.fileDomain = res.fileDomain;
-                $('#noticeScroll').marquee({yScroll: 'bottom'});
               },
               error: function (err) {
                 vm.isLoading = false;
