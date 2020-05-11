@@ -64,7 +64,12 @@ $(document).ready(function() {
               vm.fileDomain = fileDomain;
             },
             error: function (err) {
-              vm.isLoading = false
+              vm.isLoading = false;
+              showToast({
+                str:err.responseJSON?err.responseJSON.errorMsg:'服务错误',
+                time: 2000,
+                position: 'middle'
+              })
             }
           })
         }

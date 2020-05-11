@@ -11,56 +11,11 @@ $(document).ready(function() {
   new Vue({
       el: '#root',
       data: {
+        fileDomain:'',
+        isLoading:false,
         isShowBtn:true,
-        couponList:[
-          {
-            couponId:'1',
-            couponMoney:'5',
-            couponFullAmount:'满199元使用',
-            spuScope:'全部商品可用',
-            receiveStatus:'0',
-            couponValid:'领取后7天有效',
-          },
-          {
-            couponId:'1',
-            couponMoney:'15',
-            couponFullAmount:'满299元使用',
-            spuScope:'一般贸易品可用',
-            receiveStatus:'0',
-            couponValid:'领取后7天有效',
-          },
-          {
-            couponId:'1',
-            couponMoney:'35',
-            couponFullAmount:'满199元使用',
-            spuScope:'跨境商品可用',
-            receiveStatus:'1',
-            couponValid:'领取后7天有效',
-          },
-          {
-            couponId:'1',
-            couponMoney:'35',
-            couponFullAmount:'满199元使用',
-            spuScope:'全部商品可用',
-            receiveStatus:'1',
-            couponValid:'领取后7天有效',
-          },
-        ],
-        productList:[
-          {
-            pdSpuId:'1',
-            name:'奶瓶',
-            mainPicUrl:'',
-            showPrice:'1239',
-            hiddenPrice:'2999',
-            iconList:[
-              {
-                iconName:'新品'
-              }
-            ],
-            sellingPoints:'卖点'
-          }
-        ]
+        couponList:[],
+        productList:[]
       },
       created() {
         this.getAccessToken();
@@ -72,6 +27,7 @@ $(document).ready(function() {
         let vm = this;
         setTimeout(function(){
           vm.getData();
+          vm.getProductData();
         });
       },
       methods: {
@@ -85,23 +41,65 @@ $(document).ready(function() {
         showAccessToken:function(accesstoken) {
           this.accesstoken = accesstoken;
         },
+        goUseCoupon: function(value) {
+          window.Qtools.goCouponUseStyle(JSON.stringify({
+            linkInfoType: value.linkInfoType,
+            linkInfo: value.linkInfo,
+          }))
+        },
+        getCoupon:function() {
+          var vm = this;
+          // vm.accesstoken = "6dd6a873be5eec55c3fba2d0786c4e7b";
+          $.ajax({
+            url: '/qtoolsApp/coupons/voucherNewUserGiftCoupon',
+            type: 'GET',
+            dataType:'json',
+            data:{ accessToken: vm.accesstoken },
+            success:function(res) {
+              if(res.code == '200') {
+                showToast({
+                  str:'领取成功',
+                  time: 2000,
+                  position: 'middle'
+                })
+                window.location.reload();
+              } else if(res.code == '401') {
+                window.Qtools.goLogin(null);
+                return;
+              }
+            },
+            error: function (err) {
+              showToast({
+                str:err.responseJSON?err.responseJSON.errorMsg:'服务错误',
+                time: 2000,
+                position: 'middle'
+              })
+            }
+          })
+        },
         getData: function () {
             var vm = this;
-            // vm.accesstoken = "fc447ab53ba6c78bce03d410aa28ad80"
+            vm.isLoading = true;
+            // vm.accesstoken = "6dd6a873be5eec55c3fba2d0786c4e7b"
             $.ajax({
               url: '/qtoolsApp/newUserGift/area',
               type: 'GET',
               dataType:'json',
-              data:{ accesstoken: vm.accesstoken },
+              data:{ accessToken: vm.accesstoken },
               success:function(res) {
-                let { data } =res;
+                let { code, fileDomain,data } =res;
+                vm.isLoading = false;
+                if(res.code == '401') {
+                  window.Qtools.goLogin(null);
+                  return;
+                }
                 let coupons = data.coupons?data.coupons:[];
-                this.couponList = coupons;
+                vm.couponList = coupons;
               },
               error: function (err) {
                 vm.isLoading = false;
                 showToast({
-                  str:err.responseJSON.errorMsg,
+                  str:err.responseJSON?err.responseJSON.errorMsg:'服务错误',
                   time: 2000,
                   position: 'middle'
                 })
@@ -110,21 +108,34 @@ $(document).ready(function() {
         },
         getProductData: function () {
             var vm = this;
-            // vm.accesstoken = "fc447ab53ba6c78bce03d410aa28ad80"
+            vm.isLoading = true;
+            // vm.accesstoken = "6dd6a873be5eec55c3fba2d0786c4e7b"
             $.ajax({
               url: '/qtoolsApp/newUserGift/spus',
               type: 'GET',
               dataType:'json',
-              data:{ accesstoken: vm.accesstoken },
+              data:{ accessToken: vm.accesstoken },
               success:function(res) {
-                let { data } =res;
-                data = data?data:[];
-                this.couponList = data;
+                vm.isLoading = false;
+                let { code, fileDomain, data } =res;
+                if(res.code == '401') {
+                  window.Qtools.goLogin(null);
+                  return;
+                }
+                let list = data.list?data.list:[];
+                list.map((el,index) => {
+                  if(index<=2) {
+                    el.iconPath = require(`./newUserGift/imgs/icon_gift${index}.png`);
+                  }
+
+                })
+                vm.productList = list;
+                vm.fileDomain = fileDomain;
               },
               error: function (err) {
                 vm.isLoading = false;
                 showToast({
-                  str:err.responseJSON.errorMsg,
+                  str:err.responseJSON?err.responseJSON.errorMsg:'服务错误',
                   time: 2000,
                   position: 'middle'
                 })

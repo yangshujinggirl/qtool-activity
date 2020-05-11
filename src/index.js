@@ -11,7 +11,6 @@ $(document).ready(function() {
   new Vue({
       el: '#root',
       data: {
-        err:'',
         visibleRule:false,
         visibleCover:false,
         visibleThr:false,
@@ -156,7 +155,7 @@ $(document).ready(function() {
         getData: function () {
             var vm = this;
             vm.isLoading = true
-            // vm.accesstoken = "864fd07eadd9e1eaeb7fc8b923cd1be1"
+            // vm.accesstoken = "92013e64427cda9311f1654e5e4aa176"
             $.ajax({
               url: '/qtoolsApp/invitation/index',
               type: 'GET',
@@ -207,12 +206,12 @@ $(document).ready(function() {
                 vm.couponList = couponList;
                 vm.productList = productList;
                 vm.fileDomain = res.fileDomain;
+                $('#noticeScroll').marquee({yScroll: 'bottom'});
               },
               error: function (err) {
                 vm.isLoading = false;
-                vm.err = JSON.stringify(err)
                 showToast({
-                  str:err.responseJSON.errorMsg,
+                  str:err.responseJSON?err.responseJSON.errorMsg:'服务错误',
                   time: 2000,
                   position: 'middle'
                 })

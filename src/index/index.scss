@@ -16,6 +16,20 @@ $mainColor:#FDBC28;
   background: url('./imgs/banner.png') left top no-repeat;
   background-size: contain;
   position: relative;
+  .notice-list {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 30px;
+    box-sizing: border-box;
+    overflow: hidden;
+    background: rgba(0, 0, 0, .4);
+    .item-notice {
+      color: #fff;
+      padding-right: 20px;
+    }
+  }
   .wrap {
     width: 100%;
     padding: 0 32px 110px;

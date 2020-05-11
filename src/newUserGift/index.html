@@ -37,12 +37,12 @@
               <div class="coupon-item" v-for="item in couponList">
                 <div class="cou-l">
                   ¥ <span class="amount">{{item.couponMoney}}</span>
-                  <p>{{item.couponFullAmount}}</p>
+                  <p>满{{item.couponFullAmount}}元可用</p>
                 </div>
                 <div class="cou-r">
                   {{item.couponValid}}
                   <p class="goods-type">{{item.spuScope}}</p>
-                  <button type="button" name="button" class="use-btn">
+                  <button type="button" name="button" class="use-btn" v-on:click="goUseCoupon(item)">
                     去使用
                   </button>
                 </div>
@@ -52,7 +52,8 @@
                 name="button"
                 class="gain-btn"
                 v-bind:class="{disabled: !isShowBtn}"
-                v-bind:disabled="!isShowBtn">
+                v-bind:disabled="!isShowBtn"
+                v-on:click="getCoupon">
                   {{isShowBtn?'一键领取':'已领取'}}
               </button>
             </div>
@@ -62,85 +63,22 @@
       <div class="hotSale-components">
         <p class="title-action">新人热卖榜单</p>
         <div class="goods-list clear">
-          <div class="item">
+          <div class="item" v-for="(item,index) in productList">
             <div class="goods-img">
-              <img src="" alt="">
-              <img src="./imgs/icon_gift0.png" class="icon-gift" />
+              <img :src="fileDomain+item.mainPicUrl" alt="">
+              <img :src="item.iconPath" class="icon-gift" v-if="index<=2"/>
             </div>
             <div class="goods-info">
-              <div class="country">
-                <img src="" alt="" class="coutry-logo">
-                <span class="brand-name">日本品牌</span>
-              </div>
               <p class="gods-name lineClamp">
-                <span class="label">国内首发</span>
-                ToBeUs 意大利知名木玩木玩款不一好玩意大利知名木玩木玩款不一好玩意大利知名木玩木玩款不一好玩
+                <span class="label">
+                  <img :src="fileDomain+item.nationalflagPic" alt="">
+                </span>
+                {{item.name}}
               </p>
-              <div class="tag-list box-flex">
-                <span class="item-tag">新品</span>
-                <span class="item-tag">组合满件免</span>
+              <div class="tag-list box-flex" v-for="el in item.iconList">
+                <span class="item-tag">{{el.iconName}}</span>
               </div>
-              <p class="price">¥1349.9 <span class="through">12349.9</span></p>
-            </div>
-          </div>
-          <div class="item">
-            <div class="goods-img">
-              <img src="" alt="">
-            </div>
-            <div class="goods-info">
-              <div class="country">
-                <img src="" alt="" class="coutry-logo">
-                <span class="brand-name">日本品牌</span>
-              </div>
-              <p class="gods-name lineClamp">
-                <span class="label">国内首发</span>
-                ToBeUs 意大利知名木玩木玩款不一好玩意大利知名木玩木玩款不一好玩意大利知名木玩木玩款不一好玩
-              </p>
-              <div class="tag-list box-flex">
-                <span class="item-tag">新品</span>
-                <span class="item-tag">组合满件免</span>
-              </div>
-              <p class="price">¥1349.9 <span class="through">12349.9</span></p>
-            </div>
-          </div>
-          <div class="item">
-            <div class="goods-img">
-              <img src="" alt="">
-            </div>
-            <div class="goods-info">
-              <div class="country">
-                <img src="" alt="" class="coutry-logo">
-                <span class="brand-name">日本品牌</span>
-              </div>
-              <p class="gods-name lineClamp">
-                <span class="label">国内首发</span>
-                ToBeUs 意大利知名木玩木玩款不一好玩意大利知名木玩木玩款不一好玩意大利知名木玩木玩款不一好玩
-              </p>
-              <div class="tag-list box-flex">
-                <span class="item-tag">新品</span>
-                <span class="item-tag">组合满件免</span>
-              </div>
-              <p class="price">¥1349.9 <span class="through">12349.9</span></p>
-            </div>
-          </div>
-          <div class="item">
-            <div class="goods-img">
-              <img src="" alt="">
-            </div>
-            <div class="goods-info">
-              <div class="country">
-                <img src="" alt="" class="coutry-logo">
-                <span class="brand-name">日本品牌</span>
-              </div>
-              <p class="gods-name lineClamp">
-                <span class="label">国内首发</span>
-                ToBeUs 意大利知名木玩木玩款不一好玩意大利知名木玩木玩款不一好玩意大利知名木玩木玩款不一好玩
-              </p>
-              <div class="tag-list box-flex">
-                <span class="item-tag">新品</span>
-                <span class="item-tag">组合满件免</span>
-              </div>
-              <p class="price">¥1349.9 <span class="through">12349.9</span></p>
+              <p class="price">¥{{item.showPrice}}<span class="through">{{item.hiddenPrice}}</span></p>
             </div>
           </div>
         </div>
