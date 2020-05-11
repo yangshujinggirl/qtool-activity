@@ -36,8 +36,8 @@ $(document).ready(function() {
             window.Qtools.goLogin(null);
           } else {
             this.accesstoken = accesstoken;
-            vm.getData();
-            vm.getProductData();
+            this.getData();
+            this.getProductData();
           }
         },
         goUseCoupon: function(value) {
