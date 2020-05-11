@@ -80,7 +80,7 @@ $(document).ready(function() {
         getData: function () {
             var vm = this;
             vm.isLoading = true;
-            // vm.accesstoken = "6dd6a873be5eec55c3fba2d0786c4e7b"
+            // vm.accesstoken = "92013e64427cda9311f1654e5e4aa176"
             $.ajax({
               url: '/qtoolsApp/newUserGift/area',
               type: 'GET',
@@ -109,7 +109,7 @@ $(document).ready(function() {
         getProductData: function () {
             var vm = this;
             vm.isLoading = true;
-            // vm.accesstoken = "6dd6a873be5eec55c3fba2d0786c4e7b"
+            vm.accesstoken = "92013e64427cda9311f1654e5e4aa176"
             $.ajax({
               url: '/qtoolsApp/newUserGift/spus',
               type: 'GET',
