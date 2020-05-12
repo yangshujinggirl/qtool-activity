@@ -20,11 +20,11 @@ $(document).ready(function() {
         currentItem:{},
         userInfo:{},//信息
         broadcastList:[],//广播信息
-        couponLeve:0,
+        couponLeve:null,
         couponRule:['1','3','8'],
         couponList:[],//优惠券列表
         productList:[],//实物列表
-        productLeve:0,
+        productLeve:null,
         productRule:['1','3','8'],
         inviteInfoList:[],//邀请列表
         lasteList:[],//前4条
@@ -195,6 +195,8 @@ $(document).ready(function() {
                   vm.couponLeve = 1;
                 } else if(invitationActInfo.inviteNum >= 1){
                   vm.couponLeve = 0;
+                } else {
+                  vm.couponLeve = null;
                 }
                 if(invitationActInfo.inviteOrderNum >= 6) {
                   vm.productLeve = 2;
@@ -202,6 +204,8 @@ $(document).ready(function() {
                   vm.productLeve = 1;
                 } else if(invitationActInfo.inviteOrderNum >= 1){
                   vm.productLeve = 0;
+                } else {
+                  vm.productLeve = null;
                 }
                 vm.inviteInfoList = inviteInfoList;
                 vm.lasteList = topHalfData;
