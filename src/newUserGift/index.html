@@ -42,7 +42,7 @@
                 <div class="cou-r">
                   {{item.couponValid}}
                   <p class="goods-type">{{item.spuScope}}</p>
-                  <button type="button" name="button" class="use-btn" v-on:click="goUseCoupon(item)">
+                  <button type="button" name="button" class="use-btn" v-on:click="goUseCoupon(item)" v-if="item.receiveStatus==1">
                     去使用
                   </button>
                 </div>
@@ -63,7 +63,7 @@
       <div class="hotSale-components">
         <p class="title-action">新人热卖榜单</p>
         <div class="goods-list clear">
-          <div class="item" v-for="(item,index) in productList">
+          <div class="item" v-for="(item,index) in productList"  v-on:click="goDetail(item)" >
             <div class="goods-img">
               <img :src="fileDomain+item.mainPicUrl" alt="">
               <img :src="item.iconPath" class="icon-gift" v-if="index<=2"/>
@@ -75,8 +75,8 @@
                 </span>
                 {{item.name}}
               </p>
-              <div class="tag-list box-flex" v-for="el in item.iconList">
-                <span class="item-tag">{{el.iconName}}</span>
+              <div class="tag-list box-flex">
+                <span class="item-tag"  v-for="el in item.iconList">{{el.iconName}}</span>
               </div>
               <p class="price">¥{{item.showPrice}}<span class="through">{{item.hiddenPrice}}</span></p>
             </div>

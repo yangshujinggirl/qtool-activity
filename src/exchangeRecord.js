@@ -23,6 +23,8 @@ $(document).ready(function() {
       mounted() {},
       methods: {
         getAccessToken:function() {
+          // this.accesstoken = 'a417d11ef01771a8afc93187db4af0da';
+          // this.getData();
           window.Qtools.getAccessToken(null);
         },
         showAccessToken:function(accesstoken) {

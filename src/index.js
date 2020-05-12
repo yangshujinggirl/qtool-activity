@@ -46,7 +46,7 @@ $(document).ready(function() {
       mounted() {},
       methods: {
         getAccessToken:function() {
-          // this.accesstoken = '7f3426120292e10d4a9c9b8f637202b2';
+          // this.accesstoken = 'a417d11ef01771a8afc93187db4af0da';
           // this.getData();
           window.Qtools.getAccessToken(null);
         },

@@ -220,21 +220,8 @@
             top: 18px;
           }
         }
-        .country {
-          font-size: 0;
-          margin-bottom: 26px;
-          .coutry-logo {
-            width: 34px;
-            height: 34px;
-          }
-          .brand-name {
-            font-size: 22px;
-            color: #999999;
-            display: inline-block;
-            vertical-align: middle;
-          }
-        }
         .gods-name {
+          height: 70px;
           font-size: 24px;
           line-height: 34px;
           color: #333;
@@ -251,6 +238,7 @@
           }
         }
         .tag-list {
+          height: 40px;
           font-size: 0;
           margin-bottom:4px;
           .item-tag {
@@ -272,6 +260,7 @@
             color: #D3D3D3;
             line-height: 26px;
             text-decoration: line-through;
+            padding-left: 6px;
           }
         }
       }

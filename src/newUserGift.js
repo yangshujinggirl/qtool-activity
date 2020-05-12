@@ -26,7 +26,7 @@ $(document).ready(function() {
       mounted() {},
       methods: {
         getAccessToken:function() {
-          // this.accesstoken = "6cfbb3bb917bceb520ed2e9b70a43f3d";
+          // this.accesstoken = "be7680e8f8e447ca3eab52f4e6acaa19";
           // this.getData();
           // this.getProductData();
           window.Qtools.getAccessToken(null);
@@ -46,6 +46,13 @@ $(document).ready(function() {
             linkInfo: value.linkInfo,
           }))
         },
+        goDetail: function(value) {
+          console.log(value)
+          window.Qtools.goWebPage(JSON.stringify({
+            num:6,
+            pdSpuId:value.pdSpuId,
+          }));
+        },
         getCoupon:function() {
           var vm = this;
           $.ajax({
@@ -63,6 +70,13 @@ $(document).ready(function() {
                 window.location.reload();
               } else if(res.code == '401') {
                 window.Qtools.goLogin(null);
+                return;
+              } else {
+                showToast({
+                  str:res.message,
+                  time: 2000,
+                  position: 'middle'
+                })
                 return;
               }
             },
@@ -97,6 +111,7 @@ $(document).ready(function() {
                   })
                   return;
                 }
+                data = data?data:{};
                 let coupons = data.coupons?data.coupons:[];
                 let index = coupons.findIndex((el)=>el.receiveStatus=='0');
                 if(index == '-1') {
@@ -136,6 +151,7 @@ $(document).ready(function() {
                   })
                   return;
                 }
+                data = data?data:{};
                 let list = data.list?data.list:[];
                 list.map((el,index) => {
                   if(index<=2) {
