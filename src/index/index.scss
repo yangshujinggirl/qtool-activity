@@ -16,19 +16,30 @@ $mainColor:#FDBC28;
   background: url('./imgs/banner.png') left top no-repeat;
   background-size: cover;
   position: relative;
-  .notice-list {
+  .notice-wrap {
+    color: #fff;
     width: 100%;
+    height: 40px;
+    padding-left:140px;
+    background: rgba(0, 0, 0, .4);
+    box-sizing: border-box;
     position: absolute;
     left: 0;
     top: 0;
-    height: 30px;
-    box-sizing: border-box;
+  }
+  .notice-head {
+    position: absolute;
+    left: 0;
+    top: 0;
+    line-height: 40px;
+    padding-left: 20px;
+  }
+  .notice-list {
+    width: 100%;
     overflow: hidden;
-    background: rgba(0, 0, 0, .4);
     .item-notice {
-      color: #fff;
       padding-right: 20px;
-      line-height: 30px;
+      line-height: 40px;
     }
   }
   .wrap {

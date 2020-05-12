@@ -12,7 +12,7 @@
       <meta name="keywords" content="Qtools母婴节">
       <meta name="description" content="Qtools母婴节">
       <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5">
-      <title>邀闺蜜，兑好礼</title>
+      <title>邀好友下单 0元领好物</title>
   </head>
   <body>
     <div id='root' v-cloak>
@@ -45,9 +45,12 @@
             生成海报分享
           </div>
         </div>
-        <marquee  class="notice-list" behavior="behavior" loop="2" v-if="broadcastList.length>0">
-          <span  class="item-notice" v-for="el in broadcastList">{{el.mobile}}刚领取了{{el.presentName}}</span>
-        </marquee>
+        <div class="notice-wrap" v-if="broadcastList.length>0">
+          <marquee  class="notice-list" behavior="behavior" loop="2">
+            <span  class="item-notice" v-for="el in broadcastList">{{el.mobile}}刚领取了{{el.presentName}}</span>
+          </marquee>
+          <span class="notice-head">邀请播报:</span>
+        </div>
       </div>
       <div class="main-components">
         <div class="head-action"> 活动时间：2020.5.20-2020.5.31</div>
