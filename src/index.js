@@ -63,7 +63,7 @@ $(document).ready(function() {
           window.Qtools.goShareApplte(JSON.stringify({
             imageUrl: vm.userInfo.sharePic,
             title: vm.userInfo.shareTitle,
-            path: `pages/pageActivity/inviteUser/inviteUser?B=${vm.userInfo.spShopId}&A=${vm.userInfo.oldUserId}&C=${vm.userInfo.invitationActId}`,
+            path: `pages/pageActivity/newComer/newComer?B=${vm.userInfo.spShopId}&A=${vm.userInfo.oldUserId}&C=${vm.userInfo.invitationActId}`,
             webpageUrl:'https://qtoolsapp-hd.qtoolsbaby.cn/download/'
           }));
         },
