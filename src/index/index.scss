@@ -14,7 +14,7 @@ $mainColor:#FDBC28;
 .part-one-banner {
   height: 917px;
   background: url('./imgs/banner.png') left top no-repeat;
-  background-size: cover;
+  background-size: 100% 100%;
   position: relative;
   .notice-wrap {
     color: #fff;

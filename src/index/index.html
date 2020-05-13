@@ -123,7 +123,7 @@
                 <span class="out-circle">
                   <span class="inner-circle">领</span>
                 </span>
-                <span class="pro-text">邀请{{item}}人注册</span>
+                <span class="pro-text">邀请{{item}}人下单</span>
               </div>
             </div>
           </div>
@@ -132,11 +132,11 @@
           <div class="title-action"> 本期邀请 </div>
           <div class="invit-list" v-if="inviteInfoList.length>0">
               <div class="item box-flex" v-for="item in lasteList">
-                <div class=""> {{item.mobile}}绑定手机号</div>
+                <div class=""> {{item.mobile}}{{item.type==2?'下单成功':'绑定手机号'}}</div>
                 <div class=""> {{item.recordTime}} </div>
               </div>
               <div class="item box-flex" v-for="item in botHalfList" v-if="isUp">
-                <div class=""> {{item.mobile}}绑定手机号</div>
+                <div class=""> {{item.mobile}}{{item.type==2?'下单成功':'绑定手机号'}}</div>
                 <div class=""> {{item.recordTime}} </div>
               </div>
             <div class="more" v-on:click="toggleList">
