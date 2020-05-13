@@ -189,20 +189,23 @@ $(document).ready(function() {
                 })
                 let topHalfData = inviteInfoList.slice(0,4);
                 let botHalfData = inviteInfoList.slice(4);
-                if(invitationActInfo.inviteNum >= 8) {
+                let couponRule = vm.couponRule;
+                let productRule = vm.productRule;
+
+                if(invitationActInfo.inviteNum >= couponRule[2]) {
                   vm.couponLeve = 2;
-                } else if(invitationActInfo.inviteNum >= 3) {
+                } else if(invitationActInfo.inviteNum >= couponRule[1]) {
                   vm.couponLeve = 1;
-                } else if(invitationActInfo.inviteNum >= 1){
+                } else if(invitationActInfo.inviteNum >= couponRule[0]){
                   vm.couponLeve = 0;
                 } else {
                   vm.couponLeve = null;
                 }
-                if(invitationActInfo.inviteOrderNum >= 6) {
+                if(invitationActInfo.inviteOrderNum >= productRule[2]) {
                   vm.productLeve = 2;
-                } else if(invitationActInfo.inviteOrderNum >= 3) {
+                } else if(invitationActInfo.inviteOrderNum >= productRule[1]) {
                   vm.productLeve = 1;
-                } else if(invitationActInfo.inviteOrderNum >= 1){
+                } else if(invitationActInfo.inviteOrderNum >= productRule[0]){
                   vm.productLeve = 0;
                 } else {
                   vm.productLeve = null;
