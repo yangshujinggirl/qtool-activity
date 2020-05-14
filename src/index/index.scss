@@ -180,13 +180,17 @@ $mainColor:#FDBC28;
         position: relative;
         .process-line {
           height: 16px;
+          line-height: 16px;
+          font-size: 22px;
+          color: #fff;
+          text-align: right;
           background: #DB6E56;
           border-radius: 16px;
           position: absolute;
           left: 0;
           top: 0;
           &.step0 {
-            width: 16%;
+            width: 10%;
           }
           &.step1 {
             width: 50%;
@@ -194,19 +198,24 @@ $mainColor:#FDBC28;
           &.step2 {
             width: 100%;
           }
+          &.step3{
+            width: 26%;
+          }
+          &.step4 {
+            width: 70%;
+          }
         }
         .circle-wrap {
-          width: 140px;
           position: absolute;
-          left: 20px;
+          left: 10%;
           top: 50%;
           transform: translateY(-50%);
           &.process1 {
-            left: 250px;
+            left: 50%;
           }
           &.process2 {
             left: auto;
-            right: 0px;
+            right: 10%;
           }
           &.activity {
             .out-circle {
@@ -239,7 +248,7 @@ $mainColor:#FDBC28;
         }
         .pro-text {
           color: #200000;
-          width: 100%;
+          width: 140px;
           position: absolute;
           left: 50%;
           bottom: -40px;

@@ -78,7 +78,7 @@
           </div>
           <div class="share-process">
             <div class="wrap">
-              <span class="process-line" v-bind:class="`step${couponLeve}`"></span>
+              <span class="process-line" v-bind:class="`step${couponLeve}`">{{userInfo.inviteNum}}</span>
               <div
                 class="circle-wrap"
                 v-for="(item,index) in couponRule"
@@ -115,7 +115,7 @@
           </div>
           <div class="share-process">
             <div class="wrap">
-              <span class="process-line" v-bind:class="`step${productLeve}`"></span>
+              <span class="process-line" v-bind:class="`step${productLeve}`">{{userInfo.inviteOrderNum}}</span>
               <div
                 class="circle-wrap"
                 v-for="(item,index) in productRule"

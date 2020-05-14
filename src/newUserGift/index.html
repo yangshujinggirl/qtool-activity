@@ -67,6 +67,7 @@
             <div class="goods-img">
               <img :src="fileDomain+item.mainPicUrl" alt="">
               <img :src="item.iconPath" class="icon-gift" v-if="index<=2"/>
+              <div class="sellingPoints">券后价:{{item.sellingPoints}}</div>
             </div>
             <div class="goods-info">
               <p class="gods-name lineClamp">
