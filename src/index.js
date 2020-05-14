@@ -108,21 +108,21 @@ $(document).ready(function() {
           this.visibleCover = true;
         },
         //确定领取
-        confirmExchange: function(value) {
+        confirmExchange: function() {
            var vm = this;
-           var data = {
+           var params = {
              accesstoken:vm.accesstoken,
              invitationActId:vm.userInfo.invitationActId,
              presentId:vm.currentItem.presentId,
            };
-           data = JSON.stringify(data);
+           params = JSON.stringify(params);
            $.ajax({
              url: '/qtoolsApp/invitation/exchange/coupon',
              type: 'POST',
              headers:{
                "Content-Type":"application/json;charset=utf-8",
              },
-             data:data,
+             data:params,
              dataType:'json',
              success:function(res) {
                vm.visibleOne = false;
@@ -131,7 +131,7 @@ $(document).ready(function() {
                if(gainResult != '1') {
                  vm.visibleTwo = true;
                } else {
-                 vm.currentItem=data;
+                 vm.currentItem={...vm.currentItem,...data};
                  vm.visibleThr = true;
                }
              },
@@ -141,12 +141,12 @@ $(document).ready(function() {
            })
         },
         goUseCoupon: function(value) {
-          this.onCancel('visibleThr')
           let vm =this;
           window.Qtools.goCouponUseStyle(JSON.stringify({
             linkInfoType: vm.currentItem.linkInfoType,
             linkInfo: vm.currentItem.linkInfo,
-          }))
+          }));
+          // this.onCancel('visibleThr')
         },
         goRuleModal:function(value) {
           this.visibleRule = value;

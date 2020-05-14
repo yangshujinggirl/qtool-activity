@@ -219,6 +219,23 @@
             left: 18px;
             top: 18px;
           }
+          .sellingPoints {
+            text-align: center;
+            width: 120px;
+            height:70px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            font-size: 22px;
+            line-height: 34px;
+            color: #fff;
+            background: url('./imgs/icon_sell.png') left top no-repeat;
+            background-size: cover;
+            overflow: hidden;
+            .money {
+              font-size: 30px;
+            }
+          }
         }
         .gods-name {
           height: 70px;

@@ -15,7 +15,11 @@ $(document).ready(function() {
         isLoading:false,
         isShowBtn:true,
         couponList:[],
-        productList:[]
+        productList:[
+          {
+            sellingPoints:'120'
+          }
+        ]
       },
       created() {
         this.getAccessToken();
@@ -26,7 +30,7 @@ $(document).ready(function() {
       mounted() {},
       methods: {
         getAccessToken:function() {
-          // this.accesstoken = "44bcd6029bec75b9380f8e922e3ce2ed";
+          // this.accesstoken = "facf6e5dd273664c75eeccbf819fcd34";
           // this.getData();
           // this.getProductData();
           window.Qtools.getAccessToken(null);
