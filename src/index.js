@@ -21,12 +21,12 @@ $(document).ready(function() {
         userInfo:{},//信息
         broadcastList:[],//广播信息
         couponLeve:null,
-        couponRuleWidth:0,
+        couponLeveWidth:null,
         couponRule:['1','3','8'],
         couponList:[],//优惠券列表
         productList:[],//实物列表
         productLeve:null,
-        productRuleWidth:0,
+        productLeveWidth:null,
         productRule:['1','3','8'],
         inviteInfoList:[],//邀请列表
         lasteList:[],//前4条
@@ -202,33 +202,41 @@ $(document).ready(function() {
 
                 if(invitationActInfo.inviteNum >= couponRule[2]) {
                   vm.couponLeve = 2;
+                  vm.couponLeveWidth = 2;
                 } else if(invitationActInfo.inviteNum >= couponRule[1]) {
                   vm.couponLeve = 1;
+                  vm.couponLeveWidth = 1;
                   if(invitationActInfo.inviteNum > couponRule[1]) {
-                    vm.couponLeve = 4;
+                    vm.couponLeveWidth = 4;
                   }
                 } else if(invitationActInfo.inviteNum >= couponRule[0]){
+                  vm.couponLeveWidth = 0;
                   vm.couponLeve = 0;
                   if(invitationActInfo.inviteNum > couponRule[0]) {
-                    vm.couponLeve = 3;
+                    vm.couponLeveWidth = 3;
                   }
                 } else {
                   vm.couponLeve = null;
+                  vm.couponLeveWidth = null;
                 }
                 if(invitationActInfo.inviteOrderNum >= productRule[2]) {
                   vm.productLeve = 2;
+                  vm.productLeveWidth = 2;
                 } else if(invitationActInfo.inviteOrderNum >= productRule[1]) {
                   vm.productLeve = 1;
+                  vm.productLeveWidth = 1;
                   if(invitationActInfo.inviteOrderNum > productRule[1]) {
-                    vm.productLeve = 4;
+                    vm.productLeveWidth = 4;
                   }
                 } else if(invitationActInfo.inviteOrderNum >= productRule[0]){
                   vm.productLeve = 0;
+                  vm.productLeveWidth = 0;
                   if(invitationActInfo.inviteOrderNum > productLeve[0]) {
-                    vm.productLeve = 3;
+                    vm.productLeveWidth = 3;
                   }
                 } else {
                   vm.productLeve = null;
+                  vm.productLeveWidth = null;
                 }
                 vm.inviteInfoList = inviteInfoList;
                 vm.lasteList = topHalfData;
