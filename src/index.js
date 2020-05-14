@@ -197,9 +197,6 @@ $(document).ready(function() {
                 invitationActInfo.inviteNum = invitationActInfo.inviteNum?invitationActInfo.inviteNum:0;
                 invitationActInfo.inviteOrderNum = invitationActInfo.inviteOrderNum?invitationActInfo.inviteOrderNum:0;
 
-                invitationActInfo.inviteNum = 4
-                invitationActInfo.inviteOrderNum = 4
-
                 if(invitationActInfo.inviteNum >= couponRule[2]) {
                   vm.couponLeve = 2;
                   vm.couponLeveWidth = 2;
