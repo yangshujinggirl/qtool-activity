@@ -146,7 +146,7 @@ $(document).ready(function() {
             linkInfoType: vm.currentItem.linkInfoType,
             linkInfo: vm.currentItem.linkInfo,
           }));
-          // this.onCancel('visibleThr')
+          this.onCancel('visibleThr')
         },
         goRuleModal:function(value) {
           this.visibleRule = value;
