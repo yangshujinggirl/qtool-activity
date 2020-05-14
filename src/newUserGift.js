@@ -15,11 +15,7 @@ $(document).ready(function() {
         isLoading:false,
         isShowBtn:true,
         couponList:[],
-        productList:[
-          {
-            sellingPoints:'120'
-          }
-        ]
+        productList:[]
       },
       created() {
         this.getAccessToken();
