@@ -51,6 +51,7 @@
           </marquee>
           <span class="notice-head">邀请播报:</span>
         </div>
+        <div class="rule-btn-re" v-on:click="goRuleModal(true)">活动规则</div>
       </div>
       <div class="main-components">
         <div class="head-action"> 活动时间：2020.5.20-2020.5.31</div>
@@ -80,7 +81,7 @@
           </div>
           <div class="share-process">
             <div class="wrap">
-              <span class="process-line" v-bind:class="`step${couponLeveWidth}`">{{userInfo.inviteNum}}</span>
+              <span class="process-line" v-bind:class="`step${couponLeveWidth}`" v-if="userInfo.inviteNum > 0">{{userInfo.inviteNum}}</span>
               <div
                 class="circle-wrap"
                 v-for="(item,index) in couponRule"
@@ -117,7 +118,7 @@
           </div>
           <div class="share-process">
             <div class="wrap">
-              <span class="process-line" v-bind:class="`step${productLeveWidth}`">{{userInfo.inviteOrderNum}}</span>
+              <span class="process-line" v-bind:class="`step${productLeveWidth}`" v-if="userInfo.inviteOrderNum > 0">{{userInfo.inviteOrderNum}}</span>
               <div
                 class="circle-wrap"
                 v-for="(item,index) in productRule"
@@ -150,7 +151,7 @@
           </div>
         </div>
       </div>
-      <div class="rule-btn-re" v-on:click="goRuleModal(true)">活动规则</div>
+
       <div class="cover-mask"  v-show="visibleCover"></div>
       <div class="rule-modal modal-common" v-show="visibleRule">
         <p class="modal-title">活动规则</p>
