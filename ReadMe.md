@@ -10,16 +10,14 @@ window.Qtools.[method](params/null);
 	method: getAccessToken;
 	js回调名：showAccessToken；
 
-	IOS:
 		调用window.Qtools.getAccessToken(null);
-		ios调用js回调函数，接收iOS返回的token；
+		调用js回调函数，接收iOS返回的token；
 
 		var token;
 		window.Qtools.getAccessToken(null);//不直接返回字符串，需要用回调接收；
 		function showAccessToken(accessToken) {
 			token = accessToken;
 		}
-	Androin:	token = window.Qtools.getAccessToken(null);
 
 1、调用原生分享页面
 
