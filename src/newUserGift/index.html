@@ -40,8 +40,10 @@
                   <p>满{{item.couponFullAmount}}元可用</p>
                 </div>
                 <div class="cou-r">
+                  <div class="cor-wrap">
                   {{item.couponValid}}
                   <p class="goods-type">{{item.spuScope}}</p>
+                  </div>
                   <button type="button" name="button" class="use-btn" v-on:click="goUseCoupon(item)" v-if="item.receiveStatus==1">
                     去使用
                   </button>

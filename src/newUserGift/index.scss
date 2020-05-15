@@ -117,6 +117,11 @@
           padding: 32px 0 0 16px;
           box-sizing: border-box;
           position: relative;
+          .cor-wrap {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+          }
           .goods-type {
             font-weight: bold;
             margin-top: 8px;
@@ -145,7 +150,7 @@
           box-sizing: border-box;
           line-height: 75px;
           color: #fff;
-          font-size: 24px;
+          font-size: 32px;
           background: url('./imgs/icon_btn1.png') left top no-repeat;
           background-size: cover;
           position: absolute;
@@ -192,7 +197,7 @@
       text-align: left;
       padding: 0 32px 34px;
       .item {
-        width: 320px;
+        width: 49%;
         float: right;
         border-radius:16px;
         background: #fff;
@@ -225,7 +230,7 @@
             height:70px;
             position: absolute;
             bottom: 0;
-            left: 0;
+            left: 18px;
             font-size: 22px;
             line-height: 34px;
             color: #fff;

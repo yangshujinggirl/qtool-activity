@@ -48,7 +48,7 @@ $(document).ready(function() {
       mounted() {},
       methods: {
         getAccessToken:function() {
-          // this.accesstoken = '4ad9f107cb9c003a0db2ae76013d5ab2';
+          // this.accesstoken = 'c1827a930b38a9b5ddb4c10c4e9b6ba4';
           // this.getData();
           window.Qtools.getAccessToken(null);
         },
@@ -228,7 +228,7 @@ $(document).ready(function() {
                 } else if(invitationActInfo.inviteOrderNum >= productRule[0]){
                   vm.productLeve = 0;
                   vm.productLeveWidth = 0;
-                  if(invitationActInfo.inviteOrderNum > productLeve[0]) {
+                  if(invitationActInfo.inviteOrderNum > productRule[0]) {
                     vm.productLeveWidth = 3;
                   }
                 } else {

@@ -26,7 +26,7 @@ $(document).ready(function() {
       mounted() {},
       methods: {
         getAccessToken:function() {
-          // this.accesstoken = "facf6e5dd273664c75eeccbf819fcd34";
+          // this.accesstoken = "c1827a930b38a9b5ddb4c10c4e9b6ba4";
           // this.getData();
           // this.getProductData();
           window.Qtools.getAccessToken(null);
