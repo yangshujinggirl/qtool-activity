@@ -144,7 +144,7 @@
                 <div class=""> {{item.mobile}}{{item.type==2?'下单成功':'绑定手机号'}}</div>
                 <div class=""> {{item.recordTime}} </div>
               </div>
-            <div class="more" v-on:click="toggleList">
+            <div class="more" v-on:click="toggleList" v-if="botHalfList.length>0">
               <span class="text">查看更多</span>
               <img src="./imgs/icon_open.png" alt="" class="icon-more">
             </div>
