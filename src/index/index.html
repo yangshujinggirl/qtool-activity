@@ -131,7 +131,9 @@
           </div>
         </div>
         <div class="part-four part-same">
-          <div class="title-action"> 本期邀请 </div>
+          <div class="title-wrap">
+            <div class="title-action"> 本期邀请 </div>
+          </div>
           <div class="invit-list" v-if="inviteInfoList.length>0">
               <div class="item box-flex" v-for="item in lasteList">
                 <div class=""> {{item.mobile}}{{item.type==2?'下单成功':'绑定手机号'}}</div>
