@@ -215,6 +215,7 @@ $mainColor:#FDBC28;
           transform: translateY(-50%);
           &.process1 {
             left: 50%;
+            transform: translate(-50%,-50%);
           }
           &.process2 {
             left: auto;
