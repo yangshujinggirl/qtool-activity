@@ -174,7 +174,8 @@ module.exports = {
       '/qtoolsApp': {
         // target: 'http://192.168.2.35:8214/',
         // target: 'http://192.168.2.32:8214',
-        target: 'http://192.168.2.8:8214',
+        // target: 'http://192.168.2.8:8214',
+        target: 'http://qtoolsapp.qtoolsbaby.cn',//线上
         pathRewrite: {"^/qtoolsApp" : ""},
         changeOrigin: true,
       },
