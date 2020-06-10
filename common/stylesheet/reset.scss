@@ -15,7 +15,7 @@
 }
 
 html {
-  font-family             : 'Helvetica Neue', Helvetica, Arial, 'PingFang SC', 'Hiragino Sans GB', 'Heiti SC', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
+  font-family             :'Helvetica Neue',  'PingFangSC-Light', Helvetica, Arial, 'Hiragino Sans GB', 'Heiti SC', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
   -ms-text-size-adjust    : 100%;
   -webkit-text-size-adjust: 100%;
   font-size               : 100px;
@@ -148,7 +148,6 @@ samp {
   font-size  : 1em;
 }
 
-button,
 input,
 optgroup,
 select,
@@ -159,10 +158,12 @@ textarea {
 }
 
 button {
-  overflow: visible;
-  border: none;
-  background: none;
+
+  border: 0;
+  background: transparent;
   outline: none;
+  padding: 0;
+  margin: 0;
 }
 
 button,
@@ -170,13 +171,12 @@ select {
   text-transform: none;
 }
 
-button,
-html input[type="button"],
-input[type="reset"],
-input[type="submit"] {
-  -webkit-appearance: button;
-  cursor            : pointer;
-}
+// button,
+// html input[type="button"],
+// input[type="reset"],
+// input[type="submit"] {
+//   -webkit-appearance: button;
+// }
 
 button[disabled],
 html input[disabled] {
@@ -186,6 +186,7 @@ html input[disabled] {
 button::-moz-focus-inner,
 input::-moz-focus-inner {
   border : 0;
+  outline: none;
   padding: 0;
 }
 
@@ -246,14 +247,6 @@ th {
   padding: 0;
 }
 
-button,
-html,
-input,
-select,
-textarea {
-  /* font-family: "Helvetica Neue", Helvetica, STHeiTi, Arial, sans-serif;*/
-}
-
 blockquote,
 figure,
 form,
@@ -312,13 +305,31 @@ textarea::-webkit-input-placeholder {
 img {
   width: 100%;
 }
-
+.lineClamp {
+   text-overflow: -o-ellipsis-lastline;
+   overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-line-clamp: 2;
+   line-clamp: 2;
+   -webkit-box-orient: vertical;
+ }
 .clear:after {
   content   : '';
   height    : 0;
   display   : block;
   visibility: hidden;
   clear     : both;
+}
+.loading-status {
+  width: 100%;
+  height: 100%;
+  background: url('../imgs/loading.gif') center no-repeat,rgba(0,0,0,.3);
+  background-size: 113px 100px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 99999;
 }
 .cover-mask {
   width: 100%;
@@ -341,20 +352,14 @@ img {
   transform: translate(-50%,-50%);
   z-index: 4;
   text-align: center;
-  // display: none;
 }
 [v-cloak] {
   display: none;
 }
-//
-// .fl {
-//   float: left;
-// }
-//
-// .fr {
-//   float: right;
-// }
-
+//toast样式
+.show-toast {
+  font-size: 24px!important;
+}
 .ellipsis {
   white-space  : nowrap;
   text-overflow: ellipsis;
@@ -384,28 +389,4 @@ img {
 .flex-align-center {
   display    : flex;
   align-items: center;
-}
-
-.f1 {
-  flex   : 1;
-  display: block;
-  width  : 0;
-}
-
-.f2 {
-  flex   : 2;
-  display: block;
-  width  : 0;
-}
-
-.f3 {
-  flex   : 3;
-  display: block;
-  width  : 0;
-}
-
-.f4 {
-  flex   : 4;
-  display: block;
-  width  : 0;
 }

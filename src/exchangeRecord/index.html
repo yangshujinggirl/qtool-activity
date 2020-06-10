@@ -1,0 +1,39 @@
+<html>
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="Content-Type" content="text/html; charset=GBK">
+      <meta name="author" content="www.lingtouniao.com">
+      <meta http-equiv="cleartype" content="on">
+      <meta name="apple-mobile-web-app-capable" content="yes">
+      <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+      <meta name="format-detection" content="telephone=no">
+      <meta http-equiv="Expires" content="-1">
+      <meta http-equiv="Cache-Control" content="no-cache">
+      <meta name="keywords" content="Qtools母婴节">
+      <meta name="description" content="Qtools母婴节">
+      <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5">
+      <title>领取记录</title>
+  </head>
+  <body>
+    <div id='root' v-cloak class="exchange-pages">
+      <div class="loading-status" v-if="isLoading"></div>
+      <div class="content-wrap">
+        <ul class="gift-list"  v-if="productList.length>0">
+          <li class="item" v-for="item in productList" v-on:click="goDetail(item)">
+            <div class="fl-l">
+              <img :src="fileDomain+item.pic" alt="">
+            </div>
+            <div class="fl-r">
+              <p class="title">{{item.name}}</p>
+              <div class="bottom-part">{{item.createTime}}</div>
+            </div>
+          </li>
+        </ul>
+        <div class="noData" v-else>
+          <img src="./imgs/icon_nodata.png" alt="">
+          <p class="txt">暂无数据</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

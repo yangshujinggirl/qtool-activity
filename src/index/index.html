@@ -12,105 +12,191 @@
       <meta name="keywords" content="Qtools母婴节">
       <meta name="description" content="Qtools母婴节">
       <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5">
-      <title>Qtools母婴节」邀约闺蜜，双重奖励</title>
+      <title>邀好友下单 0元领好物</title>
   </head>
   <body>
     <div id='root' v-cloak>
-      <div class="banner">
-        <img src="./imgs/banner.jpg" alt="">
+      <div class="loading-status" v-if="isLoading"></div>
+      <div class="part-one-banner" id="shareAction">
+        <div class="wrap">
+          <div class="box-flex share-step">
+            <div class="item">
+              <span class="step">1</span>
+              <span class="text">发起邀请</span>
+              <span class="icon-arrow"></span>
+            </div>
+            <div class="item">
+              <span class="step">2</span>
+              <span class="text">好友7天内下单成功</span>
+              <span class="icon-arrow"></span>
+            </div>
+            <div class="item">
+              <span class="step">3</span>
+              <span class="text">0元领好物</span>
+            </div>
+
+          </div>
+          <button type="button" name="button" class="share-btn" v-on:click="goShareApplte">
+            <img src="./imgs/icon_wx.png" alt="" class="icon-wx">
+            立即邀请好友
+          </button>
+          <div class="img-share" v-on:click="goShareWx">
+            <img src="./imgs/icon_share.png" alt="" class="icon-share">
+            生成海报分享
+          </div>
+        </div>
+        <div class="notice-wrap" v-if="broadcastList.length>0">
+          <marquee  class="notice-list" behavior="behavior" loop="2">
+            <span  class="item-notice" v-for="el in broadcastList">{{el.mobile}}刚领取了{{el.presentName}}</span>
+          </marquee>
+          <span class="notice-head">邀请播报:</span>
+        </div>
+        <div class="rule-btn-re" v-on:click="goRuleModal(true)">活动规则</div>
       </div>
-      <div class="part-redbox" id="shareAction">
-        <div class="redbox-content">
-          <div class="redbox-title">邀请好友 >好友绑定手机号 >获得Q兔徽章 >兑换超赞好物</div>
-          <button type="button" name="button" class="share-btn" v-on:click="goShareApplte">立即邀请好友</button>
-          <div class="share-btn-list">
-            <p class="fl fl-l" v-on:click="goShareWx"><span class="bot-line">分享到朋友圈</span></p>
-            <p class="fl fl-r" v-on:click="gosharePtP(true)"><span class="bot-line">面对面邀请</span></p>
+      <div class="main-components">
+        <div class="head-action"> 活动时间：2020.6.1-2020.6.30</div>
+        <div class="part-two-coupon part-same">
+          <div class="title-wrap">
+            <p class="title-action"> 好友注册领超值券 </p>
+          </div>
+          <div class="box-flex coupon-list">
+            <div class="item" v-for="item in couponList">
+              <div class="top-text">
+                <p>¥ <span class="money">{{item.couponAmount}}</span></p>
+                <p>满{{item.couponDiscountStr}}元使用</p>
+              </div>
+              <div class="bottom-action">
+                <button
+                  type="button"
+                  name="button"
+                  class="btn"
+                  v-on:click="goExchange(item,'1')"
+                  v-bind:disabled="item.gainStatus!=2"
+                  v-bind:class="{ disabled: item.gainStatus!=2 }">
+                  {{item.gainStatusStr}}
+                </button>
+                <p>{{item.couponValidStr}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="share-process">
+            <div class="wrap">
+              <span class="process-line" v-bind:class="`step${couponLeveWidth}`" v-if="userInfo.inviteNum > 0">{{userInfo.inviteNum}}</span>
+              <div
+                class="circle-wrap"
+                v-for="(item,index) in couponRule"
+                v-bind:class="[`process${index}`,{ activity: couponLeve == index}]">
+                <span class="out-circle">
+                  <span class="inner-circle">领</span>
+                </span>
+                <span class="pro-text">邀请{{item}}人注册</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="part-thr-goods part-same">
+          <div class="title-wrap">
+            <p class="title-action"> 好友下单0元领好物 </p>
+            <p class="record-btn" v-on:click="goGiftPage"> 领取记录 ></p>
+          </div>
+          <div class="box-flex goods-list">
+            <div class="item" v-for="(item,index) in productList">
+              <div class="top-goods">
+                <img :src="fileDomain+item.pic" alt="">
+                <span class="qty" v-if="item.remainQty < item.warningQty">剩{{item.remainQty}}件</span>
+              </div>
+              <button
+                type="button"
+                name="button"
+                v-on:click="goExchange(item,'2')"
+                class="bottom-action"
+                v-bind:disabled="item.gainStatus!=2"
+                v-bind:class="{ disabled: item.gainStatus!=2 }">
+                {{item.gainStatusStr}}
+              </button>
+            </div>
+          </div>
+          <div class="share-process">
+            <div class="wrap">
+              <span class="process-line" v-bind:class="`step${productLeveWidth}`" v-if="userInfo.inviteOrderNum > 0">{{userInfo.inviteOrderNum}}</span>
+              <div
+                class="circle-wrap"
+                v-for="(item,index) in productRule"
+                v-bind:class="[`process${index}`,{ activity: productLeve == index}]">
+                <span class="out-circle">
+                  <span class="inner-circle">领</span>
+                </span>
+                <span class="pro-text">邀请{{item}}人下单</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="part-four part-same">
+          <div class="title-wrap">
+            <div class="title-action"> 本期邀请 </div>
+          </div>
+          <div class="invit-list" v-if="inviteInfoList.length>0">
+              <div class="item box-flex" v-for="item in lasteList">
+                <div class=""> {{item.mobile}}{{item.type==2?'下单成功':'绑定手机号'}}</div>
+                <div class=""> {{item.recordTime}} </div>
+              </div>
+              <div class="item box-flex" v-for="item in botHalfList" v-if="isUp">
+                <div class=""> {{item.mobile}}{{item.type==2?'下单成功':'绑定手机号'}}</div>
+                <div class=""> {{item.recordTime}} </div>
+              </div>
+            <div class="more" v-on:click="toggleList" v-if="botHalfList.length>0">
+              <span class="text">查看更多</span>
+              <img src="./imgs/icon_open.png" alt="" class="icon-more">
+            </div>
           </div>
         </div>
       </div>
-      <div class="part-same">
-        <div class="part-head">
-          <span class="item">当前Q兔徽章</span>
+
+      <div class="cover-mask"  v-show="visibleCover"></div>
+      <div class="rule-modal modal-common" v-show="visibleRule">
+        <p class="modal-title">活动规则</p>
+        <div class="modal-content scroll-content">
+          <p class="rule-item highTitle activityTime">本期活动时间：2020.6.1-2020.6.30</p>
+          <p class="rule-item highTitle">邀请规则</p>
+          <p class="rule-item">1、在活动期内，用户可在该页面发起邀请，好友点击你的链接或码接受邀请，手机号注册后则算邀请成功</p>
+          <p class="rule-item">领券规则</p>
+          <p class="rule-item">2、在活动期内，成功邀请新好友完成注册可领取优惠券奖励</p>
+          <p class="rule-item">3、每张优惠券具体的适用范围与有效期可前往优惠券中心查看详情</p>
+          <p class="rule-item">0元兑规则</p>
+          <p class="rule-item">4、在活动期内，被邀请的好友在注册后7天内在Qtools小程序/APP成功下单，可免费领取商品，好友下单数累计达到可兑换商品的数量时，可在该页面进行领取</p>
+          <p class="rule-item">5、若到活动截止期，被邀请好友仍未下单，则该邀请人下单无法累计到下一期</p>
+          <p class="rule-item">其他规则</p>
+          <p class="rule-item">6、在当期活动结束后，可领取的优惠券或商品尚未领取成功，则该奖励自动失效，请注意及时领取奖励</p>
+          <p class="rule-item">7、同一个手机号注册视为一个新客，若被邀请用户已在Qtools任一渠道（线下门店、APP、小程序）注册过，则不计入本次有效邀请</p>
+          <p class="rule-item">8、若出现任何不正当手段获取奖励，经Qtools平台核实后，Qtools有权取消用户参与本次活动的资格，同时有权撤销违规交易，并收回活动中已发放的奖励，同时追究相关法律责任</p>
         </div>
-        <div class="part-content">
-          <div class="ac-left">
-            <div class="top-cover">
-              <span class="ite badge-ite">
-                <img src="./imgs/badge.png" alt="">
-              </span>
-              <span class="ite big-num" v-if="totalBadges!=0">{{totalBadges}}</span>
-              <span class="ite" v-else>还没徽章哦</span>
-            </div>
-          </div>
-          <div class="ac-right" v-on:click="goGiftPage" v-if="totalBadges!=0">立即兑换好物 >></div>
-          <div class="ac-right" v-on:click="goGiftPage">看看神秘好物 >></div>
+        <div class="modal-footer" v-on:click="goRuleModal(false)">明白了</div>
+      </div>
+      <div class="confirm-modal modal-common" v-show="visibleOne">
+        <p class="modal-title">兑换确认</p>
+        <p class="modal-content">您要领取此优惠券么</p>
+        <div class="modal-footer">
+          <p class="item" v-on:click="onCancel('visibleOne')">暂不领取</p>
+          <p class="item" v-on:click="confirmExchange">我要领取</p>
         </div>
       </div>
-      <div class="part-same part-share">
-        <div class="part-head">
-          <span class="item">我的邀请</span>
+      <div class="modal-error modal-common" v-show="visibleTwo">
+        <div class="modal-content">
+          优惠券剩余数量不足
+          哎呀，来晚了一步，优惠券已领完,看看其他可领取的好物吧
         </div>
-        <div class="no-share"  v-if="userList.length==0">
-          暂无邀请好友，赶快点击邀请赢取Q兔徽章哦
-          <p class="btn-wrap">
-            <a href="#shareAction">
-              <button type="button" name="button" class="go-share">立即邀请</button>
-            </a>
-          </p>
+        <div class="modal-footer" v-on:click="onCancel('visibleTwo')">
+          去看看
         </div>
-        <ul class="share-data-list" v-else>
-          <li class="share-item" v-for="(item,index) in userList">
-            <div class="flex-l">
-              <img :src="item.weiXinPic" alt="">
-            </div>
-            <div class="flex-r">
-              <p>{{ item.createTime }} {{item.mobile}}</p>
-              <p class="row-two">获得<span class="highlight">{{ item.badgeQty }}</span>个Q兔徽章</p>
-            </div>
-          </li>
-          <li class="share-item" v-for="(item,index) in botHalfData" v-if="isUp">
-            <div class="flex-l">
-              <img :src="item.weiXinPic" alt="">
-            </div>
-            <div class="flex-r">
-              <p>{{ item.createTime }} {{item.mobile}}</p>
-              <p class="row-two">获得<span class="highlight">{{ item.badgeQty }}</span>个Q兔徽章</p>
-            </div>
-          </li>
-          <li class="handle-item" v-if="botHalfData.length>0">
-            <span class="icon-handle" v-on:click="toggleList">
-              <label class="handle-text">{{isUp?'收起':'展开'}}</label>
-              <span v-bind:class="['icon-arrow',(isUp?'bot-arrow':'up-arrow')]"></span>
-            </span>
-          </li>
-        </ul>
       </div>
-      <div class="rule-part">
-        <h2 class="rule-title">活动规则</h2>
-        <p class="rule-item">1. 活动时间：2019.5.13 0:00 - 2019.6.2 24:00</p>
-        <p class="rule-item">
-          2. 活动对象：Qtools未注册新用户与已注册老用户均可参加 3. 用户可通过邀请好友/分享到朋友圈/面对面邀请等任一方式邀请好友前来加入活动；
-        </p>
-        <p class="rule-item">4. 新用户扫描小程序码进入小程序并成功绑定手机号则视为邀请成功；</p>
-        <p class="rule-item">5. 根据成功邀请的好友人数，随机获得Q兔徽章；</p>
-        <p class="rule-item">6. Q兔徽章可兑换超值优惠券和精美母婴好物</p>
-      </div>
-      <footer>
-        <div class="logo-wrap">
-          <img src="./imgs/logo.png" alt="qtools">
-        </div>
-      </footer>
-      <div class="cover-mask"  v-show="visible" v-on:click="gosharePtP(false)">
-        <div class="modal-share">
-          <div class="top-title">
-            <img :src="userInfo.userPic" alt="">
+      <div class="modal-success modal-common" v-show="visibleThr">
+        <div class="modal-title">领取成功</div>
+        <div class="modal-content">
+          <div class="exchange-info">
+            你已成功兑换“满{{currentItem.couponDiscountStr}}减{{currentItem.couponAmount}}”优惠券赶快去使用吧
           </div>
-          <div class="middle-content">
-            <img :src="userInfo.codePath" alt="">
-          </div>
-          <div class="bottom-tips">邀请好友扫描此二维码，<br/>授权绑定手机号即可获得积分哦</div>
         </div>
+        <button type="button" name="button" class="use-btn" v-on:click="goUseCoupon">去使用</button>
       </div>
     </div>
   </body>

@@ -59,7 +59,7 @@ switch (process.env.NODE_ENV) {
       env.lib_env = 'development';
       break;
     case 'production':
-      env.path = `./dist/${pkg.actName}/`;
+      env.path = `./dist/qtoolsActivity/${pkg.actName}/`;
       env.publicPath = './';
       env.cssFileName = '[name].css';
       env.jsFileName = '[name].js';
@@ -82,7 +82,7 @@ for(let key in Entry.entry) {
       template:`${pagePath}/${key}/index.html`,
       // template:`./src/index.html`,
       filename:`${env.htmlFilePath}${key}.html`,
-      chunks:['common','vendor',key],
+      chunks:['common',key],
       hash:true
     }))
   }
@@ -156,7 +156,11 @@ module.exports = {
       use:[{
         loader:'url-loader',
         options:{
+<<<<<<< HEAD
           limit:10000,
+=======
+          limit:8192,
+>>>>>>> 20200531_ChildrensDay
           name: env.imgFileName,
           publicPath: env.publicPath
         }
@@ -173,15 +177,15 @@ module.exports = {
   optimization: {
     splitChunks: {
       cacheGroups: {
-        default: false,
-        vendors: false,
-        vendor: {
-          test: /[\\/]node_modules[\\/]/,
-          chunks: 'initial',
-          enforce: true,
-          priority: 10,
-          name: 'vendor'
-        },
+        // default: false,
+        // vendors: false,
+        // vendor: {
+        //   test: /[\\/]node_modules[\\/]/,
+        //   chunks: 'initial',
+        //   enforce: true,
+        //   priority: 10,
+        //   name: 'vendor'
+        // },
         common: {
           chunks: "all",
           minChunks: 2,
@@ -196,10 +200,24 @@ module.exports = {
     host: Ip.address(),
     port:3006,
     proxy: {
+<<<<<<< HEAD
       '/invitation': {
         // target: 'http://192.168.2.15:8214/',
         target: 'http://v2.apph5.testin.qtoolsbaby.net:81/',
         // target: 'http://192.168.2.164:8214',
+=======
+      // '/invitation': {
+      //   target: 'http://192.168.2.35:8214/',
+      //   // target: 'http://v5.apph5.testin.qtoolsbaby.net:81/',
+      //   changeOrigin: true,
+      // },
+      '/qtoolsApp': {
+        // target: 'http://192.168.2.35:8214/',
+        // target: 'http://192.168.2.32:8214',
+        // target: 'http://192.168.2.8:8214',
+        target: 'http://qtoolsapp.qtoolsbaby.cn',//线上
+        pathRewrite: {"^/qtoolsApp" : ""},
+>>>>>>> 20200531_ChildrensDay
         changeOrigin: true,
       },
     }

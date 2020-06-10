@@ -1,47 +1,78 @@
 import rem from '../common/javascript/rem.js';
-
-import Vue from 'vue'
-// 导入reset.scss
-import '../common/stylesheet/reset.scss';
+import Vue from 'vue';
+import '../common/stylesheet/reset.scss';// 导入reset.scss
 import './index/index.scss';
+import showToast from 'show-toast';
 
 rem(100,1);
-
-const titleMap = {
-  0:'邀请你一起逛明星妈妈都在用的Qtools！',
-  1:'亲爱的，找小众轻奢母婴好物，就上Qtools',
-  2:'推荐！他们家的母婴选品颜值超高，件件是网红潮流款',
-  3:'小红书母婴热门推荐的好物，Qtools全都有',
-}
 //邀请
 
 $(document).ready(function() {
   new Vue({
       el: '#root',
       data: {
-        userList:[],
-        botHalfData:[],
+        visibleRule:false,
+        visibleCover:false,
+        visibleThr:false,
+        visibleOne:false,
+        visibleTwo:false,
+        fileDomain:'',
+        currentItem:{},
+        userInfo:{},//信息
+        broadcastList:[],//广播信息
+        couponLeve:null,
+        couponLeveWidth:null,
+        couponRule:['1','3','8'],
+        couponList:[],//优惠券列表
+        productList:[],//实物列表
+        productLeve:null,
+        productLeveWidth:null,
+        productRule:['1','3','8'],
+        inviteInfoList:[],//邀请列表
+        lasteList:[],//前4条
+        botHalfList:[],//所有
         totalBadges:0,
         visible:null,
         accesstoken:'',
-        testAccessToken:'',
-        userInfo:{},
-        isUp:false
+        isUp:false,
+        isLoading:false,
+        visibleRule:false,
+        shareText:''
       },
       created() {
         // this.getAccessToken();
         window['showAccessToken'] = (getAccessToken) => {
-          this.showAccessToken(getAccessToken)
+          this.showAccessToken(getAccessToken);
         };
       },
-      mounted() {
-        let vm = this;
-        setTimeout(function(){
-          vm.getUserInfo()
-          vm.getData();
-        });
-      },
+      mounted() {},
       methods: {
+        getAccessToken:function() {
+          // this.accesstoken = '7436d5355bb77537f6451af826ce9ed8';
+          // this.getData();
+          window.Qtools.getAccessToken(null);
+        },
+        showAccessToken:function(accesstoken) {
+          if(accesstoken == '') {
+            window.Qtools.goLogin(null);
+          } else {
+            this.accesstoken = accesstoken;
+            this.getData();
+          }
+        },
+        goShareApplte: function () {
+          const vm = this;
+          window.Qtools.goShareApplte(JSON.stringify({
+            imageUrl: vm.userInfo.sharePic,
+            title: vm.userInfo.shareTitle,
+            path: `pages/pageActivity/newComer/newComer?B=${vm.userInfo.spShopId}&A=${vm.userInfo.oldUserId}&C=${vm.userInfo.invitationActId}`,
+            webpageUrl:'https://qtoolsapp-hd.qtoolsbaby.cn/download/'
+          }));
+        },
+        //图片分享
+        goShareWx: function () {
+          window.Qtools.goPosterShare(null);
+        },
         toggleList:function() {
           let isUp = this.isUp;
           this.isUp = !isUp;
@@ -54,47 +85,92 @@ $(document).ready(function() {
             index:0
           }))
         },
-        getAccessToken:function() {
-          let accesstoken = window.Qtools.getAccessToken(null);
-          this.accesstoken = accesstoken;
+        onCancel:function(key) {
+          this[key] = false;
+          this.visibleCover = false;
+          if(key == 'visibleThr') {
+            window.location.reload();
+          }
         },
-        showAccessToken:function(accesstoken) {
-          this.accesstoken = accesstoken;
+        //领取
+        goExchange: function (value, giftType) {
+          if(giftType == '2') {
+            window.Qtools.goWebPage(JSON.stringify({
+              num:8,
+              presentId:value.presentId,
+              mainPicUrl:value.pic,
+              name:value.name,
+            }));
+            return;
+          }
+          this.currentItem = value;
+          this.visibleOne = true;
+          this.visibleCover = true;
         },
-        goShareApplte: function () {
-          var index = Math.floor(Math.random()*4);
-          var imgUrl = "https://qcampfile.oss-cn-shanghai.aliyuncs.com/activity_share.png";
-          window.Qtools.goShareApplte(JSON.stringify({
-          	imageUrl: imgUrl,
-            title: titleMap[index],
-          	path: 'pages/welcome/welcome?scene=4_'+this.userInfo.spshopid+'_'+this.userInfo.userId,
-            webpageUrl:'https://qtoolsapp-hd.qtoolsbaby.cn/download/'
+        //确定领取
+        confirmExchange: function() {
+           var vm = this;
+           var params = {
+             accesstoken:vm.accesstoken,
+             invitationActId:vm.userInfo.invitationActId,
+             presentId:vm.currentItem.presentId,
+           };
+           params = JSON.stringify(params);
+           $.ajax({
+             url: '/qtoolsApp/invitation/exchange/coupon',
+             type: 'POST',
+             headers:{
+               "Content-Type":"application/json;charset=utf-8",
+             },
+             data:params,
+             dataType:'json',
+             success:function(res) {
+               vm.visibleOne = false;
+               let { data } =res;
+               let gainResult = data.gainResult;
+               if(gainResult != '1') {
+                 vm.visibleTwo = true;
+               } else {
+                 vm.currentItem={...vm.currentItem,...data};
+                 vm.visibleThr = true;
+               }
+             },
+             err: function (err) {
+               vm.visibleOne = false;
+             }
+           })
+        },
+        goUseCoupon: function(value) {
+          let vm =this;
+          window.Qtools.goCouponUseStyle(JSON.stringify({
+            linkInfoType: vm.currentItem.linkInfoType,
+            linkInfo: vm.currentItem.linkInfo,
           }));
+          this.onCancel('visibleThr')
         },
-        goShareWx: function () {
-          window.Qtools.goShareWx(JSON.stringify({
-            index:1,
-            isPic: 1,
-          }));
-        },
-        gosharePtP:function(value) {
-          this.visible = value;
+        goRuleModal:function(value) {
+          this.visibleRule = value;
+          this.visibleCover = value;
         },
         goGiftPage: function () {
-          window.location.href = './exchange.html?accesstoken='+this.accesstoken;
+          window.location.href = './exchangeRecord.html';
         },
         getData: function () {
             var vm = this;
-            // vm.accesstoken = "2ab63862d983694f9f6ed07fb0d55f50"
+            vm.isLoading = true
+
             $.ajax({
-              url: '/invitation/user/search?accesstoken='+vm.accesstoken,
+              url: '/qtoolsApp/invitation/index',
               type: 'GET',
               dataType:'json',
+              data:{ accesstoken: vm.accesstoken },
               success:function(res) {
+                vm.isLoading = false;
                 if(res.code == '401') {
                   window.Qtools.goLogin(null);
                   return;
                 }
+<<<<<<< HEAD
                 let topHalfData = res.data.userList.slice(0,5);
                 let botHalfData = res.data.userList.slice(4);
                 vm.userList = res.data.userList;
@@ -119,12 +195,89 @@ $(document).ready(function() {
                 if(res.code == '401') {
                   window.Qtools.goLogin(null);
                   return;
+=======
+                let { invitationActInfo, broadcastList, couponList, productList, inviteInfoList } =res.data;
+                inviteInfoList = inviteInfoList?inviteInfoList:[];
+                broadcastList = broadcastList?broadcastList:[];
+                couponList = couponList?couponList:[];
+                productList = productList?productList:[];
+                couponList.map((el) => {
+                  vm.couponRule = el.gainThreshold;
+                })
+                productList.map((el) => {
+                  vm.productRule = el.gainThreshold;
+                })
+                broadcastList.map((el)=> {
+                  el.mobile = el.mobile&&el.mobile.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2');
+                  return el;
+                })
+                inviteInfoList.map((el)=> {
+                  el.mobile = el.mobile&&el.mobile.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2');
+                  return el;
+                })
+                let topHalfData = inviteInfoList.slice(0,4);
+                let botHalfData = inviteInfoList.slice(4);
+                let couponRule = vm.couponRule;
+                let productRule = vm.productRule;
+
+                invitationActInfo.inviteNum = invitationActInfo.inviteNum?invitationActInfo.inviteNum:0;
+                invitationActInfo.inviteOrderNum = invitationActInfo.inviteOrderNum?invitationActInfo.inviteOrderNum:0;
+
+                if(invitationActInfo.inviteNum >= couponRule[2]) {
+                  vm.couponLeve = 2;
+                  vm.couponLeveWidth = 2;
+                } else if(invitationActInfo.inviteNum >= couponRule[1]) {
+                  vm.couponLeve = 1;
+                  vm.couponLeveWidth = 1;
+                  if(invitationActInfo.inviteNum > couponRule[1]) {
+                    vm.couponLeveWidth = 4;
+                  }
+                } else if(invitationActInfo.inviteNum >= couponRule[0]){
+                  vm.couponLeveWidth = 0;
+                  vm.couponLeve = 0;
+                  if(invitationActInfo.inviteNum > couponRule[0]) {
+                    vm.couponLeveWidth = 3;
+                  }
+                } else {
+                  vm.couponLeve = null;
+                  vm.couponLeveWidth = null;
                 }
-                var fileDomain = res.fileDomain;
-                vm.userInfo = {...res.data,...{fileDomain}};
+                if(invitationActInfo.inviteOrderNum >= productRule[2]) {
+                  vm.productLeve = 2;
+                  vm.productLeveWidth = 2;
+                } else if(invitationActInfo.inviteOrderNum >= productRule[1]) {
+                  vm.productLeve = 1;
+                  vm.productLeveWidth = 1;
+                  if(invitationActInfo.inviteOrderNum > productRule[1]) {
+                    vm.productLeveWidth = 4;
+                  }
+                } else if(invitationActInfo.inviteOrderNum >= productRule[0]){
+                  vm.productLeve = 0;
+                  vm.productLeveWidth = 0;
+                  if(invitationActInfo.inviteOrderNum > productRule[0]) {
+                    vm.productLeveWidth = 3;
+                  }
+                } else {
+                  vm.productLeve = null;
+                  vm.productLeveWidth = null;
+>>>>>>> 20200531_ChildrensDay
+                }
+                vm.inviteInfoList = inviteInfoList;
+                vm.lasteList = topHalfData;
+                vm.botHalfList = botHalfData;
+                vm.userInfo = invitationActInfo;
+                vm.broadcastList = broadcastList;
+                vm.couponList = couponList;
+                vm.productList = productList;
+                vm.fileDomain = res.fileDomain;
               },
               error: function (err) {
-                window.Qtools.goLogin(null)
+                vm.isLoading = false;
+                showToast({
+                  str:err.responseJSON?err.responseJSON.errorMsg:'服务错误',
+                  time: 2000,
+                  position: 'middle'
+                })
               }
             })
         },

@@ -1,0 +1,298 @@
+.newuser-gift-pages {
+  font-size: 22px;
+  background: rgba(254,221,206,.5);
+  .box-flex {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .part-one-banner {
+    height: 1000px;
+    background: #FEDDCE;
+    position: relative;
+    .coupon-components {
+      width: 100%;
+      padding: 0 24px;
+      box-sizing: border-box;
+      position: absolute;
+      bottom: 70px;
+      left: 50%;
+      transform: translateX(-50%);
+      .wrap {
+        color: #fff;
+      }
+      .top-content {
+        background:url('./imgs/icon0.png') right top no-repeat, linear-gradient(112deg, #F17056 0%, #F06D53 98%, #F36A68 98%);
+        background-size: 110px auto;
+        border-radius: 24px 24px 0px 0px;
+        padding:16px 0 6px 26px;
+        .title-action {
+          font-size: 0;
+          margin-bottom: 13px;
+          .logo {
+            width: 102px;
+            height: 28px;
+            vertical-align: middle;
+          }
+          .text {
+            display: inline-block;
+            vertical-align: middle;
+            padding-left: 18px;
+            position: relative;
+            line-height: 33px;
+            margin-left: 16px;
+            font-size: 24px;
+            &:before {
+              content: '';
+              width: 1px;
+              height: 16px;
+              position: absolute;
+              background: #fff;
+              left: 0;
+              top: 50%;
+              transform: translateY(-50%);
+            }
+          }
+        }
+        .item {
+          padding-left: 30px;
+          position: relative;
+          margin-right: 32px;
+          line-height: 28px;
+          font-style: 22px;
+          &:before {
+            content: '';
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            background: url('./imgs/icon_circle.png') left top no-repeat;
+            background-size: contain;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+          }
+        }
+      }
+      .bottom-content {
+        background: #FFE9E0;
+        border-radius: 0 0 24px 24px;
+        padding: 24px 10px 45px;
+        position: relative;
+        .coupon-item {
+          width: 48%;
+          height: 130px;
+          display: inline-block;
+          font-size: 0;
+          margin-bottom: 20px;
+          float: right;
+          &:nth-child(2n+1) {
+            float: left;
+          }
+        }
+        .cou-l,.cou-r {
+          display: inline-block;
+          vertical-align: middle;
+          height: 100%;
+        }
+        .cou-l {
+          width: 42%;
+          // width: 136px;
+          text-align: center;
+          background: #FFFFFF;
+          border: 1px solid #F26F59;
+          border-radius: 8px;
+          color: #df5445;
+          font-size: 22px;
+          padding-top: 10px;
+          box-sizing: border-box;
+          overflow: hidden;
+          .amount {
+            font-size: 42px;
+            font-weight: bold;
+          }
+        }
+        .cou-r {
+          width: 58%;
+          // width: 188px;
+          background-image: linear-gradient(90deg, #F17056 0%, #F46969 100%, #F25838 100%);
+          border-radius: 8px;
+          border-radius: 8px;
+          font-size: 22px;
+          line-height: 30px;
+          padding: 32px 0 0 16px;
+          box-sizing: border-box;
+          position: relative;
+          .cor-wrap {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+          }
+          .goods-type {
+            font-weight: bold;
+            margin-top: 8px;
+          }
+          .use-btn {
+            width: 30px;
+            height: 84px;
+            font-size: 22px;
+            line-height: 24px;
+            color: #F46A69;
+            background: #FFFFFF;
+            border: 2px solid #F46A69;
+            border-radius: 26px;
+            border-radius: 14px;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            margin-right:-14px;
+            transform: translateY(-50%);
+          }
+        }
+        .gain-btn {
+          width: 301px;
+          height: 96px;
+          padding-bottom: 10px;
+          box-sizing: border-box;
+          line-height: 75px;
+          color: #fff;
+          font-size: 32px;
+          background: url('./imgs/icon_btn1.png') left top no-repeat;
+          background-size: cover;
+          position: absolute;
+          bottom: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          margin-bottom:-50px;
+          &.disabled {
+            background: url('./imgs/icon_btn0.png') left top no-repeat;
+            background-size: cover;
+          }
+        }
+      }
+    }
+  }
+  .hotSale-components {
+    text-align: center;
+    .title-action {
+      display: inline-block;
+      position: relative;
+      padding: 40px 46px 40px 46px;
+      font-size: 36px;
+      color: #905C5A;
+      &:before,&:after {
+        content: '';
+        width: 36px;
+        height: 36px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      &:before {
+        left: 0;
+        background: url('./imgs/icon_l.png') left top no-repeat;
+        background-size: cover;
+      }
+      &:after {
+        right: 0;
+        background: url('./imgs/icon_r.png') left top no-repeat;
+        background-size: cover;
+      }
+    }
+    .goods-list {
+      text-align: left;
+      padding: 0 32px 34px;
+      .item {
+        width: 49%;
+        float: right;
+        border-radius:16px;
+        background: #fff;
+        margin-bottom: 16px;
+        overflow: hidden;
+        &:nth-child(2n+1) {
+          float: left;
+        }
+        .goods-info {
+          padding: 16px;
+        }
+        .goods-img {
+          height: 335px;
+          margin-bottom: 24px;
+          position: relative;
+          img {
+            width: 100%;
+            height: 100%;
+          }
+          .icon-gift {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            left: 18px;
+            top: 18px;
+          }
+          .sellingPoints {
+            text-align: center;
+            width: 120px;
+            height:70px;
+            position: absolute;
+            bottom: 0;
+            left: 18px;
+            font-size: 22px;
+            padding-top: 8px;
+            box-sizing: border-box;
+            color: #fff;
+            background: url('./imgs/icon_sell.png') left top no-repeat;
+            background-size: cover;
+            overflow: hidden;
+            .money {
+              font-size: 30px;
+              line-height: 30px;
+            }
+          }
+        }
+        .gods-name {
+          height: 70px;
+          font-size: 24px;
+          line-height: 34px;
+          color: #333;
+          position: relative;
+          margin-bottom: 8px;
+          .label {
+            display: inline-block;
+            width: 34px;
+            height: 34px;
+            img {
+              width: 100%;
+              height: 100%;
+            }
+          }
+        }
+        .tag-list {
+          height: 40px;
+          font-size: 0;
+          margin-bottom:4px;
+          .item-tag {
+            display: inline-block;
+            vertical-align: middle;
+            font-size: 22px;
+            color: #FF7357;
+            margin-right: 8px;
+            padding: 0 8px;
+            border: 1px solid #FD7C61;
+            border-radius: 4px;
+          }
+        }
+        .price {
+          font-size: 28px;
+          color: #000;
+          .through {
+            font-size: 20px;
+            color: #D3D3D3;
+            line-height: 26px;
+            text-decoration: line-through;
+            padding-left: 6px;
+          }
+        }
+      }
+    }
+  }
+}
