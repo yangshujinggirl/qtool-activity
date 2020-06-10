@@ -6,7 +6,7 @@ window.Qtools.[method](params/null);
 小程序path: 'pages/welcome/welcome?scene=4_29_123'（29/门店id，123/用户id）;
 
 
-0、获取accessToken;（有待改进）
+1. 获取accessToken;
 	method: getAccessToken;
 	js回调名：showAccessToken；
 
@@ -19,13 +19,15 @@ window.Qtools.[method](params/null);
 			token = accessToken;
 		}
 
-1、调用原生分享页面
+2. 调用原生分享页面
 
 	 {"method": "share", "shareUrl": "hhtps:www.baidu.com", "title":"分享文本的 title", "detailTitle": "分享的详细文本", "imageUrl": "图片地址"}
 
 	 如果是链接是需要完整的https的链接（iOS 这边的分享需要是 https的）
+3. 生成图片并分享
+	window.Qtools.goPosterShare(null)
 
-2、分享到小程序
+4. 分享到小程序
 	method: goShareApplte
 	参数 (都是非空的)
 	params = {
@@ -43,7 +45,7 @@ window.Qtools.[method](params/null);
 		webpageUrl:'https://qtoolsapp-hd.qtoolsbaby.cn/download/'
 	}));
 
-3、分享方法 （分享弹框是h5的原生只提供分享方法）
+5. 分享方法 （分享弹框是h5的原生只提供分享方法）
 	method: goShareWx;
 
 	params = {
@@ -60,22 +62,22 @@ window.Qtools.[method](params/null);
 		isPic: 1,
 	}));
 
-4、原生登录方法
+6. 原生登录方法
 	method: goLogin;
 	window.Qtools.goLogin(null)
 
-5、调用拨打电话
+7. 调用拨打电话
 	method: goTelePhone
 	{phoneNum: String}
 
-6、copy文本
+8. copy文本
 	method: goCopy
 	{text: String}
 
-7、web截屏分享到朋友圈
+9. web截屏分享到朋友圈
 	method: goScreen
 
-8、跳转到 tab 页
+10. 跳转到 tab 页
 	method: goTab;
 	{index: Number}
 	Number:
@@ -85,7 +87,7 @@ window.Qtools.[method](params/null);
 	 3 - 我的  
 	 （1、2需要登录后才能调用跳转）
 
-9、 跳转特殊页面
+11. 跳转特殊页面
 	method: goWebPage
 	{ num: Number }
 
@@ -140,6 +142,12 @@ window.Qtools.[method](params/null);
 		presentId: Number? 商品Id
 		couponCode: String?	代金券CODE
 	}
+
+	12.	//优惠券使用页
+	window.Qtools.goCouponUseStyle(JSON.stringify({
+		linkInfoType: linkInfoType,
+		linkInfo: linkInfo,
+	}));
 
 Q掌柜h5分享方法
 	imageUrl = 'https://qcampfile.oss-cn-shanghai.aliyuncs.com/activity_share.png'
