@@ -1,4 +1,10 @@
-QtoolsAppH5调原生方法:
+1：项目开发：
+	1）每一个活动都需重建新的分支
+	2）在package.js里修改actName（例如："actName": "childrensDay"）
+	3）目录：.js文件要对应同名html文件。具体可以看src目录。
+
+
+2：QtoolsAppH5调原生方法:
 
 参数params:JSON字符串格式；
 	var params = JSON.stringify({});
